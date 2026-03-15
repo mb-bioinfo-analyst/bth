@@ -1,0 +1,482 @@
+import React from "react";
+import { tools, getRelatedTools } from "../data/tools";
+import { Link, useLocation } from "react-router-dom";
+import Navbar from "../components/Navbar"
+import { Helmet } from "react-helmet-async"
+
+import { useMemo, useState } from "react"
+import Footer from "../components/Footer"
+
+type ToolLayoutProps = {
+  title: string;
+  description: string;
+  category?: string;
+  tags?: string[]
+  slug?: string
+  badge?: string;
+  children: React.ReactNode;
+  rightPanel?: React.ReactNode;
+
+  seoContent?: React.ReactNode;
+  howTo?: React.ReactNode;
+  faq?: { question: string; answer: string }[];
+
+};
+
+
+
+export default function ToolLayout({
+  title,
+  description,
+  category,
+  tags,
+  slug,
+  badge = "Bioinformatics Tool",
+  children,
+  rightPanel,
+
+  seoContent,
+  howTo,
+  faq,
+
+
+
+}: ToolLayoutProps) {
+
+  const location = useLocation();
+
+  const relatedTools = getRelatedTools(slug)
+
+  const currentPath = location.pathname;
+
+  const citationText = `Bioinformatics Tools Hub (${new Date().getFullYear()})
+${title}
+https://yourdomain.com${location.pathname}`
+
+  const bibtex = `@misc{bioinfo-tools-${slug},
+  title = {${title}},
+  author = {{Bioinformatics Tools Hub}},
+  year = {${new Date().getFullYear()}},
+  url = {https://yourdomain.com${location.pathname}}
+}`
+
+const [copied, setCopied] = useState<string | null>(null)
+
+  const randomTools = [...tools]
+    .filter(t => t.path !== currentPath)
+    .sort(() => 0.5 - Math.random())
+    .slice(0, 4);
+
+  const groupedTools = useMemo(() => {
+    return tools.reduce((acc, tool) => {
+      if (!acc[tool.category]) acc[tool.category] = []
+      acc[tool.category].push(tool)
+      return acc
+    }, {} as Record<string, typeof tools>)
+  }, [])
+
+  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(
+    Object.keys(groupedTools).reduce((acc, category) => {
+      acc[category] = category === "Sequence" || category === "FASTA"
+      return acc
+    }, {} as Record<string, boolean>)
+  )
+
+  const toggleCategory = (category: string) => {
+    setOpenCategories(prev => ({
+      ...prev,
+      [category]: !prev[category]
+    }))
+  }
+
+  const copyToClipboard = async (text: string, type: string) => {
+    await navigator.clipboard.writeText(text)
+    setCopied(type)
+
+    setTimeout(() => {
+      setCopied(null)
+    }, 2000)
+  }
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white">
+      <Navbar />
+      <Helmet>
+
+
+
+        <title>{title} | Bioinformatics Tools Hub</title>
+
+        <meta name="description" content={description} />
+
+        <meta
+          name="keywords"
+          content={tags?.join(", ") || ""}
+        />
+
+        <meta name="robots" content="index,follow" />
+
+        <link
+          rel="canonical"
+          href={`https://yourdomain.com${location.pathname.replace(/\/$/, "")}`}
+        />
+
+        <meta property="og:title" content={`${title} | Bioinfo Tools Hub`} />
+        <meta property="og:site_name" content="Bioinformatics Tools Hub" />
+        <meta property="og:description" content={description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content="https://yourdomain.com/preview.png" />
+        <meta property="og:url" content={`https://yourdomain.com${location.pathname}`} />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${title} | Bioinfo Tools Hub`} />
+        <meta name="twitter:image" content="https://yourdomain.com/preview.png" />
+        <meta name="twitter:description" content={description} />
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            name: title,
+            description: description,
+            url: `https://yourdomain.com${location.pathname}`,
+            applicationCategory: "ScientificApplication",
+            operatingSystem: "Web",
+            browserRequirements: "Requires JavaScript",
+            softwareVersion: "1.0",
+            creator: {
+              "@type": "Organization",
+              name: "Bioinformatics Tools Hub"
+            },
+            offers: {
+              "@type": "Offer",
+              price: "0",
+              priceCurrency: "USD"
+            }
+          })}
+        </script>
+
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+              {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://yourdomain.com"
+              },
+              {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Tools",
+                "item": "https://yourdomain.com/tools"
+              },
+              {
+                "@type": "ListItem",
+                "position": 3,
+                "name": title,
+                "item": `https://yourdomain.com${location.pathname}`
+              }
+
+            ]
+
+          })}
+        </script>
+
+        {faq?.length > 0 && (
+          <script type="application/ld+json">
+            {JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": faq.map(f => ({
+                "@type": "Question",
+                "name": f.question,
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": f.answer
+                }
+              }))
+            })}
+          </script>
+        )}
+
+      </Helmet>
+
+      {/* Hero / heading */}
+      <section className="mx-auto max-w-7xl px-6 pb-8 pt-10">
+        <div className="mb-6 inline-flex items-center rounded-full border border-cyan-400/20 bg-cyan-400/10 px-3 py-1 text-xs font-medium text-cyan-200">
+          {badge}
+        </div>
+
+        <div className="max-w-3xl">
+          <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
+            {title}
+          </h1>
+          <p className="mt-4 text-base leading-7 text-slate-300 md:text-lg">
+            {description}
+          </p>
+        </div>
+      </section>
+
+      {/* Main content */}
+      <main className="mx-auto max-w-7xl px-6 pb-16">
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_320px]">
+          <section className="rounded-3xl border border-white/10 bg-white/10 p-4 shadow-2xl shadow-black/20 backdrop-blur-md md:p-6">
+            <div className="rounded-2xl bg-white p-4 text-slate-900 md:p-6">
+              {children}
+            </div>
+          </section>
+
+
+
+          <aside className="lg:sticky lg:top-6 self-start flex flex-col gap-6 lg:max-h-[calc(100vh-3rem)]">
+            {rightPanel ?? (
+              <>
+                <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
+                  <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">
+                    Why use this tool?
+                  </h2>
+                  <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-200">
+                    <li>• Modern interface built for speed and clarity</li>
+                    <li>• Works directly in the browser</li>
+                    <li>• No sequence data sent to a server</li>
+                    <li>• Easy copy and download workflow</li>
+                  </ul>
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-md flex flex-col min-h-0">
+
+                  <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">
+                    Tools
+                  </h2>
+
+                  <div className="mt-4 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+
+                    {Object.entries(groupedTools).map(([category, categoryTools]) => (
+                      <div key={category} className="mb-4">
+
+                        <h3 className="text-xs font-semibold uppercase text-cyan-300">
+                          {category}
+                        </h3>
+
+                        <ul className="mt-2 space-y-2 text-sm text-slate-200">
+
+                          {categoryTools.map(tool => (
+
+                            <li key={tool.path}>
+
+                              <Link
+                                to={tool.path}
+                                className={`hover:text-cyan-300 transition ${location.pathname === tool.path
+                                  ? "text-cyan-300 font-semibold"
+                                  : ""
+                                  }`}
+                              >
+                                • {tool.name}
+                              </Link>
+
+                            </li>
+
+                          ))}
+
+                        </ul>
+
+                      </div>
+                    ))}
+
+                  </div>
+
+                </div>
+
+                <div className="rounded-3xl border border-white/10 bg-white/10 p-5 backdrop-blur-md">
+                  <h2 className="text-sm font-semibold uppercase tracking-wide text-cyan-200">
+                    Try another tool
+                  </h2>
+
+                  <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-200">
+
+                    {randomTools.map(tool => (
+
+                      <li key={tool.path}>
+
+                        <Link
+                          to={tool.path}
+                          className="hover:text-cyan-300 transition"
+                        >
+                          • {tool.name}
+                        </Link>
+
+                      </li>
+
+                    ))}
+
+                  </ul>
+                </div>
+              </>
+            )}
+          </aside>
+        </div>
+
+
+        {/* SEO CONTENT SECTION (FULL WIDTH BELOW GRID) */}
+
+        {(seoContent || howTo || faq) && (
+
+          <section className="mt-16">
+
+            <div className="rounded-3xl border border-white/10 bg-white/10 p-8 backdrop-blur-md space-y-10">
+
+              {/* SEO EXPLANATION */}
+
+              {seoContent && (
+                <div className="prose prose-invert max-w-none text-slate-300">
+                  {seoContent}
+                </div>
+              )}
+
+              {/* HOW TO */}
+
+              {howTo && (
+                <div>
+                  <h2 className="text-2xl font-semibold text-white mb-4">
+                    How to use this tool
+                  </h2>
+
+                  <div className="text-slate-300">
+                    {howTo}
+                  </div>
+                </div>
+              )}
+
+              {relatedTools.length > 0 && (
+                <div>
+                  <h2 className="text-2xl font-semibold text-white mb-4">
+                    Related Bioinformatics Tools
+                  </h2>
+
+                  {relatedTools.length > 0 && (
+                    <div>
+                      {/* <h2 className="text-2xl font-semibold text-white mb-4">
+                        Related Bioinformatics Tools
+                      </h2> */}
+
+                      <p className="text-slate-300 mb-4">
+                        Explore additional bioinformatics tools related to {category.toLowerCase()}
+                        analysis and molecular biology workflows.
+
+                      </p>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {relatedTools.map(tool => (
+                          <Link
+                            key={tool.slug}
+                            to={tool.path}
+                            className="block rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
+                          >
+                            <div className="font-semibold text-cyan-300">
+                              {tool.name}
+                            </div>
+
+                            <div className="text-sm text-slate-300 mt-1">
+                              {tool.description}
+                            </div>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* FAQ */}
+
+              {faq && (
+                <div>
+                  <h2 className="text-2xl font-semibold text-white mb-6">
+                    Frequently Asked Questions
+                  </h2>
+
+                  <div className="space-y-6">
+
+                    {faq.map((f, i) => (
+
+                      <div key={i}>
+
+                        <h3 className="font-semibold text-white">
+                          {f.question}
+                        </h3>
+
+                        <p className="text-slate-300 mt-2">
+                          {f.answer}
+                        </p>
+
+                      </div>
+
+                    ))}
+
+                  </div>
+
+                </div>
+              )}
+
+
+              <section className="mt-10">
+
+                <h2 className="text-2xl font-semibold text-white mb-4">
+                  How to Cite This Tool
+                </h2>
+
+                <div className="rounded-xl border border-white/10 bg-white/5 p-5 text-slate-300">
+
+                  <p className="mb-3">
+                    If you use this tool in academic work, please cite:
+                  </p>
+
+                  <pre className="bg-slate-900 rounded-lg p-4 text-sm overflow-x-auto">
+                    {citationText}
+                  </pre>
+
+                  <button
+                  aria-label= "Copy citation"
+                    onClick={() => copyToClipboard(citationText, "citation")}
+                    className="mt-3 rounded-lg border border-white/20 px-4 py-2 text-sm hover:border-cyan-400 hover:text-cyan-300 transition"
+                  >
+                    {copied === "citation" ? "Copied ✓" : "Copy Citation"}
+                  </button>
+
+                  <p className="mt-6 mb-3">
+                    BibTeX
+                  </p>
+
+                  <pre className="bg-slate-900 rounded-lg p-4 text-sm overflow-x-auto">
+                    {bibtex}
+                  </pre>
+
+                  <button
+                  aria-label= "Copy BibTeX citation"
+                    onClick={() => copyToClipboard(bibtex, "bibtex")}
+                    className="mt-3 rounded-lg border border-white/20 px-4 py-2 text-sm hover:border-cyan-400 hover:text-cyan-300 transition"
+                  >
+                    {copied === "bibtex" ? "Copied ✓" : "Copy BibTeX"}
+                  </button>
+
+                </div>
+
+              </section>
+
+            </div>
+
+          </section>
+
+        )}
+
+      </main>
+
+      {/* Footer */}
+
+      <Footer />
+    </div>
+  );
+}
