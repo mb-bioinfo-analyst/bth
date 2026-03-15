@@ -1,5 +1,7 @@
 # Bioinformatics Tools Hub
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/637952da-1243-45b8-b86b-c01525031fcc/deploy-status)](https://app.netlify.com/projects/stupendous-speculoos-ba31ba/deploys)
+
 A browser-based collection of bioinformatics utilities for DNA, RNA, and protein sequence analysis.
 
 ## Features
