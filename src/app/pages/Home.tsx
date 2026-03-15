@@ -29,7 +29,7 @@ export default function Home() {
           content="Free online bioinformatics tools for sequence analysis, FASTA formatting, GC content calculation, ORF finding and DNA translation."
         />
 
-        <link rel="canonical" href="https://yourdomain.com/" />
+        <link rel="canonical" href="https://biotoolshub.org/" />
 
         <meta property="og:title" content="Bioinformatics Tools Hub" />
         <meta
@@ -49,7 +49,7 @@ export default function Home() {
             itemListElement: tools.map((tool, index) => ({
               "@type": "ListItem",
               position: index + 1,
-              url: `https://yourdomain.com${tool.path}`,
+              url: `https://biotoolshub.org${tool.path}`,
               name: tool.name
             }))
           })}

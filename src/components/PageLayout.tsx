@@ -33,19 +33,19 @@ export default function PageLayout({
 
         <link
           rel="canonical"
-          href={`https://yourdomain.com${location.pathname.replace(/\/$/, "")}`}
+          href={`https://biotoolshub.org${location.pathname.replace(/\/$/, "")}`}
         />
 
         <meta property="og:title" content={`${title} | Bioinformatics Tools Hub`} />
         <meta property="og:site_name" content="Bioinformatics Tools Hub" />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://yourdomain.com/preview.png" />
-        <meta property="og:url" content={`https://yourdomain.com${location.pathname}`} />
+        <meta property="og:image" content="https://biotoolshub.org/preview.png" />
+        <meta property="og:url" content={`https://biotoolshub.org${location.pathname}`} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${title} | Bioinformatics Tools Hub`} />
-        <meta name="twitter:image" content="https://yourdomain.com/preview.png" />
+        <meta name="twitter:image" content="https://biotoolshub.org/preview.png" />
         <meta name="twitter:description" content={description} />
 
         <script type="application/ld+json">
@@ -54,11 +54,11 @@ export default function PageLayout({
             "@type": "WebPage",
             name: title,
             description,
-            url: `https://yourdomain.com${location.pathname}`,
+            url: `https://biotoolshub.org${location.pathname}`,
             isPartOf: {
               "@type": "WebSite",
               name: "Bioinformatics Tools Hub",
-              url: "https://yourdomain.com"
+              url: "https://biotoolshub.org"
             }
           })}
         </script>
@@ -72,13 +72,13 @@ export default function PageLayout({
                 "@type": "ListItem",
                 position: 1,
                 name: "Home",
-                item: "https://yourdomain.com"
+                item: "https://biotoolshub.org"
               },
               {
                 "@type": "ListItem",
                 position: 2,
                 name: title,
-                item: `https://yourdomain.com${location.pathname}`
+                item: `https://biotoolshub.org${location.pathname}`
               }
             ]
           })}

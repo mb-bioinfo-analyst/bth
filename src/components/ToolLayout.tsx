@@ -51,13 +51,13 @@ export default function ToolLayout({
 
   const citationText = `Bioinformatics Tools Hub (${new Date().getFullYear()})
 ${title}
-https://yourdomain.com${location.pathname}`
+https://biotoolshub.org${location.pathname}`
 
   const bibtex = `@misc{bioinfo-tools-${slug},
   title = {${title}},
   author = {{Bioinformatics Tools Hub}},
   year = {${new Date().getFullYear()}},
-  url = {https://yourdomain.com${location.pathname}}
+  url = {https://biotoolshub.org${location.pathname}}
 }`
 
 const [copied, setCopied] = useState<string | null>(null)
@@ -118,19 +118,19 @@ const [copied, setCopied] = useState<string | null>(null)
 
         <link
           rel="canonical"
-          href={`https://yourdomain.com${location.pathname.replace(/\/$/, "")}`}
+          href={`https://biotoolshub.org${location.pathname.replace(/\/$/, "")}`}
         />
 
         <meta property="og:title" content={`${title} | Bioinfo Tools Hub`} />
         <meta property="og:site_name" content="Bioinformatics Tools Hub" />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://yourdomain.com/preview.png" />
-        <meta property="og:url" content={`https://yourdomain.com${location.pathname}`} />
+        <meta property="og:image" content="https://biotoolshub.org/preview.png" />
+        <meta property="og:url" content={`https://biotoolshub.org${location.pathname}`} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={`${title} | Bioinfo Tools Hub`} />
-        <meta name="twitter:image" content="https://yourdomain.com/preview.png" />
+        <meta name="twitter:image" content="https://biotoolshub.org/preview.png" />
         <meta name="twitter:description" content={description} />
 
         <script type="application/ld+json">
@@ -139,7 +139,7 @@ const [copied, setCopied] = useState<string | null>(null)
             "@type": "SoftwareApplication",
             name: title,
             description: description,
-            url: `https://yourdomain.com${location.pathname}`,
+            url: `https://biotoolshub.org${location.pathname}`,
             applicationCategory: "ScientificApplication",
             operatingSystem: "Web",
             browserRequirements: "Requires JavaScript",
@@ -165,19 +165,19 @@ const [copied, setCopied] = useState<string | null>(null)
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://yourdomain.com"
+                "item": "https://biotoolshub.org"
               },
               {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "Tools",
-                "item": "https://yourdomain.com/tools"
+                "item": "https://biotoolshub.org/tools"
               },
               {
                 "@type": "ListItem",
                 "position": 3,
                 "name": title,
-                "item": `https://yourdomain.com${location.pathname}`
+                "item": `https://biotoolshub.org${location.pathname}`
               }
 
             ]

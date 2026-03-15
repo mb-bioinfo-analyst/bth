@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import { tools } from "../data/tools"
 
-const BASE_URL = "https://yourdomain.com"
+const BASE_URL = "https://biotoolshub.org"
 
 const today = new Date().toISOString().split("T")[0]
 
