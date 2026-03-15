@@ -111,7 +111,7 @@ Write file
 */
 
 fs.writeFileSync(
-  path.join(process.cwd(), "dist", "sitemap.xml"),
+  path.join(process.cwd(), "public", "sitemap.xml"),
   xml
 )
 
