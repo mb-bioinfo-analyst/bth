@@ -26,12 +26,12 @@ export default function Home() {
 
         <meta name="google-site-verification" content="DJPtj4zoq7sRdzDx-L1o_o1Y_6l-cZkKJp3bLK07Zks" />
 
-        <meta
+        {/* <meta
           name="description"
           content="Free online bioinformatics tools for DNA, RNA, and Protein data including ORF finder, FASTA tools, motif search and codon analysis."
-        />
+        /> */}
 
-        <link rel="canonical" href="https://biotoolshub.org/" />
+        {/* <link rel="canonical" href="https://biotoolshub.org/" /> */}
 
         {/* <!-- Open Graph --> */}
         <meta property="og:title" content="Bioinformatics Tools Hub" />
