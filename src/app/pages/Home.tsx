@@ -28,7 +28,7 @@ export default function Home() {
 
         <meta
           name="description"
-          content="Free online bioinformatics tools for sequence analysis, FASTA formatting, GC content calculation, ORF finding and DNA translation."
+          content="Free online bioinformatics tools for DNA, RNA, and Protein data including ORF finder, FASTA tools, motif search and codon analysis."
         />
 
         <link rel="canonical" href="https://biotoolshub.org/" />
