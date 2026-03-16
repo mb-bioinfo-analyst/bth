@@ -33,11 +33,24 @@ export default function Home() {
 
         <link rel="canonical" href="https://biotoolshub.org/" />
 
+        {/* <!-- Open Graph --> */}
         <meta property="og:title" content="Bioinformatics Tools Hub" />
         <meta
           property="og:description"
           content="Modern browser-based bioinformatics tools for researchers and students."
-        />
+          />
+        <meta property="og:type" content="website"/>
+        <meta property="og:url" content="https://biotoolshub.org/"/>
+        <meta property="og:image" content="https://biotoolshub.org/preview.png"/>
+        <meta property="og:site_name" content="Bioinformatics Tools Hub"/>
+
+
+        {/* <!-- Twitter --> */}
+        <meta name="twitter:card" content="summary_large_image"/>
+        <meta name="twitter:title" content="Bioinformatics Tools Hub"/>
+        <meta name="twitter:description"
+            content="Free online bioinformatics tools for DNA, RNA, and Protein data including ORF finder, FASTA tools, motif search and codon analysis."/>
+        <meta name="twitter:image" content="https://biotoolshub.org/preview.png"/>
 
         {/* ItemList schema */}
 
