@@ -24,7 +24,7 @@ export default function Home() {
 
         <title>Bioinformatics Tools Hub</title>
 
-        <meta name="google-site-verification" content="DJPtj4zoq7sRdzDx-L1o_o1Y_6l-cZkKJp3bLK07Zks" />
+        
 
         {/* <meta
           name="description"
