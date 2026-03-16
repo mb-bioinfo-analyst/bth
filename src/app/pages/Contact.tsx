@@ -2,6 +2,7 @@ import PageLayout from "../../components/PageLayout"
 import { Mail, Github, Linkedin } from "lucide-react"
 
 export default function Contact() {
+    
 
     return (
 
@@ -40,13 +41,14 @@ export default function Contact() {
 
 
                 {/* CONTACT METHODS */}
+                
 
                 <section className="grid md:grid-cols-3 gap-6">
 
                     {/* EMAIL */}
 
                     <a
-                        href="mailto:your@email.com"
+                        href="mailto:biotoolshhub@outlook.com"
                         className="rounded-xl border border-slate-200 p-6 hover:border-cyan-400 transition"
                     >
 
@@ -66,7 +68,7 @@ export default function Contact() {
                     {/* GITHUB */}
 
                     <a
-                        href="https://github.com/yourusername"
+                        href="https://github.com/mb-bioinfo-analyst"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-xl border border-slate-200 p-6 hover:border-cyan-400 transition"
@@ -88,7 +90,7 @@ export default function Contact() {
                     {/* LINKEDIN */}
 
                     <a
-                        href="https://linkedin.com/in/yourprofile"
+                        href="https://linkedin.com/in/bmustafa1"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-xl border border-slate-200 p-6 hover:border-cyan-400 transition"
@@ -121,7 +123,7 @@ export default function Contact() {
                         You can also send a message using the form below.
                     </p>
 
-                    <form
+                    {/* <form
                         action="https://formspree.io/f/yourformid"
                         method="POST"
                         className="space-y-4"
@@ -159,7 +161,75 @@ export default function Contact() {
                             Send Message
                         </button>
 
+                    </form> */}
+                    <form
+                        action="https://api.web3forms.com/submit"
+                        method="POST"
+                        className="space-y-4"
+                    >
+
+                        {/* Web3Forms Access Key */}
+                        <input
+                            type="hidden"
+                            name="access_key"
+                            value="62a0ef37-05c7-4d49-b564-b090eca91185"
+                        />
+
+                        {/* Optional subject */}
+                        <input
+                            type="hidden"
+                            name="subject"
+                            value="New message from Bioinformatics Tools Hub"
+                        />
+
+                        {/* Spam protection */}
+                        <input
+                            type="checkbox"
+                            name="botcheck"
+                            className="hidden"
+                            style={{ display: "none" }}
+                        />
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Your name"
+                            required
+                            className="w-full rounded-lg border border-slate-200 p-3"
+                        />
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Your email"
+                            required
+                            className="w-full rounded-lg border border-slate-200 p-3"
+                        />
+
+                        <textarea
+                            name="message"
+                            placeholder="Your message"
+                            required
+                            rows={5}
+                            className="w-full rounded-lg border border-slate-200 p-3"
+                        />
+
+                        <button
+                            aria-label="Submit Send Message"
+                            type="submit"
+                            className="rounded-lg bg-cyan-500 px-6 py-2 text-black font-medium hover:bg-cyan-400"
+                        >
+                            Send Message
+                        </button>
+
+                        <input
+                            type="hidden"
+                            name="redirect"
+                            value="https://biotoolshub.org/tools"
+                        />
+
                     </form>
+
 
                 </section>
 
