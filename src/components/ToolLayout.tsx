@@ -60,7 +60,7 @@ https://biotoolshub.org${location.pathname}`
   url = {https://biotoolshub.org${location.pathname}}
 }`
 
-const [copied, setCopied] = useState<string | null>(null)
+  const [copied, setCopied] = useState<string | null>(null)
 
   const randomTools = [...tools]
     .filter(t => t.path !== currentPath)
@@ -98,52 +98,61 @@ const [copied, setCopied] = useState<string | null>(null)
     }, 2000)
   }
 
+  const toolMeta = tools.find(t => t.slug === slug)
+
+  const finalTitle = toolMeta?.name || title
+  const finalDescription = toolMeta?.description || description
+  const finalTags = toolMeta?.tags || tags
+
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 text-white">
       <Navbar />
       <Helmet>
 
+        {/* Title */}
+        <title>{finalTitle} | Bioinformatics Tools Hub</title>
 
+        {/* Primary SEO */}
+        <meta name="description" content={finalDescription} key="description" />
 
-        <title>{title} | Bioinformatics Tools Hub</title>
+        {finalTags && (
+          <meta name="keywords" content={finalTags.join(", ")} key="keywords" />
+        )}
 
-        <meta name="description" content={description} />
+        <meta name="robots" content="index,follow" key="robots" />
 
-        <meta
-          name="keywords"
-          content={tags?.join(", ") || ""}
-        />
-
-        <meta name="robots" content="index,follow" />
-
+        {/* Canonical (CRITICAL FIX) */}
         <link
           rel="canonical"
           href={`https://biotoolshub.org${location.pathname.replace(/\/$/, "")}`}
+          key="canonical"
         />
 
-        <meta property="og:title" content={`${title} | Bioinfo Tools Hub`} />
-        <meta property="og:site_name" content="Bioinformatics Tools Hub" />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:image" content="https://biotoolshub.org/preview.png" />
-        <meta property="og:url" content={`https://biotoolshub.org${location.pathname}`} />
+        {/* Open Graph */}
+        <meta property="og:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="og:title" />
+        <meta property="og:description" content={finalDescription} key="og:description" />
+        <meta property="og:type" content="website" key="og:type" />
+        <meta property="og:image" content="https://biotoolshub.org/preview.png" key="og:image" />
+        <meta property="og:url" content={`https://biotoolshub.org${location.pathname}`} key="og:url" />
+        <meta property="og:site_name" content="Bioinformatics Tools Hub" key="og:site_name" />
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${title} | Bioinfo Tools Hub`} />
-        <meta name="twitter:image" content="https://biotoolshub.org/preview.png" />
-        <meta name="twitter:description" content={description} />
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+        <meta name="twitter:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="twitter:title" />
+        <meta name="twitter:description" content={finalDescription} key="twitter:description" />
+        <meta name="twitter:image" content="https://biotoolshub.org/preview.png" key="twitter:image" />
 
-        <script type="application/ld+json">
+        {/* Structured Data: SoftwareApplication */}
+        <script type="application/ld+json" key="software-schema">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            name: title,
-            description: description,
+            name: finalTitle,
+            description: finalDescription,
             url: `https://biotoolshub.org${location.pathname}`,
             applicationCategory: "ScientificApplication",
             operatingSystem: "Web",
-            browserRequirements: "Requires JavaScript",
-            softwareVersion: "1.0",
             creator: {
               "@type": "Organization",
               name: "Bioinformatics Tools Hub"
@@ -156,46 +165,46 @@ const [copied, setCopied] = useState<string | null>(null)
           })}
         </script>
 
-        <script type="application/ld+json">
+        {/* Breadcrumb */}
+        <script type="application/ld+json" key="breadcrumb-schema">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "BreadcrumbList",
-            "itemListElement": [
+            itemListElement: [
               {
                 "@type": "ListItem",
-                "position": 1,
-                "name": "Home",
-                "item": "https://biotoolshub.org"
+                position: 1,
+                name: "Home",
+                item: "https://biotoolshub.org"
               },
               {
                 "@type": "ListItem",
-                "position": 2,
-                "name": "Tools",
-                "item": "https://biotoolshub.org/tools"
+                position: 2,
+                name: "Tools",
+                item: "https://biotoolshub.org/tools"
               },
               {
                 "@type": "ListItem",
-                "position": 3,
-                "name": title,
-                "item": `https://biotoolshub.org${location.pathname}`
+                position: 3,
+                name: finalTitle,
+                item: `https://biotoolshub.org${location.pathname}`
               }
-
             ]
-
           })}
         </script>
 
+        {/* FAQ Schema */}
         {faq?.length > 0 && (
-          <script type="application/ld+json">
+          <script type="application/ld+json" key="faq-schema">
             {JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
-              "mainEntity": faq.map(f => ({
+              mainEntity: faq.map(f => ({
                 "@type": "Question",
-                "name": f.question,
-                "acceptedAnswer": {
+                name: f.question,
+                acceptedAnswer: {
                   "@type": "Answer",
-                  "text": f.answer
+                  text: f.answer
                 }
               }))
             })}
@@ -439,7 +448,7 @@ const [copied, setCopied] = useState<string | null>(null)
                   </pre>
 
                   <button
-                  aria-label= "Copy citation"
+                    aria-label="Copy citation"
                     onClick={() => copyToClipboard(citationText, "citation")}
                     className="mt-3 rounded-lg border border-white/20 px-4 py-2 text-sm hover:border-cyan-400 hover:text-cyan-300 transition"
                   >
@@ -455,7 +464,7 @@ const [copied, setCopied] = useState<string | null>(null)
                   </pre>
 
                   <button
-                  aria-label= "Copy BibTeX citation"
+                    aria-label="Copy BibTeX citation"
                     onClick={() => copyToClipboard(bibtex, "bibtex")}
                     className="mt-3 rounded-lg border border-white/20 px-4 py-2 text-sm hover:border-cyan-400 hover:text-cyan-300 transition"
                   >

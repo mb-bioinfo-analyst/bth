@@ -24,37 +24,47 @@ export default function Home() {
 
         <title>Bioinformatics Tools Hub</title>
 
-        
 
-        {/* <meta
+
+        {/* Primary SEO */}
+        <meta
           name="description"
-          content="Free online bioinformatics tools for DNA, RNA, and Protein data including ORF finder, FASTA tools, motif search and codon analysis."
-        /> */}
+          content="Free online bioinformatics tools for DNA, RNA, and protein analysis including ORF finder, FASTA tools, motif search, and codon analysis."
+          key="description"
+        />
 
-        {/* <link rel="canonical" href="https://biotoolshub.org/" /> */}
+        <meta name="robots" content="index,follow" key="robots" />
 
-        {/* <!-- Open Graph --> */}
-        <meta property="og:title" content="Bioinformatics Tools Hub" />
+        <link
+          rel="canonical"
+          href="https://biotoolshub.org/"
+          key="canonical"
+        />
+
+        {/* Open Graph */}
+        <meta property="og:title" content="Bioinformatics Tools Hub" key="og:title" />
         <meta
           property="og:description"
-          content="Modern browser-based bioinformatics tools for researchers and students."
-          />
-        <meta property="og:type" content="website"/>
-        <meta property="og:url" content="https://biotoolshub.org/"/>
-        <meta property="og:image" content="https://biotoolshub.org/preview.png"/>
-        <meta property="og:site_name" content="Bioinformatics Tools Hub"/>
+          content="Free online bioinformatics tools for DNA, RNA, and protein analysis including ORF finder, FASTA tools, motif search, and codon analysis."
+          key="og:description"
+        />
+        <meta property="og:type" content="website" key="og:type" />
+        <meta property="og:url" content="https://biotoolshub.org/" key="og:url" />
+        <meta property="og:image" content="https://biotoolshub.org/preview.png" key="og:image" />
+        <meta property="og:site_name" content="Bioinformatics Tools Hub" key="og:site_name" />
 
-
-        {/* <!-- Twitter --> */}
-        <meta name="twitter:card" content="summary_large_image"/>
-        <meta name="twitter:title" content="Bioinformatics Tools Hub"/>
-        <meta name="twitter:description"
-            content="Free online bioinformatics tools for DNA, RNA, and Protein data including ORF finder, FASTA tools, motif search and codon analysis."/>
-        <meta name="twitter:image" content="https://biotoolshub.org/preview.png"/>
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
+        <meta name="twitter:title" content="Bioinformatics Tools Hub" key="twitter:title" />
+        <meta
+          name="twitter:description"
+          content="Free online bioinformatics tools for DNA, RNA, and protein analysis including ORF finder, FASTA tools, motif search, and codon analysis."
+          key="twitter:description"
+        />
+        <meta name="twitter:image" content="https://biotoolshub.org/preview.png" key="twitter:image" />
 
         {/* ItemList schema */}
-
-        <script type="application/ld+json">
+        <script type="application/ld+json" key="itemlist-schema">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "ItemList",
@@ -85,7 +95,7 @@ export default function Home() {
 
           <h1 className="mt-6 text-5xl font-bold tracking-tight">
 
-            Bioinformatics Tools Hub
+            Bioinformatics Tools Hub for DNA, RNA and Protein Analysis
 
           </h1>
 
@@ -219,7 +229,7 @@ export default function Home() {
 
       </section>
       {/* Footer */}
-      
+
       <Footer />
     </div>
 
