@@ -510,7 +510,7 @@ export const tools: Tool[] = [
 
   category: "Sequence Bioinformatics Tools",
 
-  component: () => import("../tools/random-dna/RandomDnaGenerator"),
+  component: () => import("../tools/random-dna-generator/RandomDnaGenerator"),
 
   tags: [
     "random dna generator",
@@ -542,7 +542,7 @@ export const tools: Tool[] = [
 
   category: "Protein Analysis Tools",
 
-  component: () => import("../tools/random-protein/RandomProteinGenerator"),
+  component: () => import("../tools/random-protein-generator/RandomProteinGenerator"),
 
   tags: [
     "random protein generator",
@@ -563,8 +563,8 @@ export const tools: Tool[] = [
 
   {
   name: "Protein Molecular Weight & pI Calculator",
-  slug: "protein-mw-pi-calculator",
-  path: "/tools/protein-mw-pi-calculator",
+  slug: "protein-mw",
+  path: "/tools/protein-mw",
 
   uiDescription:
     "Calculate protein molecular weight, isoelectric point (pI), and amino acid composition from protein sequences for biochemical and bioinformatics analysis.",
@@ -606,7 +606,7 @@ export const tools: Tool[] = [
 
   category: "Sequence Bioinformatics Tools",
 
-  component: () => import("../tools/protein-backtranslation/ProteinBackTranslation"),
+  component: () => import("../tools/protein-back-translation/ProteinBackTranslation"),
 
   tags: [
     "protein to dna",
@@ -1277,7 +1277,7 @@ export const tools: Tool[] = [
 
   category: "Sequence Analysis Tools",
 
-  component: () => import("../tools/restriction-finder/RestrictionSiteFinder"),
+  component: () => import("../tools/restriction-site-finder/RestrictionSiteFinder"),
 
   tags: [
     "restriction enzyme finder",

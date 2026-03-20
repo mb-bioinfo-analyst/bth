@@ -102,7 +102,7 @@ export default function RandomDnaGenerator() {
 
     <ToolLayout
       badge="Sequence Tool"
-      slug="random-dna"
+      slug="random-dna-generator"
       category="Sequence"
 
       seoContent={

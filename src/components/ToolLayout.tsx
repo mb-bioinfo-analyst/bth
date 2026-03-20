@@ -48,6 +48,23 @@ export default function ToolLayout({
   const finalUiDescription = toolMeta?.uiDescription
   const finalTags = toolMeta?.tags
 
+  const fullBrand = "Bioinformatics Tools Hub"
+  const mediumBrand = "Bioinformatics Tools"
+  const shortBrand = "BioToolshub"
+
+  let seoTitle = `${finalTitle} | ${fullBrand}`
+
+  if (seoTitle.length > 60) {
+    seoTitle = `${finalTitle} | ${mediumBrand}`
+  }
+
+  if (seoTitle.length > 60) {
+    seoTitle = `${finalTitle} | ${shortBrand}`
+  }
+
+  if (seoTitle.length > 60) {
+    seoTitle = finalTitle
+  }
 
 
   const location = useLocation();
@@ -85,7 +102,9 @@ https://biotoolshub.org${location.pathname}`
     }, {} as Record<string, typeof tools>)
   }, [])
 
-  const defaultOpenCategories = ["sequence", "fasta"]
+  // const defaultOpenCategories = ["sequence", "fasta"]
+
+  const defaultOpenCategories = ["pcr"]
 
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(
     Object.keys(groupedTools).reduce((acc, cat) => {
@@ -127,8 +146,10 @@ https://biotoolshub.org${location.pathname}`
       <Navbar />
       <Helmet>
 
-        {/* Title */}
-        <title>{finalTitle} | Bioinformatics Tools Hub</title>
+        {/* Title 
+        <title>{finalTitle} | Bioinformatics Tools Hub</title>  */}
+
+        <title>{seoTitle}</title>
 
         {/* Primary SEO */}
         <meta name="description" content={finalDescription} key="description" />
@@ -143,7 +164,9 @@ https://biotoolshub.org${location.pathname}`
         <link rel="canonical" href={canonicalUrl} key="canonical" />
 
         {/* Open Graph */}
-        <meta property="og:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="og:title" />
+        {/* <meta property="og:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="og:title" /> */}
+        <meta property="og:title" content={seoTitle} key="og:title" />
+        
         <meta property="og:description" content={finalDescription} key="og:description" />
         <meta property="og:type" content="website" key="og:type" />
         <meta property="og:image" content="https://biotoolshub.org/preview.png" key="og:image" />
@@ -152,7 +175,8 @@ https://biotoolshub.org${location.pathname}`
 
         {/* Twitter */}
         <meta name="twitter:card" content="summary_large_image" key="twitter:card" />
-        <meta name="twitter:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="twitter:title" />
+        {/* <meta name="twitter:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="twitter:title" /> */}
+        <meta name="twitter:title" content={seoTitle} key="twitter:title"  />
         <meta name="twitter:description" content={finalDescription} key="twitter:description" />
         <meta name="twitter:image" content="https://biotoolshub.org/preview.png" key="twitter:image" />
 

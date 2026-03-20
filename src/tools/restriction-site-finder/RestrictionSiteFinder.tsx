@@ -332,7 +332,7 @@ ATGGAATTCGGATCCATGAAGCTTATGGCGGCCGCATGGGTACCGCTAGCACTAGTCTCGAGCTGCAGCCCGGGCCATGG
 
     <ToolLayout
       badge="Sequence Analysis"
-      slug="restriction-finder"
+      slug="restriction-site-finder"
       category="Sequence Analysis"
 
       seoContent={

@@ -108,7 +108,7 @@ export default function RandomProteinGenerator() {
 
     <ToolLayout
       badge="Protein Tool"
-      slug="random-protein"
+      slug="random-protein-generator"
       category="Protein"
 
       seoContent={

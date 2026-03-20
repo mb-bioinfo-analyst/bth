@@ -167,7 +167,7 @@ MKWVTFISLLFLFSSAYS`);
 
     <ToolLayout
       badge="Sequence Tool"
-      slug="protein-backtranslation"
+      slug="protein-back-translation"
       category="Sequence"
 
       seoContent={
