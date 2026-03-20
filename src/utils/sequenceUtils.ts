@@ -163,3 +163,50 @@ export function reverseComplement(seq: string): string {
     .join("")
 
 }
+
+
+
+/*
+---------------------------------------
+for sequence toolkit
+---------------------------------------
+*/
+
+
+export const cleanInput = (input: string) =>
+  input.replace(/^>.*$/gm, "").replace(/\s/g, "").toUpperCase()
+
+export const reverse = (seq: string) =>
+  seq.split("").reverse().join("")
+
+export const complementDNA = (seq: string) => {
+  const map: Record<string, string> = {
+    A: "T", T: "A", C: "G", G: "C",
+    R: "Y", Y: "R", S: "S", W: "W",
+    K: "M", M: "K", B: "V", D: "H",
+    H: "D", V: "B", N: "N"
+  }
+  return seq.split("").map(c => map[c] || c).join("")
+}
+
+export const dnaToRna = (seq: string) =>
+  seq.replace(/T/g, "U")
+
+export const rnaToDna = (seq: string) =>
+  seq.replace(/U/g, "T")
+
+export const removeGaps = (seq: string) =>
+  seq.replace(/[-.\s]/g, "")
+
+export const toUpper = (seq: string) => seq.toUpperCase()
+export const toLower = (seq: string) => seq.toLowerCase()
+
+export const getLength = (seq: string) => seq.length
+
+
+
+/*
+---------------------------------------
+for sequence toolkit END
+---------------------------------------
+*/

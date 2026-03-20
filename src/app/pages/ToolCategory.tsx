@@ -2,98 +2,100 @@ import { useParams, Link, Navigate } from "react-router-dom"
 import { tools } from "../../data/tools"
 import ToolLayout from "../../components/ToolLayout"
 
+function categoryToSlug(category: string) {
+  return category
+    .toLowerCase()
+    .replace("bioinformatics tools", "")
+    .replace("tools", "")
+    .trim()
+    .replace(/\s+/g, "-")
+}
+
 export default function ToolCategory() {
 
-    const { category } = useParams()
+  const { category } = useParams()
 
-    const categoryTools = tools.filter(
-        t => t.category.toLowerCase() === category?.toLowerCase()
-    )
+  const categoryTools = tools.filter(
+    t => categoryToSlug(t.category) === category
+  )
 
-    // invalid category → redirect to 404
-    if (!categoryTools.length) {
-        return <Navigate to="/404" replace />
-    }
+  if (!categoryTools.length) {
+    return <Navigate to="/404" replace />
+  }
 
-    const realCategory = categoryTools[0].category
+  const realCategory = categoryTools[0].category
 
-    const title = `${realCategory} | Bioinformatics Tools Hub`
+  const cleanCategory = realCategory
+    .replace("Bioinformatics Tools", "")
+    .replace("Tools", "")
+    .trim()
 
-    const description =
-        `Collection of ${realCategory.toLowerCase()} for DNA, RNA and protein data analysis.`
+  return (
+    <ToolLayout
+      slug={`category-${category}`}
+  title={`${cleanCategory} Bioinformatics Tools`}
+  description={`Explore ${cleanCategory.toLowerCase()} tools for DNA, RNA and protein sequence analysis. Free browser-based bioinformatics utilities.`}
+  badge="Tool Category"
+    >
 
-    return (
-        <ToolLayout
-            title={title}
-            description={description}
-            badge="Tool Category"
-        >
+      {/* Tool grid */}
 
-            {/* Tool grid */}
+      <div className="grid md:grid-cols-2 gap-4">
 
-            <div className="grid md:grid-cols-2 gap-4">
+        {categoryTools.map(tool => (
 
-                {categoryTools.map(tool => (
+          <Link
+            key={tool.path}
+            to={tool.path}
+            className="p-4 border rounded-lg hover:border-cyan-400"
+          >
+            <h3 className="font-semibold">{tool.name}</h3>
 
-                    <Link
-                        key={tool.path}
-                        to={tool.path}
-                        className="p-4 border rounded-lg hover:border-cyan-400"
-                    >
-                        <h3 className="font-semibold">{tool.name}</h3>
-                        <p className="text-sm text-slate-600">{tool.description}</p>
-                    </Link>
+            <p className="text-sm text-slate-600">
+              {tool.uiDescription}
+            </p>
 
-                ))}
+          </Link>
 
-            </div>
+        ))}
 
+      </div>
 
-            {/* SEO explanation text */}
+      {/* SEO CONTENT */}
 
-            <section className="mt-12 max-w-3xl space-y-5 text-slate-700">
+      <section className="mt-12 max-w-3xl space-y-5 text-slate-700">
 
-                <h2 className="text-xl font-semibold">
-                    About {category}
-                </h2>
+        <h2 className="text-xl font-semibold">
+          {cleanCategory} Tools for Bioinformatics Analysis
+        </h2>
 
-                <p>
-                    This page contains a collection of browser-based tools designed for
-                    {category?.toLowerCase()} used in modern molecular biology,
-                    genomics, and bioinformatics research.
-                </p>
+        <p>
+          This collection of {cleanCategory.toLowerCase()} tools enables researchers
+          to analyze DNA, RNA, and protein sequences directly in the browser.
+          These tools support modern genomics and molecular biology workflows.
+        </p>
 
-                <p>
-                    These tools allow researchers, students, and laboratory scientists to
-                    analyze data (DNA, RNA, and protein) directly in the browser without
-                    installing specialized software.
-                </p>
+        <p>
+          All tools run entirely client-side, ensuring fast performance and complete
+          data privacy without uploading sequences to external servers.
+        </p>
 
-                <p>
-                    All tools run locally in the browser to ensure fast performance and
-                    data privacy. No data is uploaded to external servers.
-                </p>
+        <h3 className="text-lg font-semibold">
+          Common applications
+        </h3>
 
-                <h3 className="text-lg font-semibold">
-                    Common applications
-                </h3>
+        <ul className="list-disc ml-6 space-y-1">
 
-                <ul className="list-disc ml-6 space-y-1">
+          <li>Sequence analysis and processing</li>
+          <li>Genomic data preparation</li>
+          <li>Bioinformatics workflows</li>
+          <li>Educational analysis</li>
+          <li>Research data exploration</li>
 
-                    <li>DNA and RNA sequence processing</li>
+        </ul>
 
-                    <li>Genomic data preparation and formatting</li>
+      </section>
 
-                    <li>Molecular biology workflow support</li>
-
-                    <li>Educational bioinformatics analysis</li>
-
-                    <li>Exploratory sequence analysis in research projects</li>
-
-                </ul>
-
-            </section>
-
-        </ToolLayout>
-    )
+    </ToolLayout>
+  )
 }

@@ -236,6 +236,32 @@ ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`);
 
       </div>
 
+      <div className="mt-10 p-6 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 to-purple-50 shadow-sm">
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900">
+              Try the Full Sequence Toolkit
+            </h3>
+
+            <p className="text-sm text-gray-600 mt-1 max-w-xl">
+              Access reverse complement, DNA ↔ RNA conversion, sequence cleaning,
+              and GC content analysis ~ all in one powerful tool.
+            </p>
+          </div>
+
+          <Link
+            to="/tools/sequence-toolkit"
+            className="mt-6 inline-flex flex-col items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg hover:from-blue-700 hover:to-purple-700 transition"
+          >
+            <span>Open Toolkit</span>
+            <span className="text-xl leading-none mt-3">→</span>
+          </Link>
+
+        </div>
+      </div>
+
     </ToolLayout>
 
   );

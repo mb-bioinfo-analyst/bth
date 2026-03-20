@@ -2,39 +2,51 @@ import { tools } from "../../data/tools"
 import { Link } from "react-router-dom"
 import ToolLayout from "../../components/ToolLayout"
 
+function categoryToSlug(category: string) {
+  return category
+    .toLowerCase()
+    .replace("bioinformatics tools", "")
+    .replace("tools", "")
+    .trim()
+    .replace(/\s+/g, "-")
+}
+
 export default function ToolsIndex() {
 
   const categories = [...new Set(tools.map(t => t.category))]
 
   return (
     <ToolLayout
-      title="Bioinformatics Tools"
-      description="Browse all available bioinformatics tools by category."
-      badge="Tools Directory"
-      
+      slug="tools-index"
+  title="Bioinformatics Tools Directory"
+  description="Browse all bioinformatics tools for DNA, RNA and protein analysis including sequence analysis, FASTA tools, and genomics utilities."
+  badge="Tools Directory"
     >
 
       <div className="grid md:grid-cols-3 gap-6">
 
-        {categories.map(cat => (
+        {categories.map(cat => {
 
-          <Link
-            key={cat}
-            to={`/tools/${cat.toLowerCase()}`}
-            className="p-6 border rounded-xl hover:border-cyan-400 transition"
-          >
+          const slug = categoryToSlug(cat)
 
-            <h2 className="text-xl font-semibold">
-              {cat}
-            </h2>
+          return (
+            <Link
+              key={cat}
+              to={`/tools/${slug}`}
+              className="p-6 border rounded-xl hover:border-cyan-400 transition"
+            >
 
-            <p className="text-sm text-slate-600 mt-2">
-              Explore tools related to {cat} sequence analysis.
-            </p>
+              <h2 className="text-xl font-semibold">
+                {cat}
+              </h2>
 
-          </Link>
+              <p className="text-sm text-slate-600 mt-2">
+                Explore {slug.replace("-", " ")} tools for DNA, RNA and protein analysis.
+              </p>
 
-        ))}
+            </Link>
+          )
+        })}
 
       </div>
 

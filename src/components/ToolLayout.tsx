@@ -9,6 +9,8 @@ import Footer from "../components/Footer"
 
 type ToolLayoutProps = {
 
+  title?: string
+  description?: string
 
   category?: string;
 
@@ -25,6 +27,7 @@ type ToolLayoutProps = {
 
 export default function ToolLayout({
 
+  
 
   category,
 
@@ -43,9 +46,11 @@ export default function ToolLayout({
 
   const toolMeta = tools.find(t => t.slug === slug)
 
-  const finalTitle = toolMeta?.name
-  const finalDescription = toolMeta?.metaDescription
-  const finalUiDescription = toolMeta?.uiDescription
+  const finalTitle = toolMeta?.name || "Bioinformatics Tools"
+  const finalDescription = toolMeta?.metaDescription ||
+  "Free online bioinformatics tools for DNA, RNA and protein sequence analysis."
+  const finalUiDescription = toolMeta?.uiDescription ||
+  "Explore bioinformatics tools for sequence analysis."
   const finalTags = toolMeta?.tags
 
   const fullBrand = "Bioinformatics Tools Hub"
