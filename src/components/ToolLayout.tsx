@@ -8,11 +8,11 @@ import { useMemo, useState } from "react"
 import Footer from "../components/Footer"
 
 type ToolLayoutProps = {
-  title: string;
-  description: string;
+
+
   category?: string;
-  tags?: string[]
-  slug?: string
+
+  slug: string
   badge?: string;
   children: React.ReactNode;
   rightPanel?: React.ReactNode;
@@ -23,13 +23,11 @@ type ToolLayoutProps = {
 
 };
 
-
-
 export default function ToolLayout({
-  title,
-  description,
+
+
   category,
-  tags,
+
   slug,
   badge = "Bioinformatics Tool",
   children,
@@ -43,18 +41,31 @@ export default function ToolLayout({
 
 }: ToolLayoutProps) {
 
+  const toolMeta = tools.find(t => t.slug === slug)
+
+  const finalTitle = toolMeta?.name
+  const finalDescription = toolMeta?.metaDescription
+  const finalUiDescription = toolMeta?.uiDescription
+  const finalTags = toolMeta?.tags
+
+
+
   const location = useLocation();
+
+  const canonicalUrl =
+    `https://biotoolshub.org${location.pathname}`.replace(/\/$/, "") ||
+    "https://biotoolshub.org"
 
   const relatedTools = getRelatedTools(slug)
 
   const currentPath = location.pathname;
 
   const citationText = `Bioinformatics Tools Hub (${new Date().getFullYear()})
-${title}
+${finalTitle}
 https://biotoolshub.org${location.pathname}`
 
   const bibtex = `@misc{bioinfo-tools-${slug},
-  title = {${title}},
+  title = {${finalTitle}},
   author = {{Bioinformatics Tools Hub}},
   year = {${new Date().getFullYear()}},
   url = {https://biotoolshub.org${location.pathname}}
@@ -62,10 +73,9 @@ https://biotoolshub.org${location.pathname}`
 
   const [copied, setCopied] = useState<string | null>(null)
 
-  const randomTools = [...tools]
+  const randomTools = tools
     .filter(t => t.path !== currentPath)
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 4);
+    .slice(0, 4)
 
   const groupedTools = useMemo(() => {
     return tools.reduce((acc, tool) => {
@@ -75,12 +85,24 @@ https://biotoolshub.org${location.pathname}`
     }, {} as Record<string, typeof tools>)
   }, [])
 
+  const defaultOpenCategories = ["sequence", "fasta"]
+
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(
-    Object.keys(groupedTools).reduce((acc, category) => {
-      acc[category] = category === "Sequence" || category === "FASTA"
+    Object.keys(groupedTools).reduce((acc, cat) => {
+      acc[cat] = defaultOpenCategories.some(d =>
+        cat.toLowerCase().includes(d)
+      )
       return acc
     }, {} as Record<string, boolean>)
   )
+
+  const cleanCategory = category
+    ? category
+      .replace("Bioinformatics Tools", "")
+      .replace("Tools", "")
+      .trim()
+      .toLowerCase()
+    : "bioinformatics"
 
   const toggleCategory = (category: string) => {
     setOpenCategories(prev => ({
@@ -98,11 +120,6 @@ https://biotoolshub.org${location.pathname}`
     }, 2000)
   }
 
-  const toolMeta = tools.find(t => t.slug === slug)
-
-  const finalTitle = toolMeta?.name || title
-  const finalDescription = toolMeta?.description || description
-  const finalTags = toolMeta?.tags || tags
 
 
   return (
@@ -123,18 +140,14 @@ https://biotoolshub.org${location.pathname}`
         <meta name="robots" content="index,follow" key="robots" />
 
         {/* Canonical (CRITICAL FIX) */}
-        <link
-          rel="canonical"
-          href={`https://biotoolshub.org${location.pathname.replace(/\/$/, "")}`}
-          key="canonical"
-        />
+        <link rel="canonical" href={canonicalUrl} key="canonical" />
 
         {/* Open Graph */}
         <meta property="og:title" content={`${finalTitle} | Bioinformatics Tools Hub`} key="og:title" />
         <meta property="og:description" content={finalDescription} key="og:description" />
         <meta property="og:type" content="website" key="og:type" />
         <meta property="og:image" content="https://biotoolshub.org/preview.png" key="og:image" />
-        <meta property="og:url" content={`https://biotoolshub.org${location.pathname}`} key="og:url" />
+        <meta property="og:url" content={canonicalUrl} key="og:url" />
         <meta property="og:site_name" content="Bioinformatics Tools Hub" key="og:site_name" />
 
         {/* Twitter */}
@@ -150,7 +163,7 @@ https://biotoolshub.org${location.pathname}`
             "@type": "SoftwareApplication",
             name: finalTitle,
             description: finalDescription,
-            url: `https://biotoolshub.org${location.pathname}`,
+            url: canonicalUrl,
             applicationCategory: "ScientificApplication",
             operatingSystem: "Web",
             creator: {
@@ -187,7 +200,7 @@ https://biotoolshub.org${location.pathname}`
                 "@type": "ListItem",
                 position: 3,
                 name: finalTitle,
-                item: `https://biotoolshub.org${location.pathname}`
+                item: canonicalUrl
               }
             ]
           })}
@@ -221,10 +234,10 @@ https://biotoolshub.org${location.pathname}`
 
         <div className="max-w-3xl">
           <h1 className="text-3xl font-bold tracking-tight text-white md:text-5xl">
-            {title}
+            {finalTitle}
           </h1>
           <p className="mt-4 text-base leading-7 text-slate-300 md:text-lg">
-            {description}
+            {finalUiDescription}
           </p>
         </div>
       </section>
@@ -266,11 +279,22 @@ https://biotoolshub.org${location.pathname}`
                     {Object.entries(groupedTools).map(([category, categoryTools]) => (
                       <div key={category} className="mb-4">
 
-                        <h3 className="text-xs font-semibold uppercase text-cyan-300">
+                        {/* <h3 className="text-xs font-semibold uppercase text-cyan-300">
                           {category}
-                        </h3>
+                        </h3> */}
+                        <button
+                          onClick={() => toggleCategory(category)}
+                          aria-expanded={openCategories[category]}
+                          className="text-xs font-semibold uppercase text-cyan-300 flex items-center justify-between w-full hover:text-cyan-200 transition"
+                        >
+                          <span>{category}</span>
 
-                        <ul className="mt-2 space-y-2 text-sm text-slate-200">
+                          <span className="text-xs">
+                            {openCategories[category] ? "−" : "+"}
+                          </span>
+                        </button>
+
+                        {/* <ul className="mt-2 space-y-2 text-sm text-slate-200">
 
                           {categoryTools.map(tool => (
 
@@ -290,7 +314,25 @@ https://biotoolshub.org${location.pathname}`
 
                           ))}
 
-                        </ul>
+                        </ul> */}
+
+                        {openCategories[category] && (
+                          <ul className="mt-2 space-y-2 text-sm text-slate-200">
+                            {categoryTools.map(tool => (
+                              <li key={tool.path}>
+                                <Link
+                                  to={tool.path}
+                                  className={`hover:text-cyan-300 transition ${location.pathname === tool.path
+                                      ? "text-cyan-300 font-semibold"
+                                      : ""
+                                    }`}
+                                >
+                                  • {tool.name}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
 
                       </div>
                     ))}
@@ -365,37 +407,35 @@ https://biotoolshub.org${location.pathname}`
                     Related Bioinformatics Tools
                   </h2>
 
-                  {relatedTools.length > 0 && (
-                    <div>
-                      {/* <h2 className="text-2xl font-semibold text-white mb-4">
+                  {/* {relatedTools.length > 0 && (
+                    <div> */}
+                  {/* <h2 className="text-2xl font-semibold text-white mb-4">
                         Related Bioinformatics Tools
                       </h2> */}
 
-                      <p className="text-slate-300 mb-4">
-                        Explore additional bioinformatics tools related to {category.toLowerCase()}
-                        analysis and molecular biology workflows.
+                  <p className="text-slate-300 mb-4">
+                    Explore related {cleanCategory} tools for DNA, RNA and protein sequence analysis workflows.
+                  </p>
 
-                      </p>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {relatedTools.map(tool => (
+                      <Link
+                        key={tool.slug}
+                        to={tool.path}
+                        className="block rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
+                      >
+                        <div className="font-semibold text-cyan-300">
+                          {tool.name}
+                        </div>
 
-                      <div className="grid md:grid-cols-2 gap-4">
-                        {relatedTools.map(tool => (
-                          <Link
-                            key={tool.slug}
-                            to={tool.path}
-                            className="block rounded-xl border border-white/10 bg-white/5 p-4 hover:bg-white/10 transition"
-                          >
-                            <div className="font-semibold text-cyan-300">
-                              {tool.name}
-                            </div>
-
-                            <div className="text-sm text-slate-300 mt-1">
-                              {tool.description}
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                        <div className="text-sm text-slate-300 mt-1">
+                          {tool.uiDescription}
+                        </div>
+                      </Link>
+                    ))}
+                  </div>
+                  {/* </div>
+                  )} */}
                 </div>
               )}
 

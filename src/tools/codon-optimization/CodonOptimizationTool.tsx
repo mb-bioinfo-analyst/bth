@@ -246,8 +246,7 @@ MAIVMGR*KGAR*`)
 
   return (
     <ToolLayout
-      title="Codon Optimization Tool"
-      description="Optimize coding DNA or reverse translate protein sequences for host-specific codon usage with GC and adaptation statistics."
+
       badge="Sequence Engineering"
       slug="codon-optimization"
       category="Sequence Engineering"
@@ -310,44 +309,44 @@ MAIVMGR*KGAR*`)
         </>
       }
 
-    howTo={
-      <ol className="list-decimal pl-6 space-y-2">
-        <li>Paste a coding DNA sequence or protein sequence into the input box.</li>
-        <li>Select the target host organism for codon usage.</li>
-        <li>Choose an optimization strategy such as maximum usage or GC-aware optimization.</li>
-        <li>Click <strong>Optimize Codons</strong>.</li>
-        <li>The optimized DNA sequence will appear instantly along with statistics.</li>
-        <li>Copy or download the optimized sequence for cloning or gene synthesis.</li>
-      </ol>
-    }
-
-    faq={[
-      {
-        question: "What is codon optimization?",
-        answer:
-          "Codon optimization is the process of modifying a DNA sequence to use codons that are preferred by a specific host organism in order to improve protein expression."
-      },
-      {
-        question: "Why is codon optimization important?",
-        answer:
-          "Different organisms prefer different codons for the same amino acid. Optimizing codons for a host organism can increase translation efficiency and protein yield."
-      },
-      {
-        question: "Can this tool reverse translate protein sequences?",
-        answer:
-          "Yes. The tool can convert protein sequences into optimized coding DNA sequences using host-specific codon usage tables."
-      },
-      {
-        question: "Does this tool calculate codon adaptation metrics?",
-        answer:
-          "Yes. The tool estimates codon adaptation scores, GC content, homopolymer runs, and provides optimization statistics."
-      },
-      {
-        question: "Is my sequence uploaded to a server?",
-        answer:
-          "No. All codon optimization calculations are performed locally in your browser to ensure full privacy."
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a coding DNA sequence or protein sequence into the input box.</li>
+          <li>Select the target host organism for codon usage.</li>
+          <li>Choose an optimization strategy such as maximum usage or GC-aware optimization.</li>
+          <li>Click <strong>Optimize Codons</strong>.</li>
+          <li>The optimized DNA sequence will appear instantly along with statistics.</li>
+          <li>Copy or download the optimized sequence for cloning or gene synthesis.</li>
+        </ol>
       }
-    ]}
+
+      faq={[
+        {
+          question: "What is codon optimization?",
+          answer:
+            "Codon optimization is the process of modifying a DNA sequence to use codons that are preferred by a specific host organism in order to improve protein expression."
+        },
+        {
+          question: "Why is codon optimization important?",
+          answer:
+            "Different organisms prefer different codons for the same amino acid. Optimizing codons for a host organism can increase translation efficiency and protein yield."
+        },
+        {
+          question: "Can this tool reverse translate protein sequences?",
+          answer:
+            "Yes. The tool can convert protein sequences into optimized coding DNA sequences using host-specific codon usage tables."
+        },
+        {
+          question: "Does this tool calculate codon adaptation metrics?",
+          answer:
+            "Yes. The tool estimates codon adaptation scores, GC content, homopolymer runs, and provides optimization statistics."
+        },
+        {
+          question: "Is my sequence uploaded to a server?",
+          answer:
+            "No. All codon optimization calculations are performed locally in your browser to ensure full privacy."
+        }
+      ]}
 
     >
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
@@ -439,7 +438,7 @@ MAIVMGR*KGAR*`)
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Optimize Codons"
+            aria-label="Optimize Codons"
 
             onClick={analyze}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
@@ -448,7 +447,7 @@ MAIVMGR*KGAR*`)
           </button>
 
           <button
-          aria-label="Clear Codons"
+            aria-label="Clear Codons"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
@@ -532,7 +531,7 @@ MAIVMGR*KGAR*`)
                 <div className="mt-4">
                   <div className="flex justify-end mb-3">
                     <button
-                    aria-label="Copy Codons Table "
+                      aria-label="Copy Codons Table "
                       onClick={handleCopyTable}
                       className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200"
                     >

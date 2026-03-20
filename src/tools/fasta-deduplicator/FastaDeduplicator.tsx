@@ -7,21 +7,21 @@ import SequenceOutput from "../../components/SequenceOutput"
 
 type Mode = "sequence" | "id" | "entry"
 
-export default function FastaDeduplicator(){
+export default function FastaDeduplicator() {
 
-  const [input,setInput] = useState("")
-  const [output,setOutput] = useState("")
-  const [report,setReport] = useState("")
-  const [mode,setMode] = useState<Mode>("sequence")
-  const [error,setError] = useState("")
+  const [input, setInput] = useState("")
+  const [output, setOutput] = useState("")
+  const [report, setReport] = useState("")
+  const [mode, setMode] = useState<Mode>("sequence")
+  const [error, setError] = useState("")
 
-  function parseFasta(text:string){
+  function parseFasta(text: string) {
 
     const entries = text
       .trim()
       .split(/\n(?=>)/)
 
-    return entries.map(entry=>{
+    return entries.map(entry => {
 
       const lines = entry.split("\n")
 
@@ -29,48 +29,48 @@ export default function FastaDeduplicator(){
       const seq = lines
         .slice(1)
         .join("")
-        .replace(/\s/g,"")
+        .replace(/\s/g, "")
         .toUpperCase()
 
-      const id = header.replace(/^>/,"").split(/\s+/)[0]
+      const id = header.replace(/^>/, "").split(/\s+/)[0]
 
-      return {header,seq,id}
+      return { header, seq, id }
 
     })
 
   }
 
-  function deduplicate(){
+  function deduplicate() {
 
     setError("")
     setOutput("")
     setReport("")
 
-    if(!input.trim()){
+    if (!input.trim()) {
       setError("Please paste FASTA sequences")
       return
     }
 
     const entries = parseFasta(input)
 
-    if(entries.length === 0){
+    if (entries.length === 0) {
       setError("No FASTA entries detected")
       return
     }
 
     const seen = new Set<string>()
-    const kept:any[] = []
+    const kept: any[] = []
     let removed = 0
 
-    for(const e of entries){
+    for (const e of entries) {
 
       let key = ""
 
-      if(mode === "sequence") key = e.seq
-      if(mode === "id") key = e.id
-      if(mode === "entry") key = `${e.header}_${e.seq}`
+      if (mode === "sequence") key = e.seq
+      if (mode === "id") key = e.id
+      if (mode === "entry") key = `${e.header}_${e.seq}`
 
-      if(seen.has(key)){
+      if (seen.has(key)) {
         removed++
         continue
       }
@@ -87,20 +87,20 @@ export default function FastaDeduplicator(){
     setOutput(fastaOut)
 
     setReport(
-`Total sequences: ${entries.length}
+      `Total sequences: ${entries.length}
 Unique sequences: ${kept.length}
 Duplicates removed: ${removed}`
     )
 
   }
 
-  const handleCopy = async ()=>{
+  const handleCopy = async () => {
     await navigator.clipboard.writeText(output)
   }
 
-  const handleDownload = ()=>{
+  const handleDownload = () => {
 
-    const blob = new Blob([output],{type:"text/plain"})
+    const blob = new Blob([output], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement("a")
@@ -115,7 +115,7 @@ Duplicates removed: ${removed}`
 
   }
 
-  const loadExample = ()=>{
+  const loadExample = () => {
 
     setInput(`>seq1
 ATGCGTACGT
@@ -130,7 +130,7 @@ TTGCGTACGA`)
 
   }
 
-  const clearAll = ()=>{
+  const clearAll = () => {
 
     setInput("")
     setOutput("")
@@ -139,105 +139,103 @@ TTGCGTACGA`)
 
   }
 
-  return(
+  return (
 
     <ToolLayout
-  title="FASTA Deduplicator"
-  description="Remove duplicate sequences from FASTA datasets by sequence, ID, or full entry."
-  badge="FASTA Tool"
-  slug="fasta-deduplicator"
-  category="FASTA"
+      badge="FASTA Tool"
+      slug="fasta-deduplicator"
+      category="FASTA"
 
-  seoContent={
-  <>
-    <h2>Remove Duplicate Sequences from FASTA Datasets</h2>
+      seoContent={
+        <>
+          <h2>Remove Duplicate Sequences from FASTA Datasets</h2>
 
-    <p>
-      FASTA datasets frequently contain duplicate sequences that can affect
-      downstream bioinformatics analyses. Duplicate entries may appear due
-      to sequencing artifacts, redundant database records, or the merging
-      of datasets from multiple sources. Removing duplicates helps ensure
-      that sequence collections remain clean, consistent, and suitable for
-      reliable computational analysis.
-    </p>
+          <p>
+            FASTA datasets frequently contain duplicate sequences that can affect
+            downstream bioinformatics analyses. Duplicate entries may appear due
+            to sequencing artifacts, redundant database records, or the merging
+            of datasets from multiple sources. Removing duplicates helps ensure
+            that sequence collections remain clean, consistent, and suitable for
+            reliable computational analysis.
+          </p>
 
-    <p>
-      This FASTA deduplication tool allows researchers to quickly detect
-      and remove duplicate entries from FASTA files directly in the browser.
-      The tool supports multiple deduplication strategies, including
-      removing duplicates by sequence content, by sequence identifier,
-      or by identical FASTA entries.
-    </p>
+          <p>
+            This FASTA deduplication tool allows researchers to quickly detect
+            and remove duplicate entries from FASTA files directly in the browser.
+            The tool supports multiple deduplication strategies, including
+            removing duplicates by sequence content, by sequence identifier,
+            or by identical FASTA entries.
+          </p>
 
-    <p>
-      After processing the dataset, the tool generates a cleaned FASTA
-      output along with a summary report showing the total number of
-      sequences analyzed, the number of unique entries retained, and
-      the number of duplicates removed. If additional dataset cleanup
-      is required, you may also use the{" "}
-      <Link to="/tools/sequence-cleaner">Sequence Cleaner</Link>{" "}
-      or extract specific records using the{" "}
-      <Link to="/tools/fasta-sequence-extractor">
-        FASTA Sequence Extractor
-      </Link>.
-    </p>
+          <p>
+            After processing the dataset, the tool generates a cleaned FASTA
+            output along with a summary report showing the total number of
+            sequences analyzed, the number of unique entries retained, and
+            the number of duplicates removed. If additional dataset cleanup
+            is required, you may also use the{" "}
+            <Link to="/tools/sequence-cleaner">Sequence Cleaner</Link>{" "}
+            or extract specific records using the{" "}
+            <Link to="/tools/fasta-sequence-extractor">
+              FASTA Sequence Extractor
+            </Link>.
+          </p>
 
-    <p>
-      FASTA deduplication is widely used in genome assembly pipelines,
-      transcriptomics datasets, protein sequence databases, and
-      metagenomics workflows. Removing redundant entries improves
-      dataset quality and prevents bias in downstream sequence
-      analysis or clustering tasks.
-    </p>
+          <p>
+            FASTA deduplication is widely used in genome assembly pipelines,
+            transcriptomics datasets, protein sequence databases, and
+            metagenomics workflows. Removing redundant entries improves
+            dataset quality and prevents bias in downstream sequence
+            analysis or clustering tasks.
+          </p>
 
-    <p>
-      Because the entire deduplication process runs locally in your
-      browser, no sequence data is transmitted to external servers.
-      This ensures complete privacy for sensitive biological datasets
-      and unpublished sequencing results.
-    </p>
-  </>
-}
+          <p>
+            Because the entire deduplication process runs locally in your
+            browser, no sequence data is transmitted to external servers.
+            This ensures complete privacy for sensitive biological datasets
+            and unpublished sequencing results.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a FASTA dataset into the input field.</li>
-    <li>Select the deduplication method such as sequence, sequence ID, or full FASTA entry.</li>
-    <li>Click <strong>Remove Duplicates</strong>.</li>
-    <li>The cleaned FASTA dataset will appear in the output panel.</li>
-    <li>Review the deduplication report showing total sequences and duplicates removed.</li>
-    <li>Copy or download the deduplicated FASTA file for further analysis.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a FASTA dataset into the input field.</li>
+          <li>Select the deduplication method such as sequence, sequence ID, or full FASTA entry.</li>
+          <li>Click <strong>Remove Duplicates</strong>.</li>
+          <li>The cleaned FASTA dataset will appear in the output panel.</li>
+          <li>Review the deduplication report showing total sequences and duplicates removed.</li>
+          <li>Copy or download the deduplicated FASTA file for further analysis.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is FASTA deduplication?",
-    answer:
-      "FASTA deduplication is the process of removing identical or redundant entries from FASTA sequence datasets so that each unique sequence appears only once."
-  },
-  {
-    question: "What is the difference between sequence and ID deduplication?",
-    answer:
-      "Sequence deduplication removes entries with identical nucleotide or protein sequences, while ID deduplication removes entries with identical sequence identifiers."
-  },
-  {
-    question: "Can this tool process multi-FASTA files?",
-    answer:
-      "Yes. The deduplicator supports multi-FASTA input containing multiple sequences within a single dataset."
-  },
-  {
-    question: "Does this tool modify the sequences?",
-    answer:
-      "No. The tool only removes duplicate entries and preserves the original sequence data and FASTA headers."
-  },
-  {
-    question: "Is my FASTA dataset uploaded anywhere?",
-    answer:
-      "No. All deduplication processing happens locally in your browser to ensure that your sequence data remains private."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is FASTA deduplication?",
+          answer:
+            "FASTA deduplication is the process of removing identical or redundant entries from FASTA sequence datasets so that each unique sequence appears only once."
+        },
+        {
+          question: "What is the difference between sequence and ID deduplication?",
+          answer:
+            "Sequence deduplication removes entries with identical nucleotide or protein sequences, while ID deduplication removes entries with identical sequence identifiers."
+        },
+        {
+          question: "Can this tool process multi-FASTA files?",
+          answer:
+            "Yes. The deduplicator supports multi-FASTA input containing multiple sequences within a single dataset."
+        },
+        {
+          question: "Does this tool modify the sequences?",
+          answer:
+            "No. The tool only removes duplicate entries and preserves the original sequence data and FASTA headers."
+        },
+        {
+          question: "Is my FASTA dataset uploaded anywhere?",
+          answer:
+            "No. All deduplication processing happens locally in your browser to ensure that your sequence data remains private."
+        }
+      ]}
+    >
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
@@ -251,7 +249,7 @@ faq={[
 
           <select
             value={mode}
-            onChange={(e)=>setMode(e.target.value as Mode)}
+            onChange={(e) => setMode(e.target.value as Mode)}
             className="px-4 py-2 border rounded-lg"
           >
 
@@ -293,7 +291,7 @@ faq={[
 
         {/* Report */}
 
-        {report &&(
+        {report && (
 
           <div className="p-6 border-t border-gray-200 bg-gray-50">
 
@@ -309,11 +307,11 @@ faq={[
 
         )}
 
-        {error &&(
+        {error && (
 
           <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3">
 
-            <AlertCircle className="w-5 h-5 text-red-600"/>
+            <AlertCircle className="w-5 h-5 text-red-600" />
 
             <p className="text-red-700 text-sm">
               {error}
@@ -328,7 +326,7 @@ faq={[
         <div className="p-6 border-t border-gray-200 flex gap-4">
 
           <button
-          aria-label="Remove Duplicates 1"
+            aria-label="Remove Duplicates 1"
             onClick={deduplicate}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg"
           >
@@ -336,11 +334,11 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Remove Duplicates 1"
+            aria-label="Clear Remove Duplicates 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
-            <RefreshCw className="w-4 h-4"/>
+            <RefreshCw className="w-4 h-4" />
             Clear
           </button>
 

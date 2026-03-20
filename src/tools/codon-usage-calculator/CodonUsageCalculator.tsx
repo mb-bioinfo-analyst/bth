@@ -313,103 +313,101 @@ ATGGCTGCTGCTGCTAAAGGAGGAGGATTTCCCGAA`)
 
   return (
     <ToolLayout
-  title="Codon Usage Calculator"
-  description="Calculate codon counts, frequencies, RSCU values, and GC position statistics from coding DNA sequences."
-  badge="Sequence Analysis"
-  slug="codon-usage-calculator"
-  category="Sequence Analysis"
+      badge="Sequence Analysis"
+      slug="codon-usage-calculator"
+      category="Sequence Analysis"
 
-  seoContent={
-  <>
-    <h2>Codon Usage Analysis and RSCU Calculator</h2>
+      seoContent={
+        <>
+          <h2>Codon Usage Analysis and RSCU Calculator</h2>
 
-    <p>
-      Codon usage analysis is an important method in genomics and
-      bioinformatics used to study how frequently different codons
-      appear in protein-coding DNA sequences. Although several codons
-      can encode the same amino acid, organisms often prefer specific
-      synonymous codons. This phenomenon is known as <strong>codon usage bias</strong>
-      and plays a key role in translation efficiency, gene expression,
-      and genome evolution.
-    </p>
+          <p>
+            Codon usage analysis is an important method in genomics and
+            bioinformatics used to study how frequently different codons
+            appear in protein-coding DNA sequences. Although several codons
+            can encode the same amino acid, organisms often prefer specific
+            synonymous codons. This phenomenon is known as <strong>codon usage bias</strong>
+            and plays a key role in translation efficiency, gene expression,
+            and genome evolution.
+          </p>
 
-    <p>
-      This codon usage calculator analyzes coding DNA sequences and
-      computes codon counts, codon frequencies, and Relative Synonymous
-      Codon Usage (RSCU) values. These statistics help researchers
-      understand translation patterns, detect codon bias, and compare
-      coding sequences across species or experimental datasets.
-    </p>
+          <p>
+            This codon usage calculator analyzes coding DNA sequences and
+            computes codon counts, codon frequencies, and Relative Synonymous
+            Codon Usage (RSCU) values. These statistics help researchers
+            understand translation patterns, detect codon bias, and compare
+            coding sequences across species or experimental datasets.
+          </p>
 
-    <p>
-      The tool also calculates GC content across codon positions,
-      including GC1, GC2, and GC3. These metrics are widely used
-      indicators of genome composition and codon preference. If you
-      want to further evaluate nucleotide composition you can use the{" "}
-      <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
-      or examine base frequencies with the{" "}
-      <Link to="/tools/nucleotide-composition-calculator">
-        Nucleotide Composition Calculator
-      </Link>.
-    </p>
+          <p>
+            The tool also calculates GC content across codon positions,
+            including GC1, GC2, and GC3. These metrics are widely used
+            indicators of genome composition and codon preference. If you
+            want to further evaluate nucleotide composition you can use the{" "}
+            <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
+            or examine base frequencies with the{" "}
+            <Link to="/tools/nucleotide-composition-calculator">
+              Nucleotide Composition Calculator
+            </Link>.
+          </p>
 
-    <p>
-      Codon usage statistics are particularly useful for applications
-      such as gene expression analysis, evolutionary genomics, synthetic
-      biology, and recombinant protein production. Researchers often
-      analyze multi-FASTA datasets to generate codon usage tables,
-      identify codon bias patterns, and compare gene sets between
-      organisms.
-    </p>
+          <p>
+            Codon usage statistics are particularly useful for applications
+            such as gene expression analysis, evolutionary genomics, synthetic
+            biology, and recombinant protein production. Researchers often
+            analyze multi-FASTA datasets to generate codon usage tables,
+            identify codon bias patterns, and compare gene sets between
+            organisms.
+          </p>
 
-    <p>
-      The entire analysis runs locally in your browser, ensuring that
-      your sequence data remains private and is never transmitted to
-      a remote server.
-    </p>
-  </>
-}
+          <p>
+            The entire analysis runs locally in your browser, ensuring that
+            your sequence data remains private and is never transmitted to
+            a remote server.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a coding DNA sequence or multi-FASTA dataset into the input box.</li>
-    <li>Select the reference species for codon bias comparison.</li>
-    <li>Choose whether stop codons should be included or ignored.</li>
-    <li>Click <strong>Calculate Codon Usage</strong>.</li>
-    <li>The tool will generate codon counts, frequencies, and RSCU statistics.</li>
-    <li>Explore codon bias visualizations including bar plots and heatmaps.</li>
-    <li>Copy or download the codon usage table for downstream analysis.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a coding DNA sequence or multi-FASTA dataset into the input box.</li>
+          <li>Select the reference species for codon bias comparison.</li>
+          <li>Choose whether stop codons should be included or ignored.</li>
+          <li>Click <strong>Calculate Codon Usage</strong>.</li>
+          <li>The tool will generate codon counts, frequencies, and RSCU statistics.</li>
+          <li>Explore codon bias visualizations including bar plots and heatmaps.</li>
+          <li>Copy or download the codon usage table for downstream analysis.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is codon usage bias?",
-    answer:
-      "Codon usage bias refers to the tendency of organisms to preferentially use certain synonymous codons when encoding proteins, even though multiple codons can specify the same amino acid."
-  },
-  {
-    question: "What does RSCU mean?",
-    answer:
-      "Relative Synonymous Codon Usage (RSCU) measures how frequently a codon appears compared to the expected frequency if all synonymous codons were used equally."
-  },
-  {
-    question: "What are GC1, GC2, and GC3?",
-    answer:
-      "GC1, GC2, and GC3 represent the GC content at the first, second, and third codon positions respectively, which are commonly used indicators of codon bias and genomic composition."
-  },
-  {
-    question: "Can this tool analyze multiple sequences?",
-    answer:
-      "Yes. The calculator supports multi-FASTA input and can analyze codon usage across multiple coding sequences simultaneously."
-  },
-  {
-    question: "Is my sequence uploaded to a server?",
-    answer:
-      "No. All codon usage calculations and visualizations run locally in your browser, ensuring that your sequence data remains private."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is codon usage bias?",
+          answer:
+            "Codon usage bias refers to the tendency of organisms to preferentially use certain synonymous codons when encoding proteins, even though multiple codons can specify the same amino acid."
+        },
+        {
+          question: "What does RSCU mean?",
+          answer:
+            "Relative Synonymous Codon Usage (RSCU) measures how frequently a codon appears compared to the expected frequency if all synonymous codons were used equally."
+        },
+        {
+          question: "What are GC1, GC2, and GC3?",
+          answer:
+            "GC1, GC2, and GC3 represent the GC content at the first, second, and third codon positions respectively, which are commonly used indicators of codon bias and genomic composition."
+        },
+        {
+          question: "Can this tool analyze multiple sequences?",
+          answer:
+            "Yes. The calculator supports multi-FASTA input and can analyze codon usage across multiple coding sequences simultaneously."
+        },
+        {
+          question: "Is my sequence uploaded to a server?",
+          answer:
+            "No. All codon usage calculations and visualizations run locally in your browser, ensuring that your sequence data remains private."
+        }
+      ]}
+    >
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
         <div className="p-6 border-b border-gray-200 bg-gray-50 flex flex-wrap items-end gap-6">
 
@@ -458,7 +456,7 @@ faq={[
 
               <div className="flex gap-2">
                 <button
-                aria-label="Copy data"
+                  aria-label="Copy data"
                   onClick={handleCopy}
                   disabled={!analysisComplete || codonStats.length === 0}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -467,7 +465,7 @@ faq={[
                 </button>
 
                 <button
-                aria-label="Download data"
+                  aria-label="Download data"
                   onClick={handleDownload}
                   disabled={!analysisComplete || codonStats.length === 0}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -512,7 +510,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Calculate Codon Usage data"
+            aria-label="Calculate Codon Usage data"
             onClick={analyze}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
           >
@@ -520,7 +518,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Codon Usage data"
+            aria-label="Clear Codon Usage data"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >

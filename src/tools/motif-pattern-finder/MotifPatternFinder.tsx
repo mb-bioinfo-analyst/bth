@@ -415,101 +415,99 @@ ATGGCGCGCTATAAGCTTAGCGCTATAAGCTA`)
 
   return (
     <ToolLayout
-  title="Motif / Pattern Finder"
-  description="Find exact, IUPAC, or regex motifs in DNA, RNA, or protein sequences with overlap detection, reverse-complement search, and visual hit summaries."
-  badge="Sequence Analysis"
-  slug="motif-pattern-finder"
-  category="Sequence Analysis"
+      badge="Sequence Analysis"
+      slug="motif-pattern-finder"
+      category="Sequence Analysis"
 
-  seoContent={
-  <>
-    <h2>Motif and Pattern Finder for DNA, RNA, and Protein Sequences</h2>
+      seoContent={
+        <>
+          <h2>Motif and Pattern Finder for DNA, RNA, and Protein Sequences</h2>
 
-    <p>
-      Motif discovery and pattern searching are essential tasks in
-      bioinformatics and molecular biology. Biological sequences such as
-      DNA, RNA, and proteins often contain short conserved patterns,
-      known as motifs, that correspond to regulatory elements,
-      transcription factor binding sites, catalytic residues, or
-      structural features. Identifying these motifs can provide valuable
-      insights into gene regulation, protein function, and evolutionary
-      conservation.
-    </p>
+          <p>
+            Motif discovery and pattern searching are essential tasks in
+            bioinformatics and molecular biology. Biological sequences such as
+            DNA, RNA, and proteins often contain short conserved patterns,
+            known as motifs, that correspond to regulatory elements,
+            transcription factor binding sites, catalytic residues, or
+            structural features. Identifying these motifs can provide valuable
+            insights into gene regulation, protein function, and evolutionary
+            conservation.
+          </p>
 
-    <p>
-      This motif and pattern finder allows researchers to search
-      biological sequences for specific motifs using several flexible
-      matching strategies. You can perform exact motif searches, use
-      IUPAC degenerate nucleotide codes to represent variable bases, or
-      apply full regular expression patterns for advanced sequence
-      queries. The tool supports DNA, RNA, and protein sequences and can
-      analyze both single sequences and multi-FASTA datasets.
-    </p>
+          <p>
+            This motif and pattern finder allows researchers to search
+            biological sequences for specific motifs using several flexible
+            matching strategies. You can perform exact motif searches, use
+            IUPAC degenerate nucleotide codes to represent variable bases, or
+            apply full regular expression patterns for advanced sequence
+            queries. The tool supports DNA, RNA, and protein sequences and can
+            analyze both single sequences and multi-FASTA datasets.
+          </p>
 
-    <p>
-      Additional capabilities include detection of overlapping motif
-      occurrences and optional searching of the reverse complement
-      strand for nucleic acid sequences. These options allow the tool to
-      detect motif matches on either DNA strand and capture complex
-      sequence patterns that may appear multiple times within a region.
-      Sequence composition surrounding motifs can also be examined using
-      the{" "}
-      <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
-      or explored with the{" "}
-      <Link to="/tools/kmer-counter">k-mer Counter</Link>.
-    </p>
+          <p>
+            Additional capabilities include detection of overlapping motif
+            occurrences and optional searching of the reverse complement
+            strand for nucleic acid sequences. These options allow the tool to
+            detect motif matches on either DNA strand and capture complex
+            sequence patterns that may appear multiple times within a region.
+            Sequence composition surrounding motifs can also be examined using
+            the{" "}
+            <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
+            or explored with the{" "}
+            <Link to="/tools/kmer-counter">k-mer Counter</Link>.
+          </p>
 
-    <p>
-      Results include detailed motif hit tables with positional
-      coordinates, strand orientation, and summary visualizations such
-      as motif density plots and highlighted sequence views. All motif
-      searches run directly in your browser, ensuring that biological
-      sequence data remains private and is never uploaded to external
-      servers.
-    </p>
-  </>
-}
+          <p>
+            Results include detailed motif hit tables with positional
+            coordinates, strand orientation, and summary visualizations such
+            as motif density plots and highlighted sequence views. All motif
+            searches run directly in your browser, ensuring that biological
+            sequence data remains private and is never uploaded to external
+            servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste DNA, RNA, or protein sequences into the input panel.</li>
-    <li>Enter the motif or pattern you want to search for.</li>
-    <li>Select a search mode: exact match, IUPAC motif, or regex pattern.</li>
-    <li>Choose the sequence type (DNA, RNA, or protein).</li>
-    <li>Enable overlapping matches or reverse complement search if needed.</li>
-    <li>Click <strong>Find Motifs</strong> to analyze the sequences.</li>
-    <li>Review motif hits, density plots, and highlighted sequence results.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste DNA, RNA, or protein sequences into the input panel.</li>
+          <li>Enter the motif or pattern you want to search for.</li>
+          <li>Select a search mode: exact match, IUPAC motif, or regex pattern.</li>
+          <li>Choose the sequence type (DNA, RNA, or protein).</li>
+          <li>Enable overlapping matches or reverse complement search if needed.</li>
+          <li>Click <strong>Find Motifs</strong> to analyze the sequences.</li>
+          <li>Review motif hits, density plots, and highlighted sequence results.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is a motif in biological sequences?",
-    answer:
-      "A motif is a short recurring sequence pattern found in DNA, RNA, or proteins that is often associated with biological functions such as transcription factor binding or enzymatic activity."
-  },
-  {
-    question: "What are IUPAC degenerate motifs?",
-    answer:
-      "IUPAC nucleotide codes allow ambiguous bases to represent multiple possible nucleotides. For example, R represents A or G, and N represents any nucleotide."
-  },
-  {
-    question: "Can this tool search protein sequences?",
-    answer:
-      "Yes. The motif finder supports protein sequence pattern searches using exact motifs or regular expression patterns."
-  },
-  {
-    question: "What does searching the reverse complement mean?",
-    answer:
-      "DNA is double stranded, so motifs may occur on the reverse complement strand. This option searches both strands to identify all possible motif occurrences."
-  },
-  {
-    question: "Are my sequences uploaded anywhere?",
-    answer:
-      "No. All motif searches and pattern analysis run locally in your browser, ensuring that sequence data remains private."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is a motif in biological sequences?",
+          answer:
+            "A motif is a short recurring sequence pattern found in DNA, RNA, or proteins that is often associated with biological functions such as transcription factor binding or enzymatic activity."
+        },
+        {
+          question: "What are IUPAC degenerate motifs?",
+          answer:
+            "IUPAC nucleotide codes allow ambiguous bases to represent multiple possible nucleotides. For example, R represents A or G, and N represents any nucleotide."
+        },
+        {
+          question: "Can this tool search protein sequences?",
+          answer:
+            "Yes. The motif finder supports protein sequence pattern searches using exact motifs or regular expression patterns."
+        },
+        {
+          question: "What does searching the reverse complement mean?",
+          answer:
+            "DNA is double stranded, so motifs may occur on the reverse complement strand. This option searches both strands to identify all possible motif occurrences."
+        },
+        {
+          question: "Are my sequences uploaded anywhere?",
+          answer:
+            "No. All motif searches and pattern analysis run locally in your browser, ensuring that sequence data remains private."
+        }
+      ]}
+    >
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
         <div className="p-6 border-b border-gray-200 bg-gray-50 grid md:grid-cols-3 gap-4">
           <div>
@@ -592,7 +590,7 @@ faq={[
 
               <div className="flex gap-2">
                 <button
-                aria-label="Copy complete analysis 1"
+                  aria-label="Copy complete analysis 1"
                   onClick={handleCopy}
                   disabled={!analysisComplete || hits.length === 0}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -601,7 +599,7 @@ faq={[
                 </button>
 
                 <button
-                aria-label="Download complete analysis 1"
+                  aria-label="Download complete analysis 1"
                   onClick={handleDownload}
                   disabled={!analysisComplete || hits.length === 0}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -652,7 +650,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Find Motifs 1"
+            aria-label="Find Motifs 1"
             onClick={analyze}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
           >
@@ -660,7 +658,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Find Motifs 1"
+            aria-label="Clear Find Motifs 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
@@ -712,7 +710,7 @@ faq={[
                 <div className="flex justify-between items-center mb-4">
                   <h3 className="font-semibold">Motif Density Plot</h3>
                   <button
-                  aria-label="Download SVG Find Motifs 1"
+                    aria-label="Download SVG Find Motifs 1"
                     onClick={downloadDensitySVG}
                     className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200"
                   >

@@ -54,7 +54,7 @@ const BLOSUM62: Record<string, Record<string, number>> = {
 }
 
 const PROTEIN_GROUPS: string[] = [
-  "A","R","N","D","C","Q","E","G","H","I","L","K","M","F","P","S","T","W","Y","V"
+  "A", "R", "N", "D", "C", "Q", "E", "G", "H", "I", "L", "K", "M", "F", "P", "S", "T", "W", "Y", "V"
 ]
 
 function cleanSequence(seq: string, type: SequenceType) {
@@ -317,7 +317,7 @@ function renderDendrogram(node: TreeNode | null, width = 900, height = 320) {
   const maxHeight = Math.max(node.height, 1)
   const scaleX = (h: number) => 60 + (h / maxHeight) * (width - 220)
 
-const elements: React.ReactNode[] = []
+  const elements: React.ReactNode[] = []
 
   function walk(n: TreeNode): { x: number; y: number } {
     if (!n.left && !n.right) {
@@ -505,113 +505,111 @@ GKTAYIAKQRQISFVKAHFSRQDVL`)
   }
 
   return (
-    
+
     <ToolLayout
-  title="Sequence Similarity Matrix"
-  description="Compute pairwise sequence identity, similarity, and distance matrices with Needleman–Wunsch alignment, BLOSUM62 scoring, heatmaps, and UPGMA clustering."
-  badge="Sequence Analysis"
-  slug="sequence-similarity-matrix"
-  category="Sequence"
+      badge="Sequence Analysis"
+      slug="sequence-similarity-matrix"
+      category="Sequence"
 
-  seoContent={
-  <>
-    <h2>Sequence Similarity Matrix Calculator</h2>
+      seoContent={
+        <>
+          <h2>Sequence Similarity Matrix Calculator</h2>
 
-    <p>
-      A sequence similarity matrix is a fundamental bioinformatics tool used
-      to compare multiple biological sequences and quantify how similar they
-      are to each other. Pairwise comparisons are calculated between every
-      sequence in a dataset, producing a matrix that summarizes sequence
-      identity, similarity scores, or evolutionary distances.
-    </p>
+          <p>
+            A sequence similarity matrix is a fundamental bioinformatics tool used
+            to compare multiple biological sequences and quantify how similar they
+            are to each other. Pairwise comparisons are calculated between every
+            sequence in a dataset, producing a matrix that summarizes sequence
+            identity, similarity scores, or evolutionary distances.
+          </p>
 
-    <p>
-      This tool performs global pairwise sequence alignment using the
-      Needleman-Wunsch algorithm and computes identity, similarity, and
-      distance matrices. For protein sequences, similarity scoring is based
-      on the BLOSUM62 substitution matrix, while nucleotide sequences use
-      simple match and mismatch scoring.
-    </p>
+          <p>
+            This tool performs global pairwise sequence alignment using the
+            Needleman-Wunsch algorithm and computes identity, similarity, and
+            distance matrices. For protein sequences, similarity scoring is based
+            on the BLOSUM62 substitution matrix, while nucleotide sequences use
+            simple match and mismatch scoring.
+          </p>
 
-    <p>
-      The resulting matrix can be visualized as an interactive heatmap,
-      allowing researchers to quickly identify closely related sequences.
-      Additionally, hierarchical clustering using the UPGMA algorithm
-      generates a dendrogram that illustrates evolutionary relationships
-      between sequences.
-    </p>
+          <p>
+            The resulting matrix can be visualized as an interactive heatmap,
+            allowing researchers to quickly identify closely related sequences.
+            Additionally, hierarchical clustering using the UPGMA algorithm
+            generates a dendrogram that illustrates evolutionary relationships
+            between sequences.
+          </p>
 
-    <p>
-      Sequence similarity matrices are commonly used in phylogenetics,
-      comparative genomics, protein family analysis, and evolutionary
-      biology studies to identify homologous sequences and clustering
-      patterns across datasets.
-    </p>
+          <p>
+            Sequence similarity matrices are commonly used in phylogenetics,
+            comparative genomics, protein family analysis, and evolutionary
+            biology studies to identify homologous sequences and clustering
+            patterns across datasets.
+          </p>
 
-    <p>
-      After computing similarity matrices, you may also analyze pairwise
-      similarity using the{" "}
-      <Link to="/tools/sequence-identity-calculator">
-        Sequence Identity Calculator
-      </Link>{" "}
-      or explore sequence patterns with the{" "}
-      <Link to="/tools/motif-pattern-finder">
-        Motif / Pattern Finder
-      </Link>.
-    </p>
+          <p>
+            After computing similarity matrices, you may also analyze pairwise
+            similarity using the{" "}
+            <Link to="/tools/sequence-identity-calculator">
+              Sequence Identity Calculator
+            </Link>{" "}
+            or explore sequence patterns with the{" "}
+            <Link to="/tools/motif-pattern-finder">
+              Motif / Pattern Finder
+            </Link>.
+          </p>
 
-    <p>
-      All computations run directly in your browser, ensuring that sequence
-      data remains private and is never transmitted to external servers.
-    </p>
-  </>
-}
+          <p>
+            All computations run directly in your browser, ensuring that sequence
+            data remains private and is never transmitted to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste two or more sequences in FASTA format into the input field.</li>
-    <li>Select the sequence type (DNA or Protein).</li>
-    <li>Click <strong>Compute Similarity Matrix</strong>.</li>
-    <li>View the identity, similarity, or distance matrix heatmap.</li>
-    <li>Click a cell in the matrix to inspect the pairwise alignment.</li>
-    <li>Explore clustering results using the generated UPGMA dendrogram.</li>
-    <li>Download or copy the matrix for downstream analysis.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste two or more sequences in FASTA format into the input field.</li>
+          <li>Select the sequence type (DNA or Protein).</li>
+          <li>Click <strong>Compute Similarity Matrix</strong>.</li>
+          <li>View the identity, similarity, or distance matrix heatmap.</li>
+          <li>Click a cell in the matrix to inspect the pairwise alignment.</li>
+          <li>Explore clustering results using the generated UPGMA dendrogram.</li>
+          <li>Download or copy the matrix for downstream analysis.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is a sequence similarity matrix?",
-    answer:
-      "A sequence similarity matrix is a table showing pairwise comparison scores between multiple biological sequences, typically representing identity percentages, similarity scores, or evolutionary distances."
-  },
-  {
-    question: "What is the difference between identity and similarity?",
-    answer:
-      "Sequence identity measures the percentage of identical residues between aligned sequences. Sequence similarity also considers biologically similar substitutions, such as conservative amino acid replacements scored using substitution matrices like BLOSUM62."
-  },
-  {
-    question: "What alignment algorithm does this tool use?",
-    answer:
-      "The tool uses the Needleman-Wunsch global alignment algorithm, which aligns entire sequences and finds the optimal alignment score across their full length."
-  },
-  {
-    question: "What is UPGMA clustering?",
-    answer:
-      "UPGMA (Unweighted Pair Group Method with Arithmetic Mean) is a hierarchical clustering method used to build phylogenetic trees from distance matrices by iteratively grouping the closest sequences."
-  },
-  {
-    question: "Can this tool analyze protein sequences?",
-    answer:
-      "Yes. When protein mode is selected, similarity scoring uses the BLOSUM62 substitution matrix to evaluate biologically meaningful amino acid substitutions."
-  },
-  {
-    question: "Is my sequence data uploaded to a server?",
-    answer:
-      "No. All sequence alignments and matrix calculations are performed locally in your browser, ensuring full data privacy."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is a sequence similarity matrix?",
+          answer:
+            "A sequence similarity matrix is a table showing pairwise comparison scores between multiple biological sequences, typically representing identity percentages, similarity scores, or evolutionary distances."
+        },
+        {
+          question: "What is the difference between identity and similarity?",
+          answer:
+            "Sequence identity measures the percentage of identical residues between aligned sequences. Sequence similarity also considers biologically similar substitutions, such as conservative amino acid replacements scored using substitution matrices like BLOSUM62."
+        },
+        {
+          question: "What alignment algorithm does this tool use?",
+          answer:
+            "The tool uses the Needleman-Wunsch global alignment algorithm, which aligns entire sequences and finds the optimal alignment score across their full length."
+        },
+        {
+          question: "What is UPGMA clustering?",
+          answer:
+            "UPGMA (Unweighted Pair Group Method with Arithmetic Mean) is a hierarchical clustering method used to build phylogenetic trees from distance matrices by iteratively grouping the closest sequences."
+        },
+        {
+          question: "Can this tool analyze protein sequences?",
+          answer:
+            "Yes. When protein mode is selected, similarity scoring uses the BLOSUM62 substitution matrix to evaluate biologically meaningful amino acid substitutions."
+        },
+        {
+          question: "Is my sequence data uploaded to a server?",
+          answer:
+            "No. All sequence alignments and matrix calculations are performed locally in your browser, ensuring full data privacy."
+        }
+      ]}
+    >
 
 
 
@@ -662,7 +660,7 @@ faq={[
 
               <div className="flex gap-2">
                 <button
-                aria-label="Copy matrix 1"
+                  aria-label="Copy matrix 1"
                   onClick={copyMatrix}
                   disabled={!analysisComplete}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -671,7 +669,7 @@ faq={[
                 </button>
 
                 <button
-                aria-label="Download matrix 1"
+                  aria-label="Download matrix 1"
                   onClick={downloadMatrix}
                   disabled={!analysisComplete}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -709,16 +707,14 @@ faq={[
                         {row.map((value, j) => (
                           <td
                             key={j}
-                            className={`p-2 text-center cursor-pointer transition hover:scale-[1.02] ${
-                              selectedPair?.[0] === i && selectedPair?.[1] === j
+                            className={`p-2 text-center cursor-pointer transition hover:scale-[1.02] ${selectedPair?.[0] === i && selectedPair?.[1] === j
                                 ? "ring-2 ring-blue-500"
                                 : ""
-                            }`}
+                              }`}
                             style={{ backgroundColor: getHeatColor(value, matrixMode) }}
                             onClick={() => setSelectedPair([i, j])}
-                            title={`${records[i].header} vs ${records[j].header}: ${value.toFixed(2)}${
-                              matrixMode === "distance" ? "% distance" : "%"
-                            }`}
+                            title={`${records[i].header} vs ${records[j].header}: ${value.toFixed(2)}${matrixMode === "distance" ? "% distance" : "%"
+                              }`}
                           >
                             {value.toFixed(2)}
                           </td>
@@ -740,7 +736,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Compute Similarity Matrix 1"
+            aria-label="Compute Similarity Matrix 1"
             onClick={analyze}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
           >
@@ -748,7 +744,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Compute Similarity Matrix 1"
+            aria-label="Clear Compute Similarity Matrix 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >

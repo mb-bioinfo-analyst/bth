@@ -92,97 +92,95 @@ ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`);
   return (
 
     <ToolLayout
-  title="Sequence Reverse"
-  description="Reverse DNA, RNA, or protein sequences without generating the complement."
-  badge="Sequence Tool"
-  slug="reverse-sequence"
-  category="Sequence"
+      badge="Sequence Tool"
+      slug="reverse-sequence"
+      category="Sequence"
 
-  seoContent={
-  <>
-    <h2>Reverse DNA, RNA, or Protein Sequences</h2>
+      seoContent={
+        <>
+          <h2>Reverse DNA, RNA, or Protein Sequences</h2>
 
-    <p>
-      Reversing a biological sequence changes the order of nucleotides or
-      amino acids from end to start without altering the characters
-      themselves. Unlike a reverse complement operation used in DNA
-      analysis, sequence reversal simply flips the orientation of the
-      sequence. This can be useful when debugging sequence transformations,
-      testing algorithms, or preparing sequence datasets for comparative
-      analysis.
-    </p>
+          <p>
+            Reversing a biological sequence changes the order of nucleotides or
+            amino acids from end to start without altering the characters
+            themselves. Unlike a reverse complement operation used in DNA
+            analysis, sequence reversal simply flips the orientation of the
+            sequence. This can be useful when debugging sequence transformations,
+            testing algorithms, or preparing sequence datasets for comparative
+            analysis.
+          </p>
 
-    <p>
-      This sequence reverse tool allows users to quickly reverse DNA, RNA,
-      or protein sequences while preserving the original characters. The
-      tool automatically cleans common formatting artifacts such as
-      whitespace and FASTA headers during processing, then outputs the
-      reversed sequence either as a plain string or in FASTA format
-      compatible with common bioinformatics pipelines.
-    </p>
+          <p>
+            This sequence reverse tool allows users to quickly reverse DNA, RNA,
+            or protein sequences while preserving the original characters. The
+            tool automatically cleans common formatting artifacts such as
+            whitespace and FASTA headers during processing, then outputs the
+            reversed sequence either as a plain string or in FASTA format
+            compatible with common bioinformatics pipelines.
+          </p>
 
-    <p>
-      Sequence reversal is frequently used in algorithm testing, sequence
-      processing pipelines, and analysis of palindromic regions in DNA.
-      Because the characters themselves are not modified, the reversed
-      sequence maintains the same nucleotide or amino acid composition
-      as the original input. If you need strand-aware operations you may
-      instead use the{" "}
-      <Link to="/tools/reverse-complement">Reverse Complement</Link>{" "}
-      tool or analyze sequence composition using the{" "}
-      <Link to="/tools/nucleotide-composition-calculator">
-        Nucleotide Composition Calculator
-      </Link>.
-    </p>
+          <p>
+            Sequence reversal is frequently used in algorithm testing, sequence
+            processing pipelines, and analysis of palindromic regions in DNA.
+            Because the characters themselves are not modified, the reversed
+            sequence maintains the same nucleotide or amino acid composition
+            as the original input. If you need strand-aware operations you may
+            instead use the{" "}
+            <Link to="/tools/reverse-complement">Reverse Complement</Link>{" "}
+            tool or analyze sequence composition using the{" "}
+            <Link to="/tools/nucleotide-composition-calculator">
+              Nucleotide Composition Calculator
+            </Link>.
+          </p>
 
-    <p>
-      All sequence processing is performed locally within your browser.
-      No biological sequence data is uploaded to external servers,
-      ensuring complete privacy when working with DNA, RNA, or protein
-      sequences.
-    </p>
-  </>
-}
+          <p>
+            All sequence processing is performed locally within your browser.
+            No biological sequence data is uploaded to external servers,
+            ensuring complete privacy when working with DNA, RNA, or protein
+            sequences.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a DNA, RNA, or protein sequence into the input panel.</li>
-    <li>Select the desired output format (plain sequence or FASTA).</li>
-    <li>Click <strong>Reverse Sequence</strong>.</li>
-    <li>The reversed sequence will appear in the output panel.</li>
-    <li>Copy or download the reversed sequence for further analysis.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a DNA, RNA, or protein sequence into the input panel.</li>
+          <li>Select the desired output format (plain sequence or FASTA).</li>
+          <li>Click <strong>Reverse Sequence</strong>.</li>
+          <li>The reversed sequence will appear in the output panel.</li>
+          <li>Copy or download the reversed sequence for further analysis.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What does reversing a sequence mean?",
-    answer:
-      "Reversing a sequence flips the order of nucleotides or amino acids so the last character becomes the first while the characters themselves remain unchanged."
-  },
-  {
-    question: "What is the difference between reverse and reverse complement?",
-    answer:
-      "Reverse flips the sequence order only, while reverse complement also replaces each DNA base with its complementary nucleotide (A↔T and C↔G)."
-  },
-  {
-    question: "Can this tool reverse protein sequences?",
-    answer:
-      "Yes. The tool works with DNA, RNA, and protein sequences because it only changes the order of characters without modifying them."
-  },
-  {
-    question: "Does the tool support FASTA format?",
-    answer:
-      "Yes. The tool can output reversed sequences in FASTA format with appropriate formatting for bioinformatics workflows."
-  },
-  {
-    question: "Is my sequence data uploaded anywhere?",
-    answer:
-      "No. All sequence processing occurs locally in your browser to ensure full privacy and data security."
-  }
-]}
->
-    
+      faq={[
+        {
+          question: "What does reversing a sequence mean?",
+          answer:
+            "Reversing a sequence flips the order of nucleotides or amino acids so the last character becomes the first while the characters themselves remain unchanged."
+        },
+        {
+          question: "What is the difference between reverse and reverse complement?",
+          answer:
+            "Reverse flips the sequence order only, while reverse complement also replaces each DNA base with its complementary nucleotide (A↔T and C↔G)."
+        },
+        {
+          question: "Can this tool reverse protein sequences?",
+          answer:
+            "Yes. The tool works with DNA, RNA, and protein sequences because it only changes the order of characters without modifying them."
+        },
+        {
+          question: "Does the tool support FASTA format?",
+          answer:
+            "Yes. The tool can output reversed sequences in FASTA format with appropriate formatting for bioinformatics workflows."
+        },
+        {
+          question: "Is my sequence data uploaded anywhere?",
+          answer:
+            "No. All sequence processing occurs locally in your browser to ensure full privacy and data security."
+        }
+      ]}
+    >
+
 
 
 
@@ -232,7 +230,7 @@ faq={[
 
           <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
 
-            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5"/>
+            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
 
             <p className="text-red-700 text-sm">
               {error}
@@ -245,7 +243,7 @@ faq={[
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
 
           <button
-          aria-label="Reverse Sequence 1"
+            aria-label="Reverse Sequence 1"
             onClick={reverseSequence}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 shadow-lg"
           >
@@ -253,11 +251,11 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Reverse Sequence 1"
+            aria-label="Clear Reverse Sequence 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
-            <RefreshCw className="w-4 h-4"/>
+            <RefreshCw className="w-4 h-4" />
             Clear
           </button>
 

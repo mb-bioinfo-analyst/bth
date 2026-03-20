@@ -100,102 +100,100 @@ ATGGCCATTGTAATGGGCCGCTGAAAGGGTGCCCGATAG`);
   return (
 
     <ToolLayout
-  title="DNA to RNA Transcription"
-  description="Transcribe DNA sequences into RNA by replacing thymine (T) with uracil (U)."
-  badge="Sequence Tool"
-  slug="dna-to-rna"
-  category="Sequence"
+      badge="Sequence Tool"
+      slug="dna-to-rna"
+      category="Sequence"
 
-  seoContent={
-  <>
-    <h2>DNA to RNA Transcription Tool</h2>
+      seoContent={
+        <>
+          <h2>DNA to RNA Transcription Tool</h2>
 
-    <p>
-      DNA to RNA transcription is a fundamental biological process in which
-      a DNA sequence is converted into a corresponding RNA molecule.
-      During transcription, thymine (T) nucleotides in DNA are replaced
-      with uracil (U) in RNA while the nucleotide order remains the same.
-      This transformation represents the first step of gene expression
-      in molecular biology and genomics.
-    </p>
+          <p>
+            DNA to RNA transcription is a fundamental biological process in which
+            a DNA sequence is converted into a corresponding RNA molecule.
+            During transcription, thymine (T) nucleotides in DNA are replaced
+            with uracil (U) in RNA while the nucleotide order remains the same.
+            This transformation represents the first step of gene expression
+            in molecular biology and genomics.
+          </p>
 
-    <p>
-      This DNA to RNA transcription tool allows researchers, students,
-      and bioinformaticians to quickly convert DNA sequences into RNA
-      sequences directly in the browser. The tool automatically removes
-      FASTA headers, cleans formatting artifacts, and generates accurate
-      RNA transcripts from nucleotide sequences.
-    </p>
+          <p>
+            This DNA to RNA transcription tool allows researchers, students,
+            and bioinformaticians to quickly convert DNA sequences into RNA
+            sequences directly in the browser. The tool automatically removes
+            FASTA headers, cleans formatting artifacts, and generates accurate
+            RNA transcripts from nucleotide sequences.
+          </p>
 
-    <p>
-      The transcription generator supports both plain sequence output
-      and FASTA formatted RNA output for compatibility with common
-      bioinformatics software. If you need to analyze sequence properties
-      after transcription you can also evaluate nucleotide composition
-      using the{" "}
-      <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
-      or examine base distributions with the{" "}
-      <Link to="/tools/nucleotide-composition-calculator">
-        Nucleotide Composition Calculator
-      </Link>.
-    </p>
+          <p>
+            The transcription generator supports both plain sequence output
+            and FASTA formatted RNA output for compatibility with common
+            bioinformatics software. If you need to analyze sequence properties
+            after transcription you can also evaluate nucleotide composition
+            using the{" "}
+            <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
+            or examine base distributions with the{" "}
+            <Link to="/tools/nucleotide-composition-calculator">
+              Nucleotide Composition Calculator
+            </Link>.
+          </p>
 
-    <p>
-      DNA to RNA conversion is widely used in gene annotation,
-      transcript analysis, RNA structure studies, and synthetic
-      biology workflows. Researchers often transcribe coding DNA
-      sequences before performing downstream RNA-based analysis
-      or computational transcript modeling.
-    </p>
+          <p>
+            DNA to RNA conversion is widely used in gene annotation,
+            transcript analysis, RNA structure studies, and synthetic
+            biology workflows. Researchers often transcribe coding DNA
+            sequences before performing downstream RNA-based analysis
+            or computational transcript modeling.
+          </p>
 
-    <p>
-      Because the entire transcription process runs locally in
-      your browser, no sequence data is transmitted to external
-      servers. This ensures complete privacy for sensitive
-      nucleotide sequences such as unpublished genes or
-      proprietary constructs.
-    </p>
-  </>
-}
+          <p>
+            Because the entire transcription process runs locally in
+            your browser, no sequence data is transmitted to external
+            servers. This ensures complete privacy for sensitive
+            nucleotide sequences such as unpublished genes or
+            proprietary constructs.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a DNA sequence or FASTA record into the input field.</li>
-    <li>Select the desired output format such as plain RNA sequence or FASTA.</li>
-    <li>Click <strong>Transcribe to RNA</strong>.</li>
-    <li>The RNA transcript will be generated instantly.</li>
-    <li>Copy or download the RNA sequence for further analysis.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a DNA sequence or FASTA record into the input field.</li>
+          <li>Select the desired output format such as plain RNA sequence or FASTA.</li>
+          <li>Click <strong>Transcribe to RNA</strong>.</li>
+          <li>The RNA transcript will be generated instantly.</li>
+          <li>Copy or download the RNA sequence for further analysis.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is DNA to RNA transcription?",
-    answer:
-      "DNA transcription is the biological process where a DNA sequence is used as a template to produce an RNA molecule, replacing thymine (T) with uracil (U)."
-  },
-  {
-    question: "What is the difference between DNA and RNA sequences?",
-    answer:
-      "DNA contains thymine (T) while RNA contains uracil (U). During transcription, thymine bases are replaced by uracil in the resulting RNA molecule."
-  },
-  {
-    question: "Does this tool support FASTA sequences?",
-    answer:
-      "Yes. The tool automatically detects FASTA headers and can output RNA sequences in FASTA format."
-  },
-  {
-    question: "Can this tool handle long DNA sequences?",
-    answer:
-      "Yes. The transcription tool can process both short DNA fragments and long nucleotide sequences."
-  },
-  {
-    question: "Is my DNA sequence uploaded anywhere?",
-    answer:
-      "No. All transcription processing occurs locally in your browser to ensure complete data privacy."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is DNA to RNA transcription?",
+          answer:
+            "DNA transcription is the biological process where a DNA sequence is used as a template to produce an RNA molecule, replacing thymine (T) with uracil (U)."
+        },
+        {
+          question: "What is the difference between DNA and RNA sequences?",
+          answer:
+            "DNA contains thymine (T) while RNA contains uracil (U). During transcription, thymine bases are replaced by uracil in the resulting RNA molecule."
+        },
+        {
+          question: "Does this tool support FASTA sequences?",
+          answer:
+            "Yes. The tool automatically detects FASTA headers and can output RNA sequences in FASTA format."
+        },
+        {
+          question: "Can this tool handle long DNA sequences?",
+          answer:
+            "Yes. The transcription tool can process both short DNA fragments and long nucleotide sequences."
+        },
+        {
+          question: "Is my DNA sequence uploaded anywhere?",
+          answer:
+            "No. All transcription processing occurs locally in your browser to ensure complete data privacy."
+        }
+      ]}
+    >
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
@@ -248,7 +246,7 @@ faq={[
 
           <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
 
-            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5"/>
+            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5" />
 
             <p className="text-red-700 text-sm">
               {error}
@@ -261,7 +259,7 @@ faq={[
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
 
           <button
-          aria-label="Transcribe to RNA 1"
+            aria-label="Transcribe to RNA 1"
             onClick={transcribe}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 shadow-lg"
           >
@@ -269,11 +267,11 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Transcribe to RNA 1"
+            aria-label="Clear Transcribe to RNA 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
-            <RefreshCw className="w-4 h-4"/>
+            <RefreshCw className="w-4 h-4" />
             Clear
           </button>
 

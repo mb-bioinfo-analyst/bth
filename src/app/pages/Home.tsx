@@ -167,9 +167,9 @@ export default function Home() {
                 {tool.name}
               </h3>
 
-              <p className="mt-3 text-sm text-slate-300 leading-6">
-                {tool.description}
-              </p>
+              <p className="mt-3 text-sm text-slate-300 leading-6 line-clamp-3">
+  {tool.uiDescription}
+</p>
 
             </Link>
 

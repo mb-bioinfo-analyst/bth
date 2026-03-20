@@ -230,99 +230,97 @@ ATGCGCGCGTTTAAACCCGGGATATATATAT`)
 
   return (
     <ToolLayout
-  title="k-mer Frequency Analyzer"
-  description="Analyze normalized k-mer frequencies, diversity, and per-sequence k-mer statistics in DNA or RNA data."
-  badge="Sequence Analysis"
-  slug="kmer-frequency-analyzer"
-  category="Sequence Analysis"
+      badge="Sequence Analysis"
+      slug="kmer-frequency-analyzer"
+      category="Sequence Analysis"
 
-  seoContent={
-  <>
-    <h2>Analyze k-mer Frequencies in DNA and RNA Sequences</h2>
+      seoContent={
+        <>
+          <h2>Analyze k-mer Frequencies in DNA and RNA Sequences</h2>
 
-    <p>
-      k-mer frequency analysis is a fundamental technique in computational
-      genomics and bioinformatics. A k-mer represents a subsequence of
-      length <em>k</em> extracted from a biological sequence such as DNA
-      or RNA. By counting and normalizing the frequency of these short
-      subsequences, researchers can analyze sequence composition,
-      identify motifs, detect repetitive elements, and compare genomes
-      across organisms.
-    </p>
+          <p>
+            k-mer frequency analysis is a fundamental technique in computational
+            genomics and bioinformatics. A k-mer represents a subsequence of
+            length <em>k</em> extracted from a biological sequence such as DNA
+            or RNA. By counting and normalizing the frequency of these short
+            subsequences, researchers can analyze sequence composition,
+            identify motifs, detect repetitive elements, and compare genomes
+            across organisms.
+          </p>
 
-    <p>
-      This k-mer frequency analyzer calculates normalized k-mer
-      frequencies from nucleotide sequences provided in FASTA format.
-      The tool reports raw counts, relative frequencies, GC composition
-      of each k-mer, and diversity metrics such as Shannon entropy.
-      Results can be sorted by frequency, count, or alphabetically,
-      allowing researchers to quickly identify dominant or rare
-      sequence patterns.
-    </p>
+          <p>
+            This k-mer frequency analyzer calculates normalized k-mer
+            frequencies from nucleotide sequences provided in FASTA format.
+            The tool reports raw counts, relative frequencies, GC composition
+            of each k-mer, and diversity metrics such as Shannon entropy.
+            Results can be sorted by frequency, count, or alphabetically,
+            allowing researchers to quickly identify dominant or rare
+            sequence patterns.
+          </p>
 
-    <p>
-      Additional options include reverse-complement collapsing, which
-      treats a k-mer and its reverse complement as identical sequences,
-      and filtering of ambiguous k-mers that contain uncertain bases.
-      These features help improve the accuracy of nucleotide pattern
-      analysis in genomic datasets. For simpler counting tasks you may
-      also use the{" "}
-      <Link to="/tools/kmer-counter">k-mer Counter</Link>{" "}
-      or explore nucleotide composition using the{" "}
-      <Link to="/tools/nucleotide-composition-calculator">
-        Nucleotide Composition Calculator
-      </Link>.
-    </p>
+          <p>
+            Additional options include reverse-complement collapsing, which
+            treats a k-mer and its reverse complement as identical sequences,
+            and filtering of ambiguous k-mers that contain uncertain bases.
+            These features help improve the accuracy of nucleotide pattern
+            analysis in genomic datasets. For simpler counting tasks you may
+            also use the{" "}
+            <Link to="/tools/kmer-counter">k-mer Counter</Link>{" "}
+            or explore nucleotide composition using the{" "}
+            <Link to="/tools/nucleotide-composition-calculator">
+              Nucleotide Composition Calculator
+            </Link>.
+          </p>
 
-    <p>
-      The analyzer also produces per-sequence summaries including
-      sequence length, number of unique k-mers, and entropy-based
-      diversity statistics. All analysis runs directly in your browser,
-      meaning your sequence data is processed locally and never
-      uploaded to external servers.
-    </p>
-  </>
-}
+          <p>
+            The analyzer also produces per-sequence summaries including
+            sequence length, number of unique k-mers, and entropy-based
+            diversity statistics. All analysis runs directly in your browser,
+            meaning your sequence data is processed locally and never
+            uploaded to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste DNA or RNA sequences in FASTA format into the input panel.</li>
-    <li>Select the desired k-mer length.</li>
-    <li>Choose sorting options and optional filters.</li>
-    <li>Enable reverse complement collapsing if needed.</li>
-    <li>Click <strong>Analyze k-mer Frequencies</strong>.</li>
-    <li>Review frequency results and per-sequence statistics or export the data.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste DNA or RNA sequences in FASTA format into the input panel.</li>
+          <li>Select the desired k-mer length.</li>
+          <li>Choose sorting options and optional filters.</li>
+          <li>Enable reverse complement collapsing if needed.</li>
+          <li>Click <strong>Analyze k-mer Frequencies</strong>.</li>
+          <li>Review frequency results and per-sequence statistics or export the data.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is a k-mer frequency analysis?",
-    answer:
-      "k-mer frequency analysis counts how often short subsequences of length k appear in a DNA or RNA sequence and measures their relative abundance."
-  },
-  {
-    question: "Why are k-mer frequencies useful in bioinformatics?",
-    answer:
-      "k-mer frequencies are widely used in genome assembly, sequence classification, motif discovery, genome comparison, and metagenomic analysis."
-  },
-  {
-    question: "What does reverse complement collapsing do?",
-    answer:
-      "Reverse complement collapsing treats a k-mer and its reverse complement as the same sequence, reducing redundancy in nucleotide pattern analysis."
-  },
-  {
-    question: "What does Shannon entropy indicate for k-mers?",
-    answer:
-      "Shannon entropy measures sequence complexity and diversity of k-mer distribution. Higher entropy indicates more diverse sequence composition."
-  },
-  {
-    question: "Are my sequences uploaded during analysis?",
-    answer:
-      "No. All sequence processing and k-mer analysis are performed locally in your browser to ensure data privacy."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is a k-mer frequency analysis?",
+          answer:
+            "k-mer frequency analysis counts how often short subsequences of length k appear in a DNA or RNA sequence and measures their relative abundance."
+        },
+        {
+          question: "Why are k-mer frequencies useful in bioinformatics?",
+          answer:
+            "k-mer frequencies are widely used in genome assembly, sequence classification, motif discovery, genome comparison, and metagenomic analysis."
+        },
+        {
+          question: "What does reverse complement collapsing do?",
+          answer:
+            "Reverse complement collapsing treats a k-mer and its reverse complement as the same sequence, reducing redundancy in nucleotide pattern analysis."
+        },
+        {
+          question: "What does Shannon entropy indicate for k-mers?",
+          answer:
+            "Shannon entropy measures sequence complexity and diversity of k-mer distribution. Higher entropy indicates more diverse sequence composition."
+        },
+        {
+          question: "Are my sequences uploaded during analysis?",
+          answer:
+            "No. All sequence processing and k-mer analysis are performed locally in your browser to ensure data privacy."
+        }
+      ]}
+    >
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
         <div className="p-6 border-b border-gray-200 bg-gray-50 grid md:grid-cols-4 gap-4">
@@ -484,7 +482,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Clear Analyze k-mer Frequencies 1"
+            aria-label="Clear Analyze k-mer Frequencies 1"
             onClick={analyze}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
           >
@@ -492,7 +490,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Analyze k-mer Frequencies 1"
+            aria-label="Clear Analyze k-mer Frequencies 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >

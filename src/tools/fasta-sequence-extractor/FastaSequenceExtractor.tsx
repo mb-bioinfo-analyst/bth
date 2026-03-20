@@ -7,23 +7,23 @@ import SequenceOutput from "../../components/SequenceOutput"
 
 type Mode = "id" | "keyword"
 
-export default function FastaSequenceExtractor(){
+export default function FastaSequenceExtractor() {
 
-  const [fasta,setFasta] = useState("")
-  const [query,setQuery] = useState("")
-  const [output,setOutput] = useState("")
+  const [fasta, setFasta] = useState("")
+  const [query, setQuery] = useState("")
+  const [output, setOutput] = useState("")
 
-  const [mode,setMode] = useState<Mode>("id")
+  const [mode, setMode] = useState<Mode>("id")
 
-  const [error,setError] = useState("")
+  const [error, setError] = useState("")
 
-  function parseFasta(text:string){
+  function parseFasta(text: string) {
 
     const entries = text
       .trim()
       .split(/\n(?=>)/)
 
-    return entries.map(entry=>{
+    return entries.map(entry => {
 
       const lines = entry.split("\n")
       const header = lines[0]
@@ -38,49 +38,49 @@ export default function FastaSequenceExtractor(){
 
   }
 
-  function extract(){
+  function extract() {
 
     setError("")
     setOutput("")
 
-    if(!fasta.trim()){
+    if (!fasta.trim()) {
       setError("Please paste FASTA sequences")
       return
     }
 
     const entries = parseFasta(fasta)
 
-    if(entries.length === 0){
+    if (entries.length === 0) {
       setError("No FASTA sequences detected")
       return
     }
 
-    let results:any[] = []
+    let results: any[] = []
 
-    if(mode === "id"){
+    if (mode === "id") {
 
       const ids = query
         .split(/\n|,/)
-        .map(i=>i.trim())
+        .map(i => i.trim())
         .filter(Boolean)
 
-      if(ids.length === 0){
+      if (ids.length === 0) {
         setError("Please enter sequence IDs")
         return
       }
 
-      results = entries.filter(e=>{
-        const id = e.header.replace(/^>/,"").split(/\s+/)[0]
+      results = entries.filter(e => {
+        const id = e.header.replace(/^>/, "").split(/\s+/)[0]
         return ids.includes(id)
       })
 
     }
 
-    if(mode === "keyword"){
+    if (mode === "keyword") {
 
       const keyword = query.trim().toLowerCase()
 
-      if(!keyword){
+      if (!keyword) {
         setError("Please enter a keyword")
         return
       }
@@ -91,7 +91,7 @@ export default function FastaSequenceExtractor(){
 
     }
 
-    if(results.length === 0){
+    if (results.length === 0) {
       setError("No sequences matched your query")
       return
     }
@@ -104,15 +104,15 @@ export default function FastaSequenceExtractor(){
 
   }
 
-  const handleCopy = async ()=>{
+  const handleCopy = async () => {
 
     await navigator.clipboard.writeText(output)
 
   }
 
-  const handleDownload = ()=>{
+  const handleDownload = () => {
 
-    const blob = new Blob([output],{type:"text/plain"})
+    const blob = new Blob([output], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement("a")
@@ -127,7 +127,7 @@ export default function FastaSequenceExtractor(){
 
   }
 
-  const loadExample = ()=>{
+  const loadExample = () => {
 
     setFasta(`>seq1 human_gene
 ATGCGTACGTAG
@@ -143,7 +143,7 @@ ATGCCCGTAGCT`)
 
   }
 
-  const clearAll = ()=>{
+  const clearAll = () => {
 
     setFasta("")
     setQuery("")
@@ -152,99 +152,97 @@ ATGCCCGTAGCT`)
 
   }
 
-  return(
+  return (
 
     <ToolLayout
-  title="FASTA Sequence Extractor"
-  description="Extract specific sequences from FASTA files using sequence IDs or header keywords."
-  badge="FASTA Tool"
-  slug="fasta-sequence-extractor"
-  category="FASTA"
+      badge="FASTA Tool"
+      slug="fasta-sequence-extractor"
+      category="FASTA"
 
-  seoContent={
-  <>
-    <h2>Extract Specific Sequences from FASTA Files</h2>
+      seoContent={
+        <>
+          <h2>Extract Specific Sequences from FASTA Files</h2>
 
-    <p>
-      FASTA files often contain large collections of biological
-      sequences such as DNA, RNA, or proteins. In many bioinformatics
-      workflows researchers need to retrieve only a subset of
-      sequences from a multi-FASTA dataset based on sequence
-      identifiers, gene names, species annotations, or other
-      metadata present in FASTA headers.
-    </p>
+          <p>
+            FASTA files often contain large collections of biological
+            sequences such as DNA, RNA, or proteins. In many bioinformatics
+            workflows researchers need to retrieve only a subset of
+            sequences from a multi-FASTA dataset based on sequence
+            identifiers, gene names, species annotations, or other
+            metadata present in FASTA headers.
+          </p>
 
-    <p>
-      This FASTA sequence extractor allows users to quickly retrieve
-      specific entries from FASTA datasets using either sequence IDs
-      or keywords found within FASTA headers. The tool scans the entire
-      FASTA dataset and returns only the sequences that match the
-      provided query, making it easy to isolate relevant biological
-      sequences for downstream analysis.
-    </p>
+          <p>
+            This FASTA sequence extractor allows users to quickly retrieve
+            specific entries from FASTA datasets using either sequence IDs
+            or keywords found within FASTA headers. The tool scans the entire
+            FASTA dataset and returns only the sequences that match the
+            provided query, making it easy to isolate relevant biological
+            sequences for downstream analysis.
+          </p>
 
-    <p>
-      Multiple sequence identifiers can be provided simultaneously,
-      allowing batch extraction of selected sequences from large
-      datasets. Researchers can also perform keyword-based searches
-      to retrieve sequences belonging to specific organisms, genes,
-      annotations, or experimental conditions. If FASTA headers need
-      to be standardized before extraction, you can use the{" "}
-      <Link to="/tools/fasta-header-editor">FASTA Header Editor</Link>{" "}
-      or extract identifier lists using the{" "}
-      <Link to="/tools/fasta-header-extractor">FASTA Header Extractor</Link>.
-    </p>
+          <p>
+            Multiple sequence identifiers can be provided simultaneously,
+            allowing batch extraction of selected sequences from large
+            datasets. Researchers can also perform keyword-based searches
+            to retrieve sequences belonging to specific organisms, genes,
+            annotations, or experimental conditions. If FASTA headers need
+            to be standardized before extraction, you can use the{" "}
+            <Link to="/tools/fasta-header-editor">FASTA Header Editor</Link>{" "}
+            or extract identifier lists using the{" "}
+            <Link to="/tools/fasta-header-extractor">FASTA Header Extractor</Link>.
+          </p>
 
-    <p>
-      FASTA sequence extraction is commonly used when preparing
-      datasets for phylogenetic analysis, genome annotation,
-      transcriptomics studies, and comparative genomics workflows.
-      Because all processing occurs locally in your browser, your
-      biological sequence data remains private and is never uploaded
-      to external servers.
-    </p>
-  </>
-}
+          <p>
+            FASTA sequence extraction is commonly used when preparing
+            datasets for phylogenetic analysis, genome annotation,
+            transcriptomics studies, and comparative genomics workflows.
+            Because all processing occurs locally in your browser, your
+            biological sequence data remains private and is never uploaded
+            to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a multi-FASTA dataset into the FASTA input panel.</li>
-    <li>Select the extraction method: sequence ID or header keyword.</li>
-    <li>Enter one or more sequence IDs or a keyword to search.</li>
-    <li>Click <strong>Extract Sequences</strong>.</li>
-    <li>The matching FASTA entries will appear in the output panel.</li>
-    <li>Copy or download the extracted FASTA sequences.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a multi-FASTA dataset into the FASTA input panel.</li>
+          <li>Select the extraction method: sequence ID or header keyword.</li>
+          <li>Enter one or more sequence IDs or a keyword to search.</li>
+          <li>Click <strong>Extract Sequences</strong>.</li>
+          <li>The matching FASTA entries will appear in the output panel.</li>
+          <li>Copy or download the extracted FASTA sequences.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What does a FASTA sequence extractor do?",
-    answer:
-      "A FASTA sequence extractor retrieves specific sequence entries from a multi-FASTA dataset based on sequence identifiers or header keywords."
-  },
-  {
-    question: "Can I extract multiple sequence IDs at once?",
-    answer:
-      "Yes. The tool supports multiple sequence identifiers entered on separate lines or separated by commas."
-  },
-  {
-    question: "What is keyword extraction in FASTA files?",
-    answer:
-      "Keyword extraction searches FASTA header lines and returns sequences whose headers contain the specified text."
-  },
-  {
-    question: "Does the tool modify the sequences?",
-    answer:
-      "No. The extractor simply retrieves matching FASTA entries and preserves the original nucleotide or protein sequences."
-  },
-  {
-    question: "Is my FASTA dataset uploaded anywhere?",
-    answer:
-      "No. All sequence extraction operations run locally in your browser to ensure complete privacy of your biological data."
-  }
-]}
->
+      faq={[
+        {
+          question: "What does a FASTA sequence extractor do?",
+          answer:
+            "A FASTA sequence extractor retrieves specific sequence entries from a multi-FASTA dataset based on sequence identifiers or header keywords."
+        },
+        {
+          question: "Can I extract multiple sequence IDs at once?",
+          answer:
+            "Yes. The tool supports multiple sequence identifiers entered on separate lines or separated by commas."
+        },
+        {
+          question: "What is keyword extraction in FASTA files?",
+          answer:
+            "Keyword extraction searches FASTA header lines and returns sequences whose headers contain the specified text."
+        },
+        {
+          question: "Does the tool modify the sequences?",
+          answer:
+            "No. The extractor simply retrieves matching FASTA entries and preserves the original nucleotide or protein sequences."
+        },
+        {
+          question: "Is my FASTA dataset uploaded anywhere?",
+          answer:
+            "No. All sequence extraction operations run locally in your browser to ensure complete privacy of your biological data."
+        }
+      ]}
+    >
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
@@ -258,7 +256,7 @@ faq={[
 
           <select
             value={mode}
-            onChange={(e)=>setMode(e.target.value as Mode)}
+            onChange={(e) => setMode(e.target.value as Mode)}
             className="px-4 py-2 border rounded-lg"
           >
 
@@ -306,7 +304,7 @@ faq={[
 
           <textarea
             value={query}
-            onChange={(e)=>setQuery(e.target.value)}
+            onChange={(e) => setQuery(e.target.value)}
             className="w-full p-3 border rounded-lg h-24"
             placeholder={
               mode === "id"
@@ -317,11 +315,11 @@ faq={[
 
         </div>
 
-        {error &&(
+        {error && (
 
           <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3">
 
-            <AlertCircle className="w-5 h-5 text-red-600"/>
+            <AlertCircle className="w-5 h-5 text-red-600" />
 
             <p className="text-red-700 text-sm">
               {error}
@@ -336,7 +334,7 @@ faq={[
         <div className="p-6 border-t border-gray-200 flex gap-4">
 
           <button
-          aria-label="Extract Sequences 1"
+            aria-label="Extract Sequences 1"
             onClick={extract}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg"
           >
@@ -344,11 +342,11 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Extract Sequences 1"
+            aria-label="Clear Extract Sequences 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
-            <RefreshCw className="w-4 h-4"/>
+            <RefreshCw className="w-4 h-4" />
             Clear
           </button>
 

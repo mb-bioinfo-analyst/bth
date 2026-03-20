@@ -7,16 +7,16 @@ import SequenceOutput from "../../components/SequenceOutput"
 
 type Mode = "count" | "percent"
 
-export default function FastaRandomSampler(){
+export default function FastaRandomSampler() {
 
-  const [input,setInput] = useState("")
-  const [output,setOutput] = useState("")
-  const [report,setReport] = useState("")
-  const [mode,setMode] = useState<Mode>("count")
-  const [value,setValue] = useState("5")
-  const [error,setError] = useState("")
+  const [input, setInput] = useState("")
+  const [output, setOutput] = useState("")
+  const [report, setReport] = useState("")
+  const [mode, setMode] = useState<Mode>("count")
+  const [value, setValue] = useState("5")
+  const [error, setError] = useState("")
 
-  function parseFasta(text:string){
+  function parseFasta(text: string) {
 
     const entries = text
       .trim()
@@ -26,69 +26,69 @@ export default function FastaRandomSampler(){
 
   }
 
-  function sample(){
+  function sample() {
 
     setError("")
     setOutput("")
     setReport("")
 
-    if(!input.trim()){
+    if (!input.trim()) {
       setError("Please paste FASTA sequences")
       return
     }
 
     const entries = parseFasta(input)
 
-    if(entries.length === 0){
+    if (entries.length === 0) {
       setError("No FASTA sequences detected")
       return
     }
 
     let sampleSize = 0
 
-    if(mode === "count"){
+    if (mode === "count") {
       sampleSize = Number(value)
     }
 
-    if(mode === "percent"){
+    if (mode === "percent") {
       const percent = Number(value)
       sampleSize = Math.round(entries.length * percent / 100)
     }
 
-    if(sampleSize <= 0){
+    if (sampleSize <= 0) {
       setError("Sample size must be greater than 0")
       return
     }
 
-    if(sampleSize > entries.length){
+    if (sampleSize > entries.length) {
       sampleSize = entries.length
     }
 
     // shuffle
-    const shuffled = [...entries].sort(()=>Math.random()-0.5)
+    const shuffled = [...entries].sort(() => Math.random() - 0.5)
 
-    const subset = shuffled.slice(0,sampleSize)
+    const subset = shuffled.slice(0, sampleSize)
 
     const fastaOut = subset.join("\n")
 
     setOutput(fastaOut)
 
     setReport(
-`Total sequences: ${entries.length}
+      `Total sequences: ${entries.length}
 Sampled sequences: ${subset.length}`
     )
 
   }
 
-  const handleCopy = async ()=>{
+  const handleCopy = async () => {
 
     await navigator.clipboard.writeText(output)
 
   }
 
-  const handleDownload = ()=>{
+  const handleDownload = () => {
 
-    const blob = new Blob([output],{type:"text/plain"})
+    const blob = new Blob([output], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement("a")
@@ -103,7 +103,7 @@ Sampled sequences: ${subset.length}`
 
   }
 
-  const loadExample = ()=>{
+  const loadExample = () => {
 
     setInput(`>seq1
 ATGCGTACGT
@@ -124,7 +124,7 @@ ATGCGTACAA`)
 
   }
 
-  const clearAll = ()=>{
+  const clearAll = () => {
 
     setInput("")
     setOutput("")
@@ -133,97 +133,95 @@ ATGCGTACAA`)
 
   }
 
-  return(
+  return (
 
     <ToolLayout
-  title="FASTA Random Sampler"
-  description="Randomly sample sequences from FASTA datasets."
-  badge="FASTA Tool"
-  slug="fasta-random-sampler"
-  category="FASTA"
+      badge="FASTA Tool"
+      slug="fasta-random-sampler"
+      category="FASTA"
 
-  seoContent={
-  <>
-    <h2>Randomly Sample Sequences from FASTA Files</h2>
+      seoContent={
+        <>
+          <h2>Randomly Sample Sequences from FASTA Files</h2>
 
-    <p>
-      Random sampling of FASTA sequences is a common preprocessing step
-      in bioinformatics when working with very large sequence datasets.
-      Researchers often need to generate smaller representative subsets
-      for testing analysis pipelines, performing exploratory data
-      analysis, or creating balanced datasets for computational
-      experiments.
-    </p>
+          <p>
+            Random sampling of FASTA sequences is a common preprocessing step
+            in bioinformatics when working with very large sequence datasets.
+            Researchers often need to generate smaller representative subsets
+            for testing analysis pipelines, performing exploratory data
+            analysis, or creating balanced datasets for computational
+            experiments.
+          </p>
 
-    <p>
-      This FASTA random sampler allows users to quickly select a subset
-      of sequences from a multi-FASTA dataset. Sampling can be performed
-      either by specifying a fixed number of sequences or by selecting
-      a percentage of the total dataset. The tool randomly shuffles the
-      FASTA entries and returns a sampled subset without modifying the
-      underlying nucleotide or protein sequences.
-    </p>
+          <p>
+            This FASTA random sampler allows users to quickly select a subset
+            of sequences from a multi-FASTA dataset. Sampling can be performed
+            either by specifying a fixed number of sequences or by selecting
+            a percentage of the total dataset. The tool randomly shuffles the
+            FASTA entries and returns a sampled subset without modifying the
+            underlying nucleotide or protein sequences.
+          </p>
 
-    <p>
-      Random sequence sampling is frequently used in genomics,
-      metagenomics, transcriptomics, and phylogenetic studies to reduce
-      dataset size while preserving representative diversity. If you
-      need to remove duplicate entries before sampling, you can also use
-      the{" "}
-      <Link to="/tools/fasta-deduplicator">FASTA Deduplicator</Link>{" "}
-      or filter sequences by length or GC content with the{" "}
-      <Link to="/tools/fasta-filter">FASTA Filter</Link>.
-    </p>
+          <p>
+            Random sequence sampling is frequently used in genomics,
+            metagenomics, transcriptomics, and phylogenetic studies to reduce
+            dataset size while preserving representative diversity. If you
+            need to remove duplicate entries before sampling, you can also use
+            the{" "}
+            <Link to="/tools/fasta-deduplicator">FASTA Deduplicator</Link>{" "}
+            or filter sequences by length or GC content with the{" "}
+            <Link to="/tools/fasta-filter">FASTA Filter</Link>.
+          </p>
 
-    <p>
-      The sampled output is returned as a valid FASTA file that can be
-      directly used in downstream sequence analysis tools. Because all
-      processing occurs locally in your browser, your biological sequence
-      data remains private and is never transmitted to external servers.
-    </p>
-  </>
-}
+          <p>
+            The sampled output is returned as a valid FASTA file that can be
+            directly used in downstream sequence analysis tools. Because all
+            processing occurs locally in your browser, your biological sequence
+            data remains private and is never transmitted to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a FASTA dataset into the input field.</li>
-    <li>Select the sampling mode: number of sequences or percentage of the dataset.</li>
-    <li>Enter the desired sampling value.</li>
-    <li>Click <strong>Sample FASTA</strong>.</li>
-    <li>The randomly sampled FASTA sequences will appear in the output panel.</li>
-    <li>Review the sampling report showing the number of sequences selected.</li>
-    <li>Copy or download the sampled FASTA dataset.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a FASTA dataset into the input field.</li>
+          <li>Select the sampling mode: number of sequences or percentage of the dataset.</li>
+          <li>Enter the desired sampling value.</li>
+          <li>Click <strong>Sample FASTA</strong>.</li>
+          <li>The randomly sampled FASTA sequences will appear in the output panel.</li>
+          <li>Review the sampling report showing the number of sequences selected.</li>
+          <li>Copy or download the sampled FASTA dataset.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is FASTA random sampling?",
-    answer:
-      "FASTA random sampling selects a subset of sequences from a FASTA dataset using a random selection process while preserving the original sequence entries."
-  },
-  {
-    question: "Can I sample by percentage instead of sequence count?",
-    answer:
-      "Yes. The tool allows sampling either by a fixed number of sequences or by specifying a percentage of the dataset."
-  },
-  {
-    question: "Does sampling modify the sequences?",
-    answer:
-      "No. The tool only selects a subset of sequences and does not alter the sequence data."
-  },
-  {
-    question: "Can this tool work with multi-FASTA files?",
-    answer:
-      "Yes. The sampler supports multi-FASTA datasets containing multiple sequence entries."
-  },
-  {
-    question: "Is my FASTA data uploaded anywhere?",
-    answer:
-      "No. All sampling operations are performed locally in your browser to ensure complete data privacy."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is FASTA random sampling?",
+          answer:
+            "FASTA random sampling selects a subset of sequences from a FASTA dataset using a random selection process while preserving the original sequence entries."
+        },
+        {
+          question: "Can I sample by percentage instead of sequence count?",
+          answer:
+            "Yes. The tool allows sampling either by a fixed number of sequences or by specifying a percentage of the dataset."
+        },
+        {
+          question: "Does sampling modify the sequences?",
+          answer:
+            "No. The tool only selects a subset of sequences and does not alter the sequence data."
+        },
+        {
+          question: "Can this tool work with multi-FASTA files?",
+          answer:
+            "Yes. The sampler supports multi-FASTA datasets containing multiple sequence entries."
+        },
+        {
+          question: "Is my FASTA data uploaded anywhere?",
+          answer:
+            "No. All sampling operations are performed locally in your browser to ensure complete data privacy."
+        }
+      ]}
+    >
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
@@ -239,7 +237,7 @@ faq={[
 
             <select
               value={mode}
-              onChange={(e)=>setMode(e.target.value as Mode)}
+              onChange={(e) => setMode(e.target.value as Mode)}
               className="px-4 py-2 border rounded-lg"
             >
 
@@ -264,7 +262,7 @@ faq={[
             <input
               type="number"
               value={value}
-              onChange={(e)=>setValue(e.target.value)}
+              onChange={(e) => setValue(e.target.value)}
               className="px-4 py-2 border rounded-lg w-full"
             />
 
@@ -292,7 +290,7 @@ faq={[
 
         </div>
 
-        {report &&(
+        {report && (
 
           <div className="p-6 border-t border-gray-200 bg-gray-50">
 
@@ -308,11 +306,11 @@ faq={[
 
         )}
 
-        {error &&(
+        {error && (
 
           <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3">
 
-            <AlertCircle className="w-5 h-5 text-red-600"/>
+            <AlertCircle className="w-5 h-5 text-red-600" />
 
             <p className="text-red-700 text-sm">
               {error}
@@ -327,7 +325,7 @@ faq={[
         <div className="p-6 border-t border-gray-200 flex gap-4">
 
           <button
-          aria-label="Sample FASTA 1"
+            aria-label="Sample FASTA 1"
             onClick={sample}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg"
           >
@@ -335,11 +333,11 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Sample FASTA 1"
+            aria-label="Clear Sample FASTA 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
-            <RefreshCw className="w-4 h-4"/>
+            <RefreshCw className="w-4 h-4" />
             Clear
           </button>
 

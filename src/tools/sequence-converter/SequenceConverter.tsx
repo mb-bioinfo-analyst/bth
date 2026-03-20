@@ -37,10 +37,10 @@ function parseFasta(input: string): ParsedSequence[] {
     const seq = lines
       .slice(1)
       .join("")
-      .replace(/\s/g,"")
+      .replace(/\s/g, "")
       .toUpperCase()
 
-    const [name,...desc] = header.split(/\s+/)
+    const [name, ...desc] = header.split(/\s+/)
 
     entries.push({
       name: name || "sequence",
@@ -144,7 +144,7 @@ export default function SequenceConverter() {
         gb += `SOURCE      .\n`;
         gb += `  ORGANISM  .\n`;
         gb += `ORIGIN\n`;
-        
+
         const chunks = seq.match(/.{1,10}/g) || [];
         let pos = 1;
         for (let i = 0; i < chunks.length; i += 6) {
@@ -168,7 +168,7 @@ export default function SequenceConverter() {
         embl += `DT   ${emblDate} (Rel. 1, Created)\n`;
         embl += `XX\n`;
         embl += `SQ   Sequence ${seq.length} BP; ${seq.split('A').length - 1} A; ${seq.split('C').length - 1} C; ${seq.split('G').length - 1} G; ${seq.split('T').length - 1} T; 0 other;\n`;
-        
+
         const emblChunks = seq.toLowerCase().match(/.{1,10}/g) || [];
         for (let i = 0; i < emblChunks.length; i += 6) {
           const lineChunks = emblChunks.slice(i, i + 6);
@@ -202,52 +202,52 @@ export default function SequenceConverter() {
 
   const handleConvert = () => {
 
-  setError("")
-  setOutputSequence("")
+    setError("")
+    setOutputSequence("")
 
-  if (!inputSequence.trim()) {
-    setError("Please enter a sequence to convert")
-    return
-  }
+    if (!inputSequence.trim()) {
+      setError("Please enter a sequence to convert")
+      return
+    }
 
-  try {
+    try {
 
-    const sequences =
-      inputFormat === "fasta"
-        ? parseFasta(inputSequence)
-        : [{ name: sequenceName, description: "", sequence: inputSequence }]
+      const sequences =
+        inputFormat === "fasta"
+          ? parseFasta(inputSequence)
+          : [{ name: sequenceName, description: "", sequence: inputSequence }]
 
-    const outputs: string[] = []
+      const outputs: string[] = []
 
-    for (const entry of sequences) {
+      for (const entry of sequences) {
 
-      const cleanSeq = entry.sequence.replace(/\s/g,"").toUpperCase()
+        const cleanSeq = entry.sequence.replace(/\s/g, "").toUpperCase()
 
-      if (!/^[ACGTRYSWKMBDHVNU-]+$/i.test(cleanSeq)) {
-        setError("Sequence contains invalid characters")
-        return
+        if (!/^[ACGTRYSWKMBDHVNU-]+$/i.test(cleanSeq)) {
+          setError("Sequence contains invalid characters")
+          return
+        }
+
+        const formatted = formatSequence(
+          cleanSeq,
+          entry.name,
+          entry.description,
+          outputFormat
+        )
+
+        outputs.push(formatted)
+
       }
 
-      const formatted = formatSequence(
-        cleanSeq,
-        entry.name,
-        entry.description,
-        outputFormat
-      )
+      setOutputSequence(outputs.join("\n\n"))
 
-      outputs.push(formatted)
+    } catch (err) {
+
+      setError("Error converting sequence")
 
     }
 
-    setOutputSequence(outputs.join("\n\n"))
-
-  } catch (err) {
-
-    setError("Error converting sequence")
-
   }
-
-}
 
   const handleCopy = async () => {
     try {
@@ -292,241 +292,239 @@ GGCTAATGCCCTGGCCCACAAGTATCACTAA`;
   };
 
   return (
-    
-     <ToolLayout
-  title="Sequence Format Converter"
-  description="Convert DNA or RNA sequence formats including FASTA, GenBank, EMBL, PHYLIP and NEXUS."
-  badge="Sequence Tool"
-  slug="sequence-converter"
-  category="Sequence"
 
-  seoContent={
-  <>
-    <h2>DNA and RNA Sequence Format Converter</h2>
+    <ToolLayout
+      badge="Sequence Tool"
+      slug="sequence-converter"
+      category="Sequence"
 
-    <p>
-      Biological sequence data is stored in many different file formats
-      depending on the database, sequencing platform, or analysis software
-      used. Converting between sequence formats is a common task in
-      bioinformatics workflows, particularly when preparing datasets for
-      phylogenetic analysis, genome annotation, or sequence alignment tools.
-      A sequence format converter allows researchers to quickly transform
-      sequence data between widely used bioinformatics formats.
-    </p>
+      seoContent={
+        <>
+          <h2>DNA and RNA Sequence Format Converter</h2>
 
-    <p>
-      This sequence converter supports several popular formats including
-      FASTA, GenBank, EMBL, PHYLIP, NEXUS, and raw sequence format. FASTA is
-      the most widely used format for storing nucleotide and protein
-      sequences, while GenBank and EMBL formats provide rich annotation
-      metadata. PHYLIP and NEXUS formats are commonly used in phylogenetic
-      analysis software such as PHYLIP, MrBayes, and PAUP.
-    </p>
+          <p>
+            Biological sequence data is stored in many different file formats
+            depending on the database, sequencing platform, or analysis software
+            used. Converting between sequence formats is a common task in
+            bioinformatics workflows, particularly when preparing datasets for
+            phylogenetic analysis, genome annotation, or sequence alignment tools.
+            A sequence format converter allows researchers to quickly transform
+            sequence data between widely used bioinformatics formats.
+          </p>
 
-    <p>
-      The converter automatically parses sequence headers, descriptions,
-      and sequence data while validating nucleotide characters to ensure
-      the output remains compatible with downstream bioinformatics tools.
-      This makes it easy to prepare sequence files for alignment programs,
-      phylogenetic inference tools, genome browsers, and molecular biology
-      pipelines.
-    </p>
+          <p>
+            This sequence converter supports several popular formats including
+            FASTA, GenBank, EMBL, PHYLIP, NEXUS, and raw sequence format. FASTA is
+            the most widely used format for storing nucleotide and protein
+            sequences, while GenBank and EMBL formats provide rich annotation
+            metadata. PHYLIP and NEXUS formats are commonly used in phylogenetic
+            analysis software such as PHYLIP, MrBayes, and PAUP.
+          </p>
 
-    <p>
-      After converting your sequence format, you may also want to clean or
-      preprocess sequences using tools such as the{" "}
-      <Link to="/tools/sequence-cleaner">
-        Sequence Cleaner / Sanitizer
-      </Link>{" "}
-      or calculate nucleotide composition using the{" "}
-      <Link to="/tools/nucleotide-composition-calculator">
-        Nucleotide Composition Calculator
-      </Link>.
-    </p>
+          <p>
+            The converter automatically parses sequence headers, descriptions,
+            and sequence data while validating nucleotide characters to ensure
+            the output remains compatible with downstream bioinformatics tools.
+            This makes it easy to prepare sequence files for alignment programs,
+            phylogenetic inference tools, genome browsers, and molecular biology
+            pipelines.
+          </p>
 
-    <p>
-      All sequence conversion is performed locally in your browser to ensure
-      data privacy. Your sequences are never uploaded to external servers,
-      making the tool safe to use with sensitive research datasets.
-    </p>
-  </>
-}
+          <p>
+            After converting your sequence format, you may also want to clean or
+            preprocess sequences using tools such as the{" "}
+            <Link to="/tools/sequence-cleaner">
+              Sequence Cleaner / Sanitizer
+            </Link>{" "}
+            or calculate nucleotide composition using the{" "}
+            <Link to="/tools/nucleotide-composition-calculator">
+              Nucleotide Composition Calculator
+            </Link>.
+          </p>
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste or upload your sequence data into the input panel.</li>
-    <li>Select the input sequence format.</li>
-    <li>Select the desired output format.</li>
-    <li>Optionally adjust the sequence name.</li>
-    <li>Click <strong>Convert Sequence</strong> to generate the formatted output.</li>
-    <li>Copy or download the converted sequence file.</li>
-  </ol>
-}
+          <p>
+            All sequence conversion is performed locally in your browser to ensure
+            data privacy. Your sequences are never uploaded to external servers,
+            making the tool safe to use with sensitive research datasets.
+          </p>
+        </>
+      }
 
-faq={[
-  {
-    question: "What sequence formats are supported?",
-    answer:
-      "This converter supports FASTA, GenBank, EMBL, PHYLIP, NEXUS, and raw sequence formats."
-  },
-  {
-    question: "What is the FASTA format?",
-    answer:
-      "FASTA is a simple text-based format where sequences are preceded by a header line beginning with the '>' character followed by the sequence itself."
-  },
-  {
-    question: "Why convert between sequence formats?",
-    answer:
-      "Different bioinformatics tools require different input formats. Converting formats ensures compatibility with alignment tools, phylogenetic programs, and genome analysis pipelines."
-  },
-  {
-    question: "Does the converter validate sequences?",
-    answer:
-      "Yes. The tool validates nucleotide characters to ensure sequences are compatible with standard DNA or RNA alphabets."
-  },
-  {
-    question: "Is my sequence data uploaded anywhere?",
-    answer:
-      "No. All sequence processing happens locally in your browser, ensuring complete privacy for your data."
-  }
-]}
->
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste or upload your sequence data into the input panel.</li>
+          <li>Select the input sequence format.</li>
+          <li>Select the desired output format.</li>
+          <li>Optionally adjust the sequence name.</li>
+          <li>Click <strong>Convert Sequence</strong> to generate the formatted output.</li>
+          <li>Copy or download the converted sequence file.</li>
+        </ol>
+      }
 
-        {/* Main Converter Interface */}
-        {/* <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden"> */}
-        <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
-          {/* Format Selection Bar */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
-            <div className="flex flex-col md:flex-row items-center gap-4">
-              {/* Input Format */}
-              <div className="flex-1 w-full">
-                <label className="block text-white text-sm font-semibold mb-2">
-                  Input Format
-                </label>
-                <select
-                  value={inputFormat}
-                  onChange={(e) => setInputFormat(e.target.value as SequenceFormat)}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-white/20 bg-white/10 text-white backdrop-blur-sm focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all"
-                >
-                  {formats.map((format) => (
-                    <option key={format.value} value={format.value} className="text-gray-900">
-                      {format.label} - {format.description}
-                    </option>
-                  ))}
-                </select>
-              </div>
+      faq={[
+        {
+          question: "What sequence formats are supported?",
+          answer:
+            "This converter supports FASTA, GenBank, EMBL, PHYLIP, NEXUS, and raw sequence formats."
+        },
+        {
+          question: "What is the FASTA format?",
+          answer:
+            "FASTA is a simple text-based format where sequences are preceded by a header line beginning with the '>' character followed by the sequence itself."
+        },
+        {
+          question: "Why convert between sequence formats?",
+          answer:
+            "Different bioinformatics tools require different input formats. Converting formats ensures compatibility with alignment tools, phylogenetic programs, and genome analysis pipelines."
+        },
+        {
+          question: "Does the converter validate sequences?",
+          answer:
+            "Yes. The tool validates nucleotide characters to ensure sequences are compatible with standard DNA or RNA alphabets."
+        },
+        {
+          question: "Is my sequence data uploaded anywhere?",
+          answer:
+            "No. All sequence processing happens locally in your browser, ensuring complete privacy for your data."
+        }
+      ]}
+    >
 
-              {/* Swap Button */}
-              <button
-              aria-label="Swap 1"
-                onClick={handleSwapFormats}
-                className="mt-6 md:mt-0 p-3 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all hover:scale-110 active:scale-95"
-                title="Swap formats"
+      {/* Main Converter Interface */}
+      {/* <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden"> */}
+      <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
+        {/* Format Selection Bar */}
+        <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6">
+          <div className="flex flex-col md:flex-row items-center gap-4">
+            {/* Input Format */}
+            <div className="flex-1 w-full">
+              <label className="block text-white text-sm font-semibold mb-2">
+                Input Format
+              </label>
+              <select
+                value={inputFormat}
+                onChange={(e) => setInputFormat(e.target.value as SequenceFormat)}
+                className="w-full px-4 py-3 rounded-lg border-2 border-white/20 bg-white/10 text-white backdrop-blur-sm focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all"
               >
-                <RefreshCw className="w-6 h-6" />
-              </button>
-
-              {/* Output Format */}
-              <div className="flex-1 w-full">
-                <label className="block text-white text-sm font-semibold mb-2">
-                  Output Format
-                </label>
-                <select
-                  value={outputFormat}
-                  onChange={(e) => setOutputFormat(e.target.value as SequenceFormat)}
-                  className="w-full px-4 py-3 rounded-lg border-2 border-white/20 bg-white/10 text-white backdrop-blur-sm focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all"
-                >
-                  {formats.map((format) => (
-                    <option key={format.value} value={format.value} className="text-gray-900">
-                      {format.label} - {format.description}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                {formats.map((format) => (
+                  <option key={format.value} value={format.value} className="text-gray-900">
+                    {format.label} - {format.description}
+                  </option>
+                ))}
+              </select>
             </div>
-          </div>
 
-          {/* Sequence Name Input */}
-          <div className="p-6 border-b border-gray-200 bg-gray-50">
-            <label className="block text-gray-700 font-semibold mb-2">
-              Sequence Name (optional)
-            </label>
-            <input
-              type="text"
-              value={sequenceName}
-              onChange={(e) => setSequenceName(e.target.value)}
-              placeholder="sequence_1"
-              className="w-full md:w-1/3 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            />
-          </div>
-
-          {/* Input/Output Areas */}
-          <div className="grid md:grid-cols-2 divide-x divide-gray-200">
-            {/* Input Area */}
-            
-
-            <SequenceInput
-              value={inputSequence}
-              onChange={setInputSequence}
-              label="Input Sequence"
-              onLoadExample={loadExample}
-            />
-
-            {/* Output Area */}
-            
-
-            <SequenceOutput
-              value={outputSequence}
-              title="Output Sequence"
-              onCopy={handleCopy}
-              onDownload={handleDownload}
-            />
-
-          </div>
-
-          {/* Error Message */}
-          {error && (
-            <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
-              <p className="text-red-800 text-sm">{error}</p>
-            </div>
-          )}
-
-          {/* Convert Button */}
-          <div className="p-6 bg-gray-50 border-t border-gray-200">
+            {/* Swap Button */}
             <button
-            aria-label="Convert Sequence 1"
-              onClick={handleConvert}
-              className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+              aria-label="Swap 1"
+              onClick={handleSwapFormats}
+              className="mt-6 md:mt-0 p-3 rounded-full bg-white/20 hover:bg-white/30 text-white transition-all hover:scale-110 active:scale-95"
+              title="Swap formats"
             >
-              Convert Sequence
+              <RefreshCw className="w-6 h-6" />
             </button>
+
+            {/* Output Format */}
+            <div className="flex-1 w-full">
+              <label className="block text-white text-sm font-semibold mb-2">
+                Output Format
+              </label>
+              <select
+                value={outputFormat}
+                onChange={(e) => setOutputFormat(e.target.value as SequenceFormat)}
+                className="w-full px-4 py-3 rounded-lg border-2 border-white/20 bg-white/10 text-white backdrop-blur-sm focus:outline-none focus:border-white/40 focus:bg-white/20 transition-all"
+              >
+                {formats.map((format) => (
+                  <option key={format.value} value={format.value} className="text-gray-900">
+                    {format.label} - {format.description}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         </div>
 
-        {/* Info Cards */}
-        <div className="mt-8 grid md:grid-cols-3 gap-6">
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-2">Supported Formats</h3>
-            <p className="text-gray-600 text-sm">
-              FASTA, GenBank, EMBL, PHYLIP, NEXUS, and raw sequence formats
-            </p>
+        {/* Sequence Name Input */}
+        <div className="p-6 border-b border-gray-200 bg-gray-50">
+          <label className="block text-gray-700 font-semibold mb-2">
+            Sequence Name (optional)
+          </label>
+          <input
+            type="text"
+            value={sequenceName}
+            onChange={(e) => setSequenceName(e.target.value)}
+            placeholder="sequence_1"
+            className="w-full md:w-1/3 px-4 py-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+
+        {/* Input/Output Areas */}
+        <div className="grid md:grid-cols-2 divide-x divide-gray-200">
+          {/* Input Area */}
+
+
+          <SequenceInput
+            value={inputSequence}
+            onChange={setInputSequence}
+            label="Input Sequence"
+            onLoadExample={loadExample}
+          />
+
+          {/* Output Area */}
+
+
+          <SequenceOutput
+            value={outputSequence}
+            title="Output Sequence"
+            onCopy={handleCopy}
+            onDownload={handleDownload}
+          />
+
+        </div>
+
+        {/* Error Message */}
+        {error && (
+          <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
+            <AlertCircle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
+            <p className="text-red-800 text-sm">{error}</p>
           </div>
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-2">Validation</h3>
-            <p className="text-gray-600 text-sm">
-              Automatic validation of nucleotide sequences with detailed error messages
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
-            <h3 className="font-semibold text-gray-900 mb-2">Privacy First</h3>
-            <p className="text-gray-600 text-sm">
-              All conversions happen locally in your browser - no data is sent to servers
-            </p>
-          </div>
+        )}
+
+        {/* Convert Button */}
+        <div className="p-6 bg-gray-50 border-t border-gray-200">
+          <button
+            aria-label="Convert Sequence 1"
+            onClick={handleConvert}
+            className="w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] active:scale-[0.98] shadow-lg"
+          >
+            Convert Sequence
+          </button>
+        </div>
+      </div>
+
+      {/* Info Cards */}
+      <div className="mt-8 grid md:grid-cols-3 gap-6">
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <h3 className="font-semibold text-gray-900 mb-2">Supported Formats</h3>
+          <p className="text-gray-600 text-sm">
+            FASTA, GenBank, EMBL, PHYLIP, NEXUS, and raw sequence formats
+          </p>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <h3 className="font-semibold text-gray-900 mb-2">Validation</h3>
+          <p className="text-gray-600 text-sm">
+            Automatic validation of nucleotide sequences with detailed error messages
+          </p>
+        </div>
+        <div className="bg-white rounded-lg shadow-md p-6 border border-gray-200">
+          <h3 className="font-semibold text-gray-900 mb-2">Privacy First</h3>
+          <p className="text-gray-600 text-sm">
+            All conversions happen locally in your browser - no data is sent to servers
+          </p>
+        </div>
         {/* </div> */}
-      {/* </div> */}
-    </div>
+        {/* </div> */}
+      </div>
     </ToolLayout>
   );
 }

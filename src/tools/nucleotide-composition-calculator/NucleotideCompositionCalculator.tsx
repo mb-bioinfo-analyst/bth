@@ -400,99 +400,97 @@ ATGAAATTTGGGCCCGCGCGCGCGTTTAAACCCGGGATATATATATA`)
 
   return (
     <ToolLayout
-  title="Nucleotide Composition Calculator"
-  description="Analyze nucleotide composition, GC content, dinucleotide frequencies, CpG ratio, and positional base bias with visual summaries."
-  badge="Sequence Analysis"
-  slug="nucleotide-composition-calculator"
-  category="Sequence Analysis"
+      badge="Sequence Analysis"
+      slug="nucleotide-composition-calculator"
+      category="Sequence Analysis"
 
-  seoContent={
-  <>
-    <h2>Analyze Nucleotide Composition in DNA and RNA Sequences</h2>
+      seoContent={
+        <>
+          <h2>Analyze Nucleotide Composition in DNA and RNA Sequences</h2>
 
-    <p>
-      Nucleotide composition analysis is a fundamental step in many
-      bioinformatics workflows. Understanding the proportion of
-      nucleotides within a sequence helps researchers evaluate sequence
-      quality, detect compositional bias, and identify genomic regions
-      with unique structural or functional properties. Key metrics such
-      as GC content, AT or AU content, and nucleotide distribution are
-      commonly used to characterize genomes, transcripts, and coding
-      sequences.
-    </p>
+          <p>
+            Nucleotide composition analysis is a fundamental step in many
+            bioinformatics workflows. Understanding the proportion of
+            nucleotides within a sequence helps researchers evaluate sequence
+            quality, detect compositional bias, and identify genomic regions
+            with unique structural or functional properties. Key metrics such
+            as GC content, AT or AU content, and nucleotide distribution are
+            commonly used to characterize genomes, transcripts, and coding
+            sequences.
+          </p>
 
-    <p>
-      This nucleotide composition calculator analyzes DNA or RNA
-      sequences and reports detailed statistics including nucleotide
-      frequencies, GC percentage, purine and pyrimidine counts, and
-      strong versus weak base pairing composition. The tool also
-      calculates positional nucleotide composition across codon
-      positions (GC1, GC2, GC3) and provides dinucleotide frequency
-      statistics for deeper sequence analysis.
-    </p>
+          <p>
+            This nucleotide composition calculator analyzes DNA or RNA
+            sequences and reports detailed statistics including nucleotide
+            frequencies, GC percentage, purine and pyrimidine counts, and
+            strong versus weak base pairing composition. The tool also
+            calculates positional nucleotide composition across codon
+            positions (GC1, GC2, GC3) and provides dinucleotide frequency
+            statistics for deeper sequence analysis.
+          </p>
 
-    <p>
-      For genomic sequences, CpG metrics are also reported including
-      observed CpG counts, expected CpG frequencies, and the
-      observed-to-expected (CpG O/E) ratio. These values are widely used
-      to identify CpG islands and study DNA methylation patterns in
-      epigenomics. You may also compute overall GC percentage using the{" "}
-      <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
-      or calculate sequence statistics with the{" "}
-      <Link to="/tools/fasta-stats">FASTA Statistics</Link>.
-    </p>
+          <p>
+            For genomic sequences, CpG metrics are also reported including
+            observed CpG counts, expected CpG frequencies, and the
+            observed-to-expected (CpG O/E) ratio. These values are widely used
+            to identify CpG islands and study DNA methylation patterns in
+            epigenomics. You may also compute overall GC percentage using the{" "}
+            <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
+            or calculate sequence statistics with the{" "}
+            <Link to="/tools/fasta-stats">FASTA Statistics</Link>.
+          </p>
 
-    <p>
-      The calculator can also generate sliding-window GC content plots
-      that visualize how nucleotide composition varies along a
-      sequence. This helps highlight GC-rich regions, compositional
-      domains, or potential regulatory elements within genomes. All
-      computations run locally in your browser so sequence data remains
-      private and is never uploaded to external servers.
-    </p>
-  </>
-}
+          <p>
+            The calculator can also generate sliding-window GC content plots
+            that visualize how nucleotide composition varies along a
+            sequence. This helps highlight GC-rich regions, compositional
+            domains, or potential regulatory elements within genomes. All
+            computations run locally in your browser so sequence data remains
+            private and is never uploaded to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste one or more DNA or RNA sequences in FASTA format.</li>
-    <li>Select the sequence type (DNA or RNA).</li>
-    <li>Set the sliding window and step size for GC analysis if desired.</li>
-    <li>Click <strong>Calculate Composition</strong>.</li>
-    <li>Review nucleotide counts, GC content, and composition metrics.</li>
-    <li>Explore dinucleotide frequencies, CpG statistics, and positional GC values.</li>
-    <li>Copy or download the analysis results.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste one or more DNA or RNA sequences in FASTA format.</li>
+          <li>Select the sequence type (DNA or RNA).</li>
+          <li>Set the sliding window and step size for GC analysis if desired.</li>
+          <li>Click <strong>Calculate Composition</strong>.</li>
+          <li>Review nucleotide counts, GC content, and composition metrics.</li>
+          <li>Explore dinucleotide frequencies, CpG statistics, and positional GC values.</li>
+          <li>Copy or download the analysis results.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is nucleotide composition?",
-    answer:
-      "Nucleotide composition refers to the proportion of nucleotides (A, C, G, T or U) present in a DNA or RNA sequence. It is commonly used to analyze genome structure and sequence characteristics."
-  },
-  {
-    question: "Why is GC content important?",
-    answer:
-      "GC content influences DNA stability, gene density, and replication properties. Regions with unusually high or low GC content may indicate functional genomic elements."
-  },
-  {
-    question: "What are GC1, GC2, and GC3?",
-    answer:
-      "GC1, GC2, and GC3 represent GC content at the first, second, and third codon positions of coding sequences. These metrics are widely used in codon usage and evolutionary studies."
-  },
-  {
-    question: "What is the CpG observed/expected ratio?",
-    answer:
-      "The CpG O/E ratio compares the observed frequency of CpG dinucleotides to the expected frequency based on individual C and G counts. It helps identify CpG islands and study methylation patterns."
-  },
-  {
-    question: "Is my sequence data uploaded anywhere?",
-    answer:
-      "No. All nucleotide composition calculations run locally in your browser, ensuring that sequence data remains private."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is nucleotide composition?",
+          answer:
+            "Nucleotide composition refers to the proportion of nucleotides (A, C, G, T or U) present in a DNA or RNA sequence. It is commonly used to analyze genome structure and sequence characteristics."
+        },
+        {
+          question: "Why is GC content important?",
+          answer:
+            "GC content influences DNA stability, gene density, and replication properties. Regions with unusually high or low GC content may indicate functional genomic elements."
+        },
+        {
+          question: "What are GC1, GC2, and GC3?",
+          answer:
+            "GC1, GC2, and GC3 represent GC content at the first, second, and third codon positions of coding sequences. These metrics are widely used in codon usage and evolutionary studies."
+        },
+        {
+          question: "What is the CpG observed/expected ratio?",
+          answer:
+            "The CpG O/E ratio compares the observed frequency of CpG dinucleotides to the expected frequency based on individual C and G counts. It helps identify CpG islands and study methylation patterns."
+        },
+        {
+          question: "Is my sequence data uploaded anywhere?",
+          answer:
+            "No. All nucleotide composition calculations run locally in your browser, ensuring that sequence data remains private."
+        }
+      ]}
+    >
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
         <div className="p-6 border-b border-gray-200 bg-gray-50 grid md:grid-cols-3 gap-4">
           <div>
@@ -550,7 +548,7 @@ faq={[
 
               <div className="flex gap-2">
                 <button
-                aria-label="Copy composition 1"
+                  aria-label="Copy composition 1"
                   onClick={handleCopy}
                   disabled={!analysisComplete || !summary}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -559,7 +557,7 @@ faq={[
                 </button>
 
                 <button
-                aria-label="Download composition 1"
+                  aria-label="Download composition 1"
                   onClick={handleDownload}
                   disabled={!analysisComplete || !summary}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200 disabled:opacity-50"
@@ -621,7 +619,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Calculate Composition 1"
+            aria-label="Calculate Composition 1"
             onClick={analyze}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
           >
@@ -629,7 +627,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Calculate Composition 1"
+            aria-label="Clear Calculate Composition 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
@@ -736,7 +734,7 @@ faq={[
                 <h3 className="font-semibold">Sliding Window GC Plot</h3>
 
                 <button
-                aria-label="Download SVG Calculate Composition 1"
+                  aria-label="Download SVG Calculate Composition 1"
                   onClick={downloadGCPlotSVG}
                   className="px-3 py-1 text-sm rounded bg-gray-100 hover:bg-gray-200"
                 >

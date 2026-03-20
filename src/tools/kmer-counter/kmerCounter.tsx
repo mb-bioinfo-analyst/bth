@@ -406,98 +406,96 @@ ATGCGCGCGTTTAAACCCGGGATATATATAT`)
 
   return (
     <ToolLayout
-  title="k-mer Counter"
-  description="Count k-mer frequencies in DNA or RNA sequences with reverse-complement collapsing, entropy, histograms, density profiles, and export options."
-  badge="Sequence Analysis"
-  slug="kmer-counter"
-  category="Sequence Analysis"
+      badge="Sequence Analysis"
+      slug="kmer-counter"
+      category="Sequence Analysis"
 
-  seoContent={
-  <>
-    <h2>Count k-mer Frequencies in DNA and RNA Sequences</h2>
+      seoContent={
+        <>
+          <h2>Count k-mer Frequencies in DNA and RNA Sequences</h2>
 
-    <p>
-      k-mers are short subsequences of length <em>k</em> extracted from
-      biological sequences such as DNA or RNA. Counting k-mers is a
-      fundamental operation in bioinformatics and computational genomics
-      and is widely used in applications such as genome assembly,
-      sequence comparison, motif discovery, and metagenomic
-      classification. Analyzing k-mer frequencies helps researchers
-      understand nucleotide composition and detect patterns within
-      genomic data.
-    </p>
+          <p>
+            k-mers are short subsequences of length <em>k</em> extracted from
+            biological sequences such as DNA or RNA. Counting k-mers is a
+            fundamental operation in bioinformatics and computational genomics
+            and is widely used in applications such as genome assembly,
+            sequence comparison, motif discovery, and metagenomic
+            classification. Analyzing k-mer frequencies helps researchers
+            understand nucleotide composition and detect patterns within
+            genomic data.
+          </p>
 
-    <p>
-      This k-mer counter analyzes nucleotide sequences and calculates
-      the frequency of all possible k-mers for a chosen value of
-      <em>k</em>. The tool supports advanced analysis options including
-      reverse-complement collapsing, GC-content filtering, k-mer
-      frequency histograms, sliding-window density plots, and Shannon
-      entropy estimation to measure sequence complexity.
-    </p>
+          <p>
+            This k-mer counter analyzes nucleotide sequences and calculates
+            the frequency of all possible k-mers for a chosen value of
+            <em>k</em>. The tool supports advanced analysis options including
+            reverse-complement collapsing, GC-content filtering, k-mer
+            frequency histograms, sliding-window density plots, and Shannon
+            entropy estimation to measure sequence complexity.
+          </p>
 
-    <p>
-      Reverse complement collapsing allows canonical representation of
-      k-mers by treating a k-mer and its reverse complement as the same
-      sequence, which is common in genome analysis pipelines. The tool
-      can also highlight rare or highly abundant k-mers and visualize
-      their distribution across the sequence. For additional sequence
-      composition analysis you may also use the{" "}
-      <Link to="/tools/nucleotide-composition-calculator">
-        Nucleotide Composition Calculator
-      </Link>{" "}
-      or compute GC percentage using the{" "}
-      <Link to="/tools/gc-content">GC Content Calculator</Link>.
-    </p>
+          <p>
+            Reverse complement collapsing allows canonical representation of
+            k-mers by treating a k-mer and its reverse complement as the same
+            sequence, which is common in genome analysis pipelines. The tool
+            can also highlight rare or highly abundant k-mers and visualize
+            their distribution across the sequence. For additional sequence
+            composition analysis you may also use the{" "}
+            <Link to="/tools/nucleotide-composition-calculator">
+              Nucleotide Composition Calculator
+            </Link>{" "}
+            or compute GC percentage using the{" "}
+            <Link to="/tools/gc-content">GC Content Calculator</Link>.
+          </p>
 
-    <p>
-      All k-mer analysis is performed directly within your browser,
-      enabling fast analysis of nucleotide sequences without uploading
-      data to external servers. This ensures that genomic datasets
-      remain private and secure during analysis.
-    </p>
-  </>
-}
+          <p>
+            All k-mer analysis is performed directly within your browser,
+            enabling fast analysis of nucleotide sequences without uploading
+            data to external servers. This ensures that genomic datasets
+            remain private and secure during analysis.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a DNA or RNA sequence (or multi-FASTA input) into the sequence field.</li>
-    <li>Choose the desired k-mer length.</li>
-    <li>Optionally enable reverse-complement collapsing or apply GC filters.</li>
-    <li>Select sorting options or limit results using the Top Results field.</li>
-    <li>Click <strong>Count k-mers</strong> to perform the analysis.</li>
-    <li>Review k-mer frequencies, histograms, and density plots or export the results.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a DNA or RNA sequence (or multi-FASTA input) into the sequence field.</li>
+          <li>Choose the desired k-mer length.</li>
+          <li>Optionally enable reverse-complement collapsing or apply GC filters.</li>
+          <li>Select sorting options or limit results using the Top Results field.</li>
+          <li>Click <strong>Count k-mers</strong> to perform the analysis.</li>
+          <li>Review k-mer frequencies, histograms, and density plots or export the results.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is a k-mer in bioinformatics?",
-    answer:
-      "A k-mer is a subsequence of length k extracted from a DNA or RNA sequence. For example, with k = 3, the sequence ATGCG contains the 3-mers ATG, TGC, and GCG."
-  },
-  {
-    question: "Why are k-mers important in genomics?",
-    answer:
-      "k-mer frequencies are used in genome assembly, sequence classification, motif detection, sequencing error correction, and many other genomic analyses."
-  },
-  {
-    question: "What does reverse complement collapsing mean?",
-    answer:
-      "Reverse complement collapsing treats a k-mer and its reverse complement as the same sequence, allowing canonical representation of nucleotide patterns."
-  },
-  {
-    question: "What is k-mer entropy?",
-    answer:
-      "Shannon entropy measures the diversity of k-mers in a sequence. Higher entropy indicates greater sequence complexity and lower repetition."
-  },
-  {
-    question: "Are my sequences uploaded during analysis?",
-    answer:
-      "No. All k-mer counting and analysis are performed locally in your browser to ensure data privacy."
-  }
-]}
->
+      faq={[
+        {
+          question: "What is a k-mer in bioinformatics?",
+          answer:
+            "A k-mer is a subsequence of length k extracted from a DNA or RNA sequence. For example, with k = 3, the sequence ATGCG contains the 3-mers ATG, TGC, and GCG."
+        },
+        {
+          question: "Why are k-mers important in genomics?",
+          answer:
+            "k-mer frequencies are used in genome assembly, sequence classification, motif detection, sequencing error correction, and many other genomic analyses."
+        },
+        {
+          question: "What does reverse complement collapsing mean?",
+          answer:
+            "Reverse complement collapsing treats a k-mer and its reverse complement as the same sequence, allowing canonical representation of nucleotide patterns."
+        },
+        {
+          question: "What is k-mer entropy?",
+          answer:
+            "Shannon entropy measures the diversity of k-mers in a sequence. Higher entropy indicates greater sequence complexity and lower repetition."
+        },
+        {
+          question: "Are my sequences uploaded during analysis?",
+          answer:
+            "No. All k-mer counting and analysis are performed locally in your browser to ensure data privacy."
+        }
+      ]}
+    >
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
         <div className="p-6 border-b border-gray-200 bg-gray-50 grid md:grid-cols-4 gap-4">
@@ -772,7 +770,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Count Kmers 1"
+            aria-label="Count Kmers 1"
             onClick={() => void countKmers()}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
             disabled={isRunning}
@@ -781,7 +779,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear count Kmers 1"
+            aria-label="Clear count Kmers 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
             disabled={isRunning}

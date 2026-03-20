@@ -358,112 +358,110 @@ export default function VisualAlignmentViewer() {
     })
 
   return (
-    
+
     <ToolLayout
-  title="Visual Alignment Viewer"
-  description="Perform global or local pairwise alignment with configurable scoring and a color-coded visual viewer."
-  badge="Sequence Analysis"
-  slug="visual-alignment-viewer"
-  category="Sequence"
+      badge="Sequence Analysis"
+      slug="visual-alignment-viewer"
+      category="Sequence"
 
-  seoContent={
-  <>
-    <h2>Visual Pairwise Sequence Alignment Viewer</h2>
+      seoContent={
+        <>
+          <h2>Visual Pairwise Sequence Alignment Viewer</h2>
 
-    <p>
-      Pairwise sequence alignment is a fundamental technique in bioinformatics
-      used to compare biological sequences and identify regions of similarity.
-      These similarities can reveal functional, structural, or evolutionary
-      relationships between DNA, RNA, or protein sequences.
-    </p>
+          <p>
+            Pairwise sequence alignment is a fundamental technique in bioinformatics
+            used to compare biological sequences and identify regions of similarity.
+            These similarities can reveal functional, structural, or evolutionary
+            relationships between DNA, RNA, or protein sequences.
+          </p>
 
-    <p>
-      This visual alignment viewer performs pairwise sequence alignment using
-      two widely used algorithms: the Needleman-Wunsch algorithm for global
-      alignment and the Smith-Waterman algorithm for local alignment. Global
-      alignment compares sequences across their full length, while local
-      alignment identifies the best matching subsections within sequences.
-    </p>
+          <p>
+            This visual alignment viewer performs pairwise sequence alignment using
+            two widely used algorithms: the Needleman-Wunsch algorithm for global
+            alignment and the Smith-Waterman algorithm for local alignment. Global
+            alignment compares sequences across their full length, while local
+            alignment identifies the best matching subsections within sequences.
+          </p>
 
-    <p>
-      The tool provides an interactive color-coded visualization of the
-      alignment, highlighting matches, mismatches, and gaps. Adjustable
-      scoring parameters for match, mismatch, and gap penalties allow
-      researchers to customize alignment behavior for different biological
-      scenarios.
-    </p>
+          <p>
+            The tool provides an interactive color-coded visualization of the
+            alignment, highlighting matches, mismatches, and gaps. Adjustable
+            scoring parameters for match, mismatch, and gap penalties allow
+            researchers to customize alignment behavior for different biological
+            scenarios.
+          </p>
 
-    <p>
-      Sequence alignments are widely used in genomics, evolutionary biology,
-      protein structure analysis, and gene annotation. By examining the
-      alignment patterns, researchers can identify conserved regions,
-      mutations, insertions, and deletions across sequences.
-    </p>
+          <p>
+            Sequence alignments are widely used in genomics, evolutionary biology,
+            protein structure analysis, and gene annotation. By examining the
+            alignment patterns, researchers can identify conserved regions,
+            mutations, insertions, and deletions across sequences.
+          </p>
 
-    <p>
-      After performing sequence alignment, you may also want to analyze
-      sequence similarity using the{" "}
-      <Link to="/tools/sequence-similarity-matrix">
-        Sequence Similarity Matrix
-      </Link>{" "}
-      or compute identity percentages using the{" "}
-      <Link to="/tools/sequence-identity-calculator">
-        Sequence Identity Calculator
-      </Link>.
-    </p>
+          <p>
+            After performing sequence alignment, you may also want to analyze
+            sequence similarity using the{" "}
+            <Link to="/tools/sequence-similarity-matrix">
+              Sequence Similarity Matrix
+            </Link>{" "}
+            or compute identity percentages using the{" "}
+            <Link to="/tools/sequence-identity-calculator">
+              Sequence Identity Calculator
+            </Link>.
+          </p>
 
-    <p>
-      All alignments are computed directly within your browser, ensuring that
-      sequence data remains private and is never uploaded to external servers.
-    </p>
-  </>
-}
+          <p>
+            All alignments are computed directly within your browser, ensuring that
+            sequence data remains private and is never uploaded to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste two sequences into the input fields.</li>
-    <li>Select the alignment mode (global or local).</li>
-    <li>Adjust scoring parameters such as match, mismatch, and gap penalties if needed.</li>
-    <li>Click <strong>Run Alignment</strong>.</li>
-    <li>The alignment will be displayed with color-coded matches and mismatches.</li>
-    <li>Copy or download the alignment results for further analysis.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste two sequences into the input fields.</li>
+          <li>Select the alignment mode (global or local).</li>
+          <li>Adjust scoring parameters such as match, mismatch, and gap penalties if needed.</li>
+          <li>Click <strong>Run Alignment</strong>.</li>
+          <li>The alignment will be displayed with color-coded matches and mismatches.</li>
+          <li>Copy or download the alignment results for further analysis.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What is pairwise sequence alignment?",
-    answer:
-      "Pairwise sequence alignment is a method used to compare two biological sequences to identify similarities, differences, and evolutionary relationships."
-  },
-  {
-    question: "What is the difference between global and local alignment?",
-    answer:
-      "Global alignment aligns entire sequences across their full length using algorithms such as Needleman-Wunsch, while local alignment identifies the most similar subsequences using algorithms such as Smith-Waterman."
-  },
-  {
-    question: "What do matches, mismatches, and gaps represent?",
-    answer:
-      "Matches indicate identical residues in both sequences, mismatches represent substitutions, and gaps represent insertions or deletions introduced during alignment."
-  },
-  {
-    question: "Why are gap penalties important?",
-    answer:
-      "Gap penalties control how insertions and deletions are treated during alignment. Higher penalties discourage gaps, while lower penalties allow more insertions or deletions."
-  },
-  {
-    question: "Can this tool align protein sequences?",
-    answer:
-      "Yes. The viewer can align nucleotide or protein sequences as long as they contain valid sequence characters."
-  },
-  {
-    question: "Is my sequence data uploaded anywhere?",
-    answer:
-      "No. All alignment calculations are performed locally in your browser and your sequences remain private."
-  }
-]}
->
-    
+      faq={[
+        {
+          question: "What is pairwise sequence alignment?",
+          answer:
+            "Pairwise sequence alignment is a method used to compare two biological sequences to identify similarities, differences, and evolutionary relationships."
+        },
+        {
+          question: "What is the difference between global and local alignment?",
+          answer:
+            "Global alignment aligns entire sequences across their full length using algorithms such as Needleman-Wunsch, while local alignment identifies the most similar subsequences using algorithms such as Smith-Waterman."
+        },
+        {
+          question: "What do matches, mismatches, and gaps represent?",
+          answer:
+            "Matches indicate identical residues in both sequences, mismatches represent substitutions, and gaps represent insertions or deletions introduced during alignment."
+        },
+        {
+          question: "Why are gap penalties important?",
+          answer:
+            "Gap penalties control how insertions and deletions are treated during alignment. Higher penalties discourage gaps, while lower penalties allow more insertions or deletions."
+        },
+        {
+          question: "Can this tool align protein sequences?",
+          answer:
+            "Yes. The viewer can align nucleotide or protein sequences as long as they contain valid sequence characters."
+        },
+        {
+          question: "Is my sequence data uploaded anywhere?",
+          answer:
+            "No. All alignment calculations are performed locally in your browser and your sequences remain private."
+        }
+      ]}
+    >
+
 
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
@@ -611,7 +609,7 @@ faq={[
 
         <div className="p-6 bg-gray-50 border-t border-gray-200 flex gap-4">
           <button
-          aria-label="Run Alignment 1"
+            aria-label="Run Alignment 1"
             onClick={runAlignment}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg"
           >
@@ -619,7 +617,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Copy Run Alignment 1"
+            aria-label="Copy Run Alignment 1"
             onClick={handleCopy}
             disabled={!result}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg disabled:opacity-50"
@@ -628,7 +626,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Download Run Alignment 1"
+            aria-label="Download Run Alignment 1"
             onClick={handleDownload}
             disabled={!result}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg disabled:opacity-50"
@@ -637,7 +635,7 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Run Alignment 1"
+            aria-label="Clear Run Alignment 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >

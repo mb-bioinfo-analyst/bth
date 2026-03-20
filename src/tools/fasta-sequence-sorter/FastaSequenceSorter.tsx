@@ -8,24 +8,24 @@ import SequenceOutput from "../../components/SequenceOutput"
 type SortMode = "length" | "gc" | "alphabetical"
 type Order = "asc" | "desc"
 
-export default function FastaSequenceSorter(){
+export default function FastaSequenceSorter() {
 
-  const [input,setInput] = useState("")
-  const [output,setOutput] = useState("")
-  const [report,setReport] = useState("")
+  const [input, setInput] = useState("")
+  const [output, setOutput] = useState("")
+  const [report, setReport] = useState("")
 
-  const [mode,setMode] = useState<SortMode>("length")
-  const [order,setOrder] = useState<Order>("desc")
+  const [mode, setMode] = useState<SortMode>("length")
+  const [order, setOrder] = useState<Order>("desc")
 
-  const [error,setError] = useState("")
+  const [error, setError] = useState("")
 
-  function parseFasta(text:string){
+  function parseFasta(text: string) {
 
     const entries = text
       .trim()
       .split(/\n(?=>)/)
 
-    return entries.map(entry=>{
+    return entries.map(entry => {
 
       const lines = entry.split("\n")
 
@@ -34,60 +34,60 @@ export default function FastaSequenceSorter(){
       const seq = lines
         .slice(1)
         .join("")
-        .replace(/\s/g,"")
+        .replace(/\s/g, "")
         .toUpperCase()
 
-      return {header,seq}
+      return { header, seq }
 
     })
 
   }
 
-  function gcContent(seq:string){
+  function gcContent(seq: string) {
 
     const gc = (seq.match(/[GC]/g) || []).length
-    return (gc/seq.length)*100
+    return (gc / seq.length) * 100
 
   }
 
-  function sortSequences(){
+  function sortSequences() {
 
     setError("")
     setOutput("")
     setReport("")
 
-    if(!input.trim()){
+    if (!input.trim()) {
       setError("Please paste FASTA sequences")
       return
     }
 
     const entries = parseFasta(input)
 
-    if(entries.length === 0){
+    if (entries.length === 0) {
       setError("No FASTA entries detected")
       return
     }
 
     let sorted = [...entries]
 
-    if(mode === "length"){
+    if (mode === "length") {
 
-      sorted.sort((a,b)=>a.seq.length - b.seq.length)
-
-    }
-
-    if(mode === "gc"){
-
-      sorted.sort((a,b)=>gcContent(a.seq) - gcContent(b.seq))
+      sorted.sort((a, b) => a.seq.length - b.seq.length)
 
     }
 
-    if(mode === "alphabetical"){
+    if (mode === "gc") {
 
-      sorted.sort((a,b)=>{
+      sorted.sort((a, b) => gcContent(a.seq) - gcContent(b.seq))
 
-        const ha = a.header.replace(/^>/,"").toLowerCase()
-        const hb = b.header.replace(/^>/,"").toLowerCase()
+    }
+
+    if (mode === "alphabetical") {
+
+      sorted.sort((a, b) => {
+
+        const ha = a.header.replace(/^>/, "").toLowerCase()
+        const hb = b.header.replace(/^>/, "").toLowerCase()
 
         return ha.localeCompare(hb)
 
@@ -95,33 +95,33 @@ export default function FastaSequenceSorter(){
 
     }
 
-    if(order === "desc"){
+    if (order === "desc") {
       sorted.reverse()
     }
 
     const fastaOut = sorted
-      .map(e=>`${e.header}\n${e.seq}`)
+      .map(e => `${e.header}\n${e.seq}`)
       .join("\n")
 
     setOutput(fastaOut)
 
     setReport(
-`Total sequences: ${entries.length}
+      `Total sequences: ${entries.length}
 Sorting mode: ${mode}
 Order: ${order === "asc" ? "Ascending" : "Descending"}`
     )
 
   }
 
-  const handleCopy = async ()=>{
+  const handleCopy = async () => {
 
     await navigator.clipboard.writeText(output)
 
   }
 
-  const handleDownload = ()=>{
+  const handleDownload = () => {
 
-    const blob = new Blob([output],{type:"text/plain"})
+    const blob = new Blob([output], { type: "text/plain" })
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement("a")
@@ -136,7 +136,7 @@ Order: ${order === "asc" ? "Ascending" : "Descending"}`
 
   }
 
-  const loadExample = ()=>{
+  const loadExample = () => {
 
     setInput(`>seq3
 ATGCGT
@@ -151,7 +151,7 @@ ATGCGTAC`)
 
   }
 
-  const clearAll = ()=>{
+  const clearAll = () => {
 
     setInput("")
     setOutput("")
@@ -160,98 +160,96 @@ ATGCGTAC`)
 
   }
 
-  return(
+  return (
 
     <ToolLayout
-  title="FASTA Sequence Sorter"
-  description="Sort FASTA sequences by length, GC content, or alphabetically by header."
-  badge="FASTA Tool"
-  slug="fasta-sequence-sorter"
-  category="FASTA"
+      badge="FASTA Tool"
+      slug="fasta-sequence-sorter"
+      category="FASTA"
 
-  seoContent={
-  <>
-    <h2>Sort FASTA Sequences by Length, GC Content, or Identifier</h2>
+      seoContent={
+        <>
+          <h2>Sort FASTA Sequences by Length, GC Content, or Identifier</h2>
 
-    <p>
-      FASTA files often contain large collections of biological sequences
-      such as DNA, RNA, or proteins. In many bioinformatics workflows it
-      is useful to organize sequences based on specific characteristics
-      such as sequence length, GC composition, or alphabetical order of
-      identifiers. Sorting FASTA entries can help researchers quickly
-      inspect datasets, prioritize sequences, or prepare structured
-      inputs for downstream analysis pipelines.
-    </p>
+          <p>
+            FASTA files often contain large collections of biological sequences
+            such as DNA, RNA, or proteins. In many bioinformatics workflows it
+            is useful to organize sequences based on specific characteristics
+            such as sequence length, GC composition, or alphabetical order of
+            identifiers. Sorting FASTA entries can help researchers quickly
+            inspect datasets, prioritize sequences, or prepare structured
+            inputs for downstream analysis pipelines.
+          </p>
 
-    <p>
-      This FASTA sequence sorter allows users to reorganize multi-FASTA
-      datasets using several common sorting criteria. Sequences can be
-      ordered by sequence length, GC content percentage, or
-      alphabetically according to the FASTA header. Both ascending and
-      descending sorting modes are supported, allowing flexible dataset
-      organization for different analytical tasks.
-    </p>
+          <p>
+            This FASTA sequence sorter allows users to reorganize multi-FASTA
+            datasets using several common sorting criteria. Sequences can be
+            ordered by sequence length, GC content percentage, or
+            alphabetically according to the FASTA header. Both ascending and
+            descending sorting modes are supported, allowing flexible dataset
+            organization for different analytical tasks.
+          </p>
 
-    <p>
-      Sorting sequences by length or GC content can be useful when
-      exploring genome assemblies, transcriptomic datasets, or
-      metagenomic sequence collections where sequence composition may
-      vary widely. Alphabetical sorting of headers can help standardize
-      datasets before comparison or integration with other FASTA files.
-      You can also calculate GC composition using the{" "}
-      <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
-      or filter datasets using the{" "}
-      <Link to="/tools/fasta-filter">FASTA Filter</Link>.
-    </p>
+          <p>
+            Sorting sequences by length or GC content can be useful when
+            exploring genome assemblies, transcriptomic datasets, or
+            metagenomic sequence collections where sequence composition may
+            vary widely. Alphabetical sorting of headers can help standardize
+            datasets before comparison or integration with other FASTA files.
+            You can also calculate GC composition using the{" "}
+            <Link to="/tools/gc-content">GC Content Calculator</Link>{" "}
+            or filter datasets using the{" "}
+            <Link to="/tools/fasta-filter">FASTA Filter</Link>.
+          </p>
 
-    <p>
-      The tool processes FASTA data directly in your browser and returns
-      a correctly formatted FASTA file containing the sorted sequences.
-      Because all processing occurs locally, your biological sequence
-      data remains private and is never uploaded to external servers.
-    </p>
-  </>
-}
+          <p>
+            The tool processes FASTA data directly in your browser and returns
+            a correctly formatted FASTA file containing the sorted sequences.
+            Because all processing occurs locally, your biological sequence
+            data remains private and is never uploaded to external servers.
+          </p>
+        </>
+      }
 
-howTo={
-  <ol className="list-decimal pl-6 space-y-2">
-    <li>Paste a multi-FASTA dataset into the input panel.</li>
-    <li>Select the sorting method such as sequence length, GC content, or alphabetical header order.</li>
-    <li>Choose the desired sorting order (ascending or descending).</li>
-    <li>Click <strong>Sort FASTA</strong>.</li>
-    <li>The sorted FASTA dataset will appear in the output panel.</li>
-    <li>Review the results and copy or download the sorted FASTA file.</li>
-  </ol>
-}
+      howTo={
+        <ol className="list-decimal pl-6 space-y-2">
+          <li>Paste a multi-FASTA dataset into the input panel.</li>
+          <li>Select the sorting method such as sequence length, GC content, or alphabetical header order.</li>
+          <li>Choose the desired sorting order (ascending or descending).</li>
+          <li>Click <strong>Sort FASTA</strong>.</li>
+          <li>The sorted FASTA dataset will appear in the output panel.</li>
+          <li>Review the results and copy or download the sorted FASTA file.</li>
+        </ol>
+      }
 
-faq={[
-  {
-    question: "What does a FASTA sequence sorter do?",
-    answer:
-      "A FASTA sequence sorter reorganizes sequence entries in a FASTA dataset according to selected criteria such as sequence length, GC content, or alphabetical header order."
-  },
-  {
-    question: "Can sequences be sorted by GC content?",
-    answer:
-      "Yes. The tool calculates the GC percentage of each sequence and sorts entries accordingly."
-  },
-  {
-    question: "Will sorting modify the sequence data?",
-    answer:
-      "No. The sorter only changes the order of FASTA entries and does not alter the nucleotide or protein sequences."
-  },
-  {
-    question: "Does this tool support multi-FASTA files?",
-    answer:
-      "Yes. The sorter works with multi-FASTA datasets containing multiple sequence entries."
-  },
-  {
-    question: "Is my FASTA dataset uploaded anywhere?",
-    answer:
-      "No. All sorting operations are performed locally in your browser to ensure complete data privacy."
-  }
-]}
->
+      faq={[
+        {
+          question: "What does a FASTA sequence sorter do?",
+          answer:
+            "A FASTA sequence sorter reorganizes sequence entries in a FASTA dataset according to selected criteria such as sequence length, GC content, or alphabetical header order."
+        },
+        {
+          question: "Can sequences be sorted by GC content?",
+          answer:
+            "Yes. The tool calculates the GC percentage of each sequence and sorts entries accordingly."
+        },
+        {
+          question: "Will sorting modify the sequence data?",
+          answer:
+            "No. The sorter only changes the order of FASTA entries and does not alter the nucleotide or protein sequences."
+        },
+        {
+          question: "Does this tool support multi-FASTA files?",
+          answer:
+            "Yes. The sorter works with multi-FASTA datasets containing multiple sequence entries."
+        },
+        {
+          question: "Is my FASTA dataset uploaded anywhere?",
+          answer:
+            "No. All sorting operations are performed locally in your browser to ensure complete data privacy."
+        }
+      ]}
+    >
 
       <div className="rounded-2xl border border-gray-200 bg-white shadow-lg">
 
@@ -267,7 +265,7 @@ faq={[
 
             <select
               value={mode}
-              onChange={(e)=>setMode(e.target.value as SortMode)}
+              onChange={(e) => setMode(e.target.value as SortMode)}
               className="px-4 py-2 border rounded-lg w-full"
             >
 
@@ -295,7 +293,7 @@ faq={[
 
             <select
               value={order}
-              onChange={(e)=>setOrder(e.target.value as Order)}
+              onChange={(e) => setOrder(e.target.value as Order)}
               className="px-4 py-2 border rounded-lg w-full"
             >
 
@@ -333,7 +331,7 @@ faq={[
 
         </div>
 
-        {report &&(
+        {report && (
 
           <div className="p-6 border-t border-gray-200 bg-gray-50">
 
@@ -349,11 +347,11 @@ faq={[
 
         )}
 
-        {error &&(
+        {error && (
 
           <div className="mx-6 mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex gap-3">
 
-            <AlertCircle className="w-5 h-5 text-red-600"/>
+            <AlertCircle className="w-5 h-5 text-red-600" />
 
             <p className="text-red-700 text-sm">
               {error}
@@ -368,7 +366,7 @@ faq={[
         <div className="p-6 border-t border-gray-200 flex gap-4">
 
           <button
-          aria-label="Sort FASTA 1"
+            aria-label="Sort FASTA 1"
             onClick={sortSequences}
             className="flex-1 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg"
           >
@@ -376,11 +374,11 @@ faq={[
           </button>
 
           <button
-          aria-label="Clear Sort FASTA 1"
+            aria-label="Clear Sort FASTA 1"
             onClick={clearAll}
             className="px-6 py-4 bg-gray-200 hover:bg-gray-300 rounded-lg flex items-center gap-2"
           >
-            <RefreshCw className="w-4 h-4"/>
+            <RefreshCw className="w-4 h-4" />
             Clear
           </button>
 
