@@ -1519,7 +1519,40 @@ export const tools: Tool[] = [
       "rna sequence tools",
       "bioinformatics toolkit"
     ]
-  }
+  },
+
+  {
+  name: "FASTA Toolkit",
+  slug: "fasta-toolkit",
+  path: "/tools/fasta-toolkit",
+
+  uiDescription:
+    "All-in-one FASTA toolkit to extract and edit headers, filter, deduplicate, sort, sample, split, merge, format, and analyze multi-FASTA datasets.",
+
+  metaDescription:
+    "Free online FASTA toolkit for header extraction, filtering, deduplication, sorting, sampling, formatting, splitting, merging, and FASTA statistics.",
+
+  category: "FASTA File Tools",
+
+  component: () => import("../tools/fasta-toolkit/FASTAToolkit"),
+
+  tags: [
+    "fasta toolkit",
+    "fasta tools",
+    "fasta splitter",
+    "fasta merge",
+    "fasta filter",
+    "fasta deduplicator",
+    "fasta header extractor",
+    "fasta header editor",
+    "multi fasta tools",
+    "fasta formatter",
+    "fasta statistics",
+    "fasta sorter",
+    "fasta random sampler",
+    "bioinformatics fasta tool"
+  ]
+}
 
 
 ]

@@ -15,6 +15,8 @@ export default function FastaSplitter() {
   const [report, setReport] = useState("")
   const [error, setError] = useState("")
 
+
+
   function parseFasta(text: string) {
 
     return text
@@ -41,40 +43,55 @@ export default function FastaSplitter() {
     }
 
     const zip = new JSZip()
-
     let chunks: string[][] = []
 
+    // -------------------------
+    // PER FILE MODE
+    // -------------------------
     if (mode === "perFile") {
 
       const perFile = Number(value)
 
-      for (let i = 0; i < entries.length; i += perFile) {
-
-        chunks.push(entries.slice(i, i + perFile))
-
+      if (!perFile || perFile <= 0) {
+        setError("Invalid split value")
+        return
       }
 
+      for (let i = 0; i < entries.length; i += perFile) {
+        chunks.push(entries.slice(i, i + perFile))
+      }
     }
 
+    // -------------------------
+    // NUM FILES MODE
+    // -------------------------
     if (mode === "numFiles") {
 
-      const numFiles = Number(value)
+      let numFiles = Number(value)
+
+      if (!numFiles || numFiles <= 0) {
+        setError("Invalid number of files")
+        return
+      }
+
+      // 🔥 prevent more files than sequences
+      numFiles = Math.min(numFiles, entries.length)
 
       const size = Math.ceil(entries.length / numFiles)
 
       for (let i = 0; i < entries.length; i += size) {
-
         chunks.push(entries.slice(i, i + size))
-
       }
-
     }
 
+    // -------------------------
+    // ZIP GENERATION
+    // -------------------------
     chunks.forEach((chunk, i) => {
 
       const content = chunk.join("\n")
 
-      zip.file(`fasta_part_${i + 1}.fasta`, content)
+      zip.file(`fasta_part_${i + 1}_n${chunk.length}.fasta`, content)
 
     })
 
@@ -83,7 +100,6 @@ export default function FastaSplitter() {
     const url = URL.createObjectURL(blob)
 
     const a = document.createElement("a")
-
     a.href = url
     a.download = "fasta_split.zip"
 
@@ -97,7 +113,6 @@ export default function FastaSplitter() {
       `Total sequences: ${entries.length}
 Files created: ${chunks.length}`
     )
-
   }
 
   const loadExample = () => {
@@ -254,8 +269,15 @@ ATGCGTACGT`)
 
             <input
               type="number"
+              min={1}
+              step={1}
               value={value}
-              onChange={(e) => setValue(e.target.value)}
+              onChange={(e) => {
+                const val = Number(e.target.value)
+                if (val >= 1 || e.target.value === "") {
+                  setValue(e.target.value)
+                }
+              }}
               className="px-4 py-2 border rounded-lg w-full"
             />
 
@@ -326,6 +348,110 @@ ATGCGTACGT`)
             <RefreshCw className="w-4 h-4" />
             Clear
           </button>
+
+        </div>
+
+      </div>
+
+      <div className="mt-10 p-6 md:p-8 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-purple-50 shadow-sm">
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+          {/* LEFT CONTENT */}
+          <div className="space-y-4 max-w-xl">
+
+            <h3 className="text-xl font-semibold text-gray-900">
+              Explore the Complete FASTA Toolkit
+            </h3>
+
+            <p className="text-sm text-gray-600">
+              Go beyond basic sequence handling. Manage, clean, and analyze FASTA files with a full suite of powerful tools — all in one place.
+            </p>
+
+            {/* FEATURES */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-700">
+
+              <span>• Header extraction & editing</span>
+              <span>• Filtering & deduplication</span>
+              <span>• Sorting & random sampling</span>
+              <span>• FASTA splitting & merging</span>
+              <span>• Sequence formatting</span>
+              <span>• Dataset statistics</span>
+
+            </div>
+
+          </div>
+
+          {/* CTA */}
+          <Link
+            to="/tools/fasta-toolkit"
+            className="group flex flex-col items-center justify-center min-w-[180px] px-8 py-5 rounded-2xl 
+                 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg 
+                 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 
+                 hover:scale-[1.03]"
+          >
+
+            <span className="text-base">
+              Open Toolkit
+            </span>
+
+            <span className="text-2xl leading-none mt-2 transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+
+          </Link>
+
+        </div>
+
+      </div>
+
+      <div className="mt-10 p-6 md:p-8 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-purple-50 shadow-sm">
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+          {/* LEFT CONTENT */}
+          <div className="space-y-4 max-w-xl">
+
+            <h3 className="text-xl font-semibold text-gray-900">
+              Explore the Complete FASTA Toolkit
+            </h3>
+
+            <p className="text-sm text-gray-600">
+              Go beyond basic sequence handling. Manage, clean, and analyze FASTA files with a full suite of powerful tools — all in one place.
+            </p>
+
+            {/* FEATURES */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-700">
+
+              <span>• Header extraction & editing</span>
+              <span>• Filtering & deduplication</span>
+              <span>• Sorting & random sampling</span>
+              <span>• FASTA splitting & merging</span>
+              <span>• Sequence formatting</span>
+              <span>• Dataset statistics</span>
+
+            </div>
+
+          </div>
+
+          {/* CTA */}
+          <Link
+            to="/tools/fasta-toolkit"
+            className="group flex flex-col items-center justify-center min-w-[180px] px-8 py-5 rounded-2xl 
+                 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg 
+                 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 
+                 hover:scale-[1.03]"
+          >
+
+            <span className="text-base">
+              Open Toolkit
+            </span>
+
+            <span className="text-2xl leading-none mt-2 transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+
+          </Link>
 
         </div>
 

@@ -13,11 +13,19 @@ export default function FastaMergeTool() {
   const [output, setOutput] = useState("")
   const [report, setReport] = useState("")
 
+  const [inputs, setInputs] = useState<string[]>(["", ""])
+
   const [removeDuplicates, setRemoveDuplicates] = useState(false)
   const [prefix, setPrefix] = useState("")
   const [suffix, setSuffix] = useState("")
 
   const [error, setError] = useState("")
+
+  function updateInput(index: number, value: string) {
+    const newInputs = [...inputs]
+    newInputs[index] = value
+    setInputs(newInputs)
+  }
 
   function parseFasta(text: string) {
 
@@ -33,16 +41,23 @@ export default function FastaMergeTool() {
     setOutput("")
     setReport("")
 
-    if (!input1.trim() && !input2.trim()) {
+    // 🔥 use dynamic inputs
+    const validInputs = inputs.filter(i => i.trim())
+
+    if (validInputs.length === 0) {
       setError("Please paste at least one FASTA dataset")
       return
     }
 
-    const fasta1 = parseFasta(input1)
-    const fasta2 = parseFasta(input2)
+    const parsed = validInputs.map(parseFasta)
 
-    let merged = [...fasta1, ...fasta2]
+    let merged = parsed.flat()
 
+    const totalSequences = merged.length
+
+    // -------------------------
+    // DEDUPLICATION
+    // -------------------------
     if (removeDuplicates) {
 
       const seen = new Set<string>()
@@ -54,18 +69,19 @@ export default function FastaMergeTool() {
           .slice(1)
           .join("")
           .replace(/\s/g, "")
+          .toUpperCase() // 🔥 important fix
 
-        if (seen.has(seq)) {
-          return false
-        }
+        if (seen.has(seq)) return false
 
         seen.add(seq)
         return true
 
       })
-
     }
 
+    // -------------------------
+    // HEADER MODIFICATION
+    // -------------------------
     if (prefix || suffix) {
 
       merged = merged.map(entry => {
@@ -79,19 +95,20 @@ export default function FastaMergeTool() {
         return `>${header}\n${lines.slice(1).join("\n")}`
 
       })
-
     }
 
+    // -------------------------
+    // OUTPUT
+    // -------------------------
     const fastaOut = merged.join("\n")
 
     setOutput(fastaOut)
 
     setReport(
-      `Dataset 1 sequences: ${fasta1.length}
-Dataset 2 sequences: ${fasta2.length}
+      `Input files: ${validInputs.length}
+Total sequences: ${totalSequences}
 Merged sequences: ${merged.length}`
     )
-
   }
 
   const handleCopy = async () => {
@@ -290,9 +307,9 @@ ATGCGTAGGA`)
 
         {/* Input */}
 
-        <div className="grid md:grid-cols-2 divide-x divide-gray-200">
+       {/*  <div className="grid md:grid-cols-2 divide-x divide-gray-200">
 
-          {/* <div className="p-6">
+          <div className="p-6">
 
             <label className="block font-semibold mb-2">
               FASTA Dataset 1
@@ -319,8 +336,44 @@ ATGCGTAGGA`)
             />
 
           </div> */}
+          <div className="space-y-4">
 
-          <SequenceInput
+          {inputs.map((input, i) => (
+
+            <div key={i} className="relative">
+
+              <SequenceInput
+                value={input}
+                onChange={(val) => updateInput(i, val)}
+                label={`FASTA Input ${i + 1}`}
+              />
+
+              {inputs.length > 1 && (
+                <button
+                  onClick={() => {
+                    const newInputs = inputs.filter((_, idx) => idx !== i)
+                    setInputs(newInputs)
+                  }}
+                  className="absolute top-2 right-2 text-xs bg-red-100 text-red-600 px-2 py-1 rounded"
+                >
+                  Remove
+                </button>
+              )}
+
+            </div>
+
+          ))}
+
+          <button
+            onClick={() => setInputs([...inputs, ""])}
+            className="w-full py-2 border border-dashed rounded-lg text-gray-600 hover:bg-gray-50"
+          >
+            + Add another FASTA file
+          </button>
+
+        </div>
+
+          {/* <SequenceInput
             value={input1}
             onChange={setInput1}
             label="FASTA Input"
@@ -332,8 +385,8 @@ ATGCGTAGGA`)
             onChange={setInput2}
             label="FASTA Input"
             onLoadExample={loadExample}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
 
         {/* Output */}
 
@@ -398,6 +451,58 @@ ATGCGTAGGA`)
             <RefreshCw className="w-4 h-4" />
             Clear
           </button>
+
+        </div>
+
+      </div>
+
+      <div className="mt-10 p-6 md:p-8 rounded-2xl border border-blue-200 bg-gradient-to-r from-blue-50 via-white to-purple-50 shadow-sm">
+
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+
+          {/* LEFT CONTENT */}
+          <div className="space-y-4 max-w-xl">
+
+            <h3 className="text-xl font-semibold text-gray-900">
+              Explore the Complete FASTA Toolkit
+            </h3>
+
+            <p className="text-sm text-gray-600">
+              Go beyond basic sequence handling. Manage, clean, and analyze FASTA files with a full suite of powerful tools — all in one place.
+            </p>
+
+            {/* FEATURES */}
+            <div className="grid grid-cols-2 gap-x-6 gap-y-1 text-sm text-gray-700">
+
+              <span>• Header extraction & editing</span>
+              <span>• Filtering & deduplication</span>
+              <span>• Sorting & random sampling</span>
+              <span>• FASTA splitting & merging</span>
+              <span>• Sequence formatting</span>
+              <span>• Dataset statistics</span>
+
+            </div>
+
+          </div>
+
+          {/* CTA */}
+          <Link
+            to="/tools/fasta-toolkit"
+            className="group flex flex-col items-center justify-center min-w-[180px] px-8 py-5 rounded-2xl 
+                 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold shadow-lg 
+                 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 
+                 hover:scale-[1.03]"
+          >
+
+            <span className="text-base">
+              Open Toolkit
+            </span>
+
+            <span className="text-2xl leading-none mt-2 transition-transform duration-300 group-hover:translate-x-1">
+              →
+            </span>
+
+          </Link>
 
         </div>
 
