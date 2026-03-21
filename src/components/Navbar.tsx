@@ -3,6 +3,7 @@ import ToolSearch from "./ToolSearch"
 import { useEffect, useMemo, useState } from "react"
 import { tools } from "../data/tools"
 import { Menu, X } from "lucide-react"
+import { categoryToSlug } from "../utils/categoryToSlug"
 
 export default function Navbar() {
 
@@ -121,7 +122,7 @@ export default function Navbar() {
                       {category} ({categoryTools.length})
                     </p>
 
-                    <ul className="space-y-1">
+                    {/* <ul className="space-y-1">
 
                       {categoryTools.slice(0, 6).map(tool => (
                         <li key={tool.path}>
@@ -133,6 +134,31 @@ export default function Navbar() {
                           </Link>
                         </li>
                       ))}
+
+                    </ul> */}
+
+                    <ul className="space-y-1">
+
+                      {categoryTools.slice(0, 5).map(tool => (
+                        <li key={tool.path}>
+                          <Link
+                            to={tool.path}
+                            className="block text-sm text-slate-300 hover:text-cyan-300"
+                          >
+                            {tool.name}
+                          </Link>
+                        </li>
+                      ))}
+
+                      {/* VIEW ALL LINK */}
+                      <li className="pt-1">
+                        <Link
+                          to={`/tools/${categoryToSlug(category)}`}
+                          className="block text-xs text-cyan-400 hover:text-cyan-300 font-medium"
+                        >
+                          View all →
+                        </Link>
+                      </li>
 
                     </ul>
 
