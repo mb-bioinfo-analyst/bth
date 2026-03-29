@@ -1522,37 +1522,95 @@ export const tools: Tool[] = [
   },
 
   {
-  name: "FASTA Toolkit",
-  slug: "fasta-toolkit",
-  path: "/tools/fasta-toolkit",
+    name: "FASTA Toolkit",
+    slug: "fasta-toolkit",
+    path: "/tools/fasta-toolkit",
 
-  uiDescription:
-    "All-in-one FASTA toolkit to extract and edit headers, filter, deduplicate, sort, sample, split, merge, format, and analyze multi-FASTA datasets.",
+    uiDescription:
+      "All-in-one FASTA toolkit to extract and edit headers, filter, deduplicate, sort, sample, split, merge, format, and analyze multi-FASTA datasets.",
 
-  metaDescription:
-    "Free online FASTA toolkit for header extraction, filtering, deduplication, sorting, sampling, formatting, splitting, merging, and FASTA statistics.",
+    metaDescription:
+      "Free online FASTA toolkit for header extraction, filtering, deduplication, sorting, sampling, formatting, splitting, merging, and FASTA statistics.",
 
-  category: "FASTA File Tools",
+    category: "FASTA File Tools",
 
-  component: () => import("../tools/fasta-toolkit/FASTAToolkit"),
+    component: () => import("../tools/fasta-toolkit/FASTAToolkit"),
 
-  tags: [
-    "fasta toolkit",
-    "fasta tools",
-    "fasta splitter",
-    "fasta merge",
-    "fasta filter",
-    "fasta deduplicator",
-    "fasta header extractor",
-    "fasta header editor",
-    "multi fasta tools",
-    "fasta formatter",
-    "fasta statistics",
-    "fasta sorter",
-    "fasta random sampler",
-    "bioinformatics fasta tool"
-  ]
-}
+    tags: [
+      "fasta toolkit",
+      "fasta tools",
+      "fasta splitter",
+      "fasta merge",
+      "fasta filter",
+      "fasta deduplicator",
+      "fasta header extractor",
+      "fasta header editor",
+      "multi fasta tools",
+      "fasta formatter",
+      "fasta statistics",
+      "fasta sorter",
+      "fasta random sampler",
+      "bioinformatics fasta tool"
+    ]
+  },
+
+  {
+    name: "Sequence Statistics & Composition Analyzer",
+    slug: "sequence-statistics",
+    path: "/tools/sequence-statistics",
+
+    uiDescription:
+      "Analyze multi-FASTA statistics, GC content, composition, entropy, complexity, and k-mer frequencies for DNA, RNA, and protein sequences.",
+
+    metaDescription:
+      "Free online sequence statistics and composition analyzer for GC content, entropy, residue composition, complexity score, and k-mer frequencies.",
+
+    category: "Sequence Analysis Tools",
+
+    component: () => import("../tools/sequence-statistics/SequenceStatistics"),
+
+    tags: [
+      "sequence statistics",
+      "fasta statistics",
+      "gc content analyzer",
+      "nucleotide composition",
+      "sequence entropy",
+      "complexity score",
+      "k-mer frequencies",
+      "multi fasta analysis",
+      "protein composition",
+      "sequence analysis tool"
+    ]
+  },
+
+  {
+    name: "REVEL Variant Pathogenicity Predictor",
+    slug: "revel-variant-predictor",
+    path: "/tools/revel-variant-predictor",
+
+    uiDescription:
+      "Predict the pathogenicity of missense variants using REVEL scores. Analyze single variants or batch inputs with interpretation and export support.",
+
+    metaDescription:
+      "Free online REVEL variant pathogenicity predictor. Analyze missense variants, interpret REVEL scores, and classify variants as benign or pathogenic.",
+
+    category: "Variant Analysis Tools",
+
+    component: () => import("../tools/revel/RevelTool"),
+
+    tags: [
+      "revel predictor",
+      "variant pathogenicity",
+      "missense variant analysis",
+      "revel score lookup",
+      "variant interpretation",
+      "genomic variant tool",
+      "clinical variant analysis",
+      "vcf analysis",
+      "mutation impact prediction",
+      "bioinformatics variant tool"
+    ]
+  }
 
 
 ]
