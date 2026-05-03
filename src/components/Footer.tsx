@@ -17,7 +17,7 @@ export default function Footer() {
             </p>
 
             <p className="mt-2 text-sm text-slate-400">
-              Free browser-based tools for DNA, RNA and protein sequence
+              Free bioinformatics tools for DNA, RNA and protein data
               analysis designed for researchers, students, and
               bioinformatics workflows.
             </p>
@@ -121,8 +121,8 @@ export default function Footer() {
             </p>
 
             <p>
-              All bioinformatics tools run locally in your browser. 
-              No data is uploaded to external servers.
+              Many tools run directly in your browser. Some tools use lightweight
+              APIs for data lookup or annotation as described on their tool pages.
             </p>
             
 

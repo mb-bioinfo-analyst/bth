@@ -1610,7 +1610,36 @@ export const tools: Tool[] = [
       "mutation impact prediction",
       "bioinformatics variant tool"
     ]
-  }
+  },
+
+  {
+  name: "Heatmap Generator",
+  slug: "heatmap-generator",
+  path: "/tools/heatmap-generator",
+
+  uiDescription:
+    "Create publication-ready heatmaps for gene expression, RNA-seq, and omics data with clustering, scaling, annotations, custom color palettes, and SVG/PNG export directly in the browser.",
+
+  metaDescription:
+    "Free online heatmap generator for bioinformatics data. Create clustered heatmaps with z-score scaling, annotations, custom palettes, and publication-ready export.",
+
+  category: "Data Visualization Tools",
+
+  component: () => import("../tools/heatmap-generator/HeatmapGenerator"),
+
+  tags: [
+    "heatmap generator",
+    "clustered heatmap",
+    "bioinformatics heatmap",
+    "gene expression heatmap",
+    "z score heatmap",
+    "correlation heatmap",
+    "publication heatmap",
+    "matrix visualization",
+    "omics heatmap",
+    "data visualization tool"
+  ]
+}
 
 
 ]

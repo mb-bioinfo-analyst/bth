@@ -12,8 +12,17 @@ Helpers
 -----------------------------------------
 */
 
-const slugify = (str: string) =>
-  str.toLowerCase().replace(/\s+/g, "-")
+// const slugify = (str: string) =>
+//   str.toLowerCase().replace(/\s+/g, "-")
+
+const categoryToSlug = (category: string) =>
+  category
+    .toLowerCase()
+    .replace("bioinformatics tools", "")
+    .replace("tools", "")
+    .trim()
+    .replace(/\s+/g, "-")
+
 
 /*
 -----------------------------------------
@@ -47,9 +56,14 @@ Category pages
 -----------------------------------------
 */
 
+// const categories = Array.from(
+//   new Set(tools.map(t => slugify(t.category)))
+// )
+
 const categories = Array.from(
-  new Set(tools.map(t => slugify(t.category)))
+  new Set(tools.map(t => categoryToSlug(t.category)))
 )
+
 
 const categoryPages = categories.map(c => `/tools/${c}`)
 

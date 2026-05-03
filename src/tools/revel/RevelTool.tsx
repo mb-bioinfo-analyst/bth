@@ -169,28 +169,24 @@ chrx:200855 A>C
     <h2>REVEL Score Lookup for Missense Variant Pathogenicity</h2>
 
     <p>
-      The REVEL (Rare Exome Variant Ensemble Learner) score is a widely used
-      computational predictor for assessing the pathogenicity of missense
-      variants in human genomes. It integrates multiple individual prediction
-      tools and conservation metrics into a single ensemble score ranging from
-      0 to 1, where higher values indicate a greater likelihood that a variant
-      is disease-causing.
+      This REVEL variant pathogenicity predictor helps you look up REVEL v1.3
+      scores for missense variants using hg19 / GRCh37 genomic coordinates.
+      You can analyze single variants or batch inputs, apply interpretation
+      thresholds, and export results for downstream variant prioritization.
     </p>
 
     <p>
-      This REVEL lookup tool allows researchers to quickly retrieve pathogenicity
-      scores for genomic variants using chromosome position, reference allele,
-      and alternate allele. The tool is based on REVEL v1.3 and uses the hg19
-      (GRCh37) genome build, ensuring compatibility with many legacy datasets
-      and widely used annotation pipelines.
+      REVEL (Rare Exome Variant Ensemble Learner) is an ensemble predictor for
+      missense variant pathogenicity. It combines outputs from multiple
+      computational methods into a single score from 0 to 1, where higher
+      values indicate stronger predicted evidence for pathogenicity.
     </p>
 
     <p>
-      REVEL is specifically designed for missense variants and has been shown
-      to outperform many individual prediction tools such as SIFT, PolyPhen-2,
-      and MutationAssessor by combining their outputs using machine learning.
-      It is commonly used in variant prioritization workflows, rare disease
-      studies, and clinical genomics research.
+      This tool supports practical research workflows by accepting formats such
+      as <code>chr:pos ref&gt;alt</code>, VCF-like lines, and simple
+      CSV or TSV-style variant input. Optional lightweight gene annotation can
+      help provide additional context during exploratory analysis.
     </p>
 
     <p>
@@ -205,15 +201,9 @@ chrx:200855 A>C
     </ul>
 
     <p>
-      This tool is ideal for integrating into variant filtering pipelines,
-      especially when combined with other annotations such as allele frequency,
-      conservation scores, and clinical databases.
-    </p>
-
-    <p>
-      All computations are performed via a lightweight API backed by indexed
-      REVEL datasets, enabling fast batch queries directly in the browser.
-      No variant data is stored or persisted.
+      Variant queries are processed through a lightweight lookup API backed by
+      indexed REVEL datasets for fast retrieval. Submitted inputs are used for
+      score lookup and are not stored.
     </p>
   </>
 }
@@ -267,7 +257,7 @@ faq={[
       <div className="space-y-4">
         <div className="rounded-lg border bg-white p-4 text-sm text-slate-700 space-y-2">
           <p>
-            This tool performs REVEL v1.3 lookup for missense variants using hg19 / GRCh37 coordinates.
+            Look up REVEL v1.3 scores for missense variants using hg19 / GRCh37 coordinates.
           </p>
           <p>
             REVEL scores range from 0 to 1, with higher values indicating greater predicted pathogenicity in this model. Thresholds below are user-adjustable for exploratory interpretation.
@@ -440,7 +430,15 @@ x:200855 A>C
           </div>
         )}
 
-        <ScoreDistribution results={results} />
+        {/* <ScoreDistribution results={results} /> */}
+
+        {results.some(r => typeof r.score === "number") ? (
+          <ScoreDistribution results={results} />
+        ) : results.length > 0 ? (
+          <div className="rounded-lg border bg-white p-4 text-sm text-slate-500">
+            No REVEL scores available to plot yet.
+          </div>
+        ) : null}
 
         {results.length > 0 && (
           <div className="overflow-auto rounded-lg border bg-white">
@@ -508,9 +506,9 @@ x:200855 A>C
           </div>
         )}
 
-<div className="text-xs text-slate-500 mt-4">
+{/* <div className="text-xs text-slate-500 mt-4">
         Data source: REVEL v1.3 (hg19 / GRCh37).
-      </div>
+      </div> */}
 
       <div className="mt-8 text-sm text-gray-600 border-t pt-4">
         <h3 className="font-semibold text-gray-800 mb-2">

@@ -48,9 +48,9 @@ export default function ToolLayout({
 
   const finalTitle = toolMeta?.name || "Bioinformatics Tools"
   const finalDescription = toolMeta?.metaDescription ||
-  "Free online bioinformatics tools for DNA, RNA and protein sequence analysis."
+  "Free online bioinformatics tools for DNA, RNA and protein data analysis."
   const finalUiDescription = toolMeta?.uiDescription ||
-  "Explore bioinformatics tools for sequence analysis."
+  "Explore bioinformatics tools for data analysis."
   const finalTags = toolMeta?.tags
 
   const fullBrand = "Bioinformatics Tools Hub"
@@ -72,11 +72,39 @@ export default function ToolLayout({
   }
 
 
+//   const location = useLocation();
+
+//   const canonicalUrl =
+//     `https://biotoolshub.org${location.pathname}`.replace(/\/$/, "") ||
+//     "https://biotoolshub.org"
+
+//   const relatedTools = getRelatedTools(slug)
+
+//   const currentPath = location.pathname;
+
+//   const citationText = `Bioinformatics Tools Hub (${new Date().getFullYear()})
+// ${finalTitle}
+// https://biotoolshub.org${location.pathname}`
+
+//   const bibtex = `@misc{bioinfo-tools-${slug},
+//   title = {${finalTitle}},
+//   author = {{Bioinformatics Tools Hub}},
+//   year = {${new Date().getFullYear()}},
+//   url = {https://biotoolshub.org${location.pathname}}
+// }`
+
+
   const location = useLocation();
 
+  const canonicalPath =
+    toolMeta?.path && toolMeta.path !== "/"
+      ? toolMeta.path.replace(/\/$/, "")
+      : "/"
+
   const canonicalUrl =
-    `https://biotoolshub.org${location.pathname}`.replace(/\/$/, "") ||
-    "https://biotoolshub.org"
+    canonicalPath === "/"
+      ? "https://biotoolshub.org"
+      : `https://biotoolshub.org${canonicalPath}`
 
   const relatedTools = getRelatedTools(slug)
 
@@ -84,14 +112,15 @@ export default function ToolLayout({
 
   const citationText = `Bioinformatics Tools Hub (${new Date().getFullYear()})
 ${finalTitle}
-https://biotoolshub.org${location.pathname}`
+${canonicalUrl}`
 
   const bibtex = `@misc{bioinfo-tools-${slug},
   title = {${finalTitle}},
   author = {{Bioinformatics Tools Hub}},
   year = {${new Date().getFullYear()}},
-  url = {https://biotoolshub.org${location.pathname}}
+  url = {${canonicalUrl}}
 }`
+
 
   const [copied, setCopied] = useState<string | null>(null)
 
@@ -292,7 +321,8 @@ https://biotoolshub.org${location.pathname}`
                   <ul className="mt-4 space-y-3 text-sm leading-6 text-slate-200">
                     <li>• Modern interface built for speed and clarity</li>
                     <li>• Works directly in the browser</li>
-                    <li>• No sequence data sent to a server</li>
+                    <li>• Some tools use lightweight APIs for data lookup</li>
+                    <li>• No data is stored</li>
                     <li>• Easy copy and download workflow</li>
                   </ul>
                 </div>
@@ -443,7 +473,7 @@ https://biotoolshub.org${location.pathname}`
                       </h2> */}
 
                   <p className="text-slate-300 mb-4">
-                    Explore related {cleanCategory} tools for DNA, RNA and protein sequence analysis workflows.
+                    Explore related {cleanCategory} tools for DNA, RNA and protein data analysis workflows.
                   </p>
 
                   <div className="grid md:grid-cols-2 gap-4">
