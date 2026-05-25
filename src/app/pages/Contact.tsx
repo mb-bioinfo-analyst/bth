@@ -65,7 +65,7 @@ export default function Contact() {
                     </a>
 
 
-                    {/* GITHUB */}
+                    {/* GITHUB
 
                     <a
                         href="https://github.com/mb-bioinfo-analyst"
@@ -84,7 +84,7 @@ export default function Contact() {
                             Report issues or view development updates.
                         </p>
 
-                    </a>
+                    </a> */}
 
 
                     {/* LINKEDIN */}

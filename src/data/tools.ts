@@ -1639,6 +1639,35 @@ export const tools: Tool[] = [
     "omics heatmap",
     "data visualization tool"
   ]
+},
+
+{
+  name: "Boxplot Generator",
+  slug: "boxplot-generator",
+  path: "/tools/boxplot-generator",
+
+  uiDescription:
+    "Create publication-ready boxplots from CSV or TSV data with grouping, jitter points, summary statistics, and export options.",
+
+  metaDescription:
+    "Free online boxplot generator for scientific data visualization. Create publication-ready boxplots from CSV or TSV data with grouping, jitter points, statistics, SVG and PNG export.",
+
+  category: "Data Visualization Tools",
+
+  component: () => import("../tools/boxplot-generator/BoxplotGenerator"),
+
+  tags: [
+    "boxplot generator",
+    "box plot maker",
+    "scientific data visualization",
+    "publication ready plots",
+    "csv boxplot",
+    "tsv boxplot",
+    "grouped boxplot",
+    "jitter plot",
+    "data visualization tool",
+    "bioinformatics visualization"
+  ]
 }
 
 
