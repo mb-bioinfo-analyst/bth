@@ -1613,62 +1613,62 @@ export const tools: Tool[] = [
   },
 
   {
-  name: "Heatmap Generator",
-  slug: "heatmap-generator",
-  path: "/tools/heatmap-generator",
+    name: "Heatmap Generator",
+    slug: "heatmap-generator",
+    path: "/tools/heatmap-generator",
 
-  uiDescription:
-    "Create publication-ready heatmaps for gene expression, RNA-seq, and omics data with clustering, scaling, annotations, custom color palettes, and SVG/PNG export directly in the browser.",
+    uiDescription:
+      "Create publication-ready heatmaps for gene expression, RNA-seq, and omics data with clustering, scaling, annotations, custom color palettes, and SVG/PNG export directly in the browser.",
 
-  metaDescription:
-    "Free online heatmap generator for bioinformatics data. Create clustered heatmaps with z-score scaling, annotations, custom palettes, and publication-ready export.",
+    metaDescription:
+      "Free online heatmap generator for bioinformatics data. Create clustered heatmaps with z-score scaling, annotations, custom palettes, and publication-ready export.",
 
-  category: "Data Visualization Tools",
+    category: "Data Visualization Tools",
 
-  component: () => import("../tools/heatmap-generator/HeatmapGenerator"),
+    component: () => import("../tools/heatmap-generator/HeatmapGenerator"),
 
-  tags: [
-    "heatmap generator",
-    "clustered heatmap",
-    "bioinformatics heatmap",
-    "gene expression heatmap",
-    "z score heatmap",
-    "correlation heatmap",
-    "publication heatmap",
-    "matrix visualization",
-    "omics heatmap",
-    "data visualization tool"
-  ]
-},
+    tags: [
+      "heatmap generator",
+      "clustered heatmap",
+      "bioinformatics heatmap",
+      "gene expression heatmap",
+      "z score heatmap",
+      "correlation heatmap",
+      "publication heatmap",
+      "matrix visualization",
+      "omics heatmap",
+      "data visualization tool"
+    ]
+  },
 
-{
-  name: "Boxplot Generator",
-  slug: "boxplot-generator",
-  path: "/tools/boxplot-generator",
+  {
+    name: "Boxplot Generator",
+    slug: "boxplot-generator",
+    path: "/tools/boxplot-generator",
 
-  uiDescription:
-    "Create publication-ready boxplots from CSV or TSV data with grouping, jitter points, summary statistics, and export options.",
+    uiDescription:
+      "Create interactive, publication-ready boxplots from CSV or TSV data. Compare distributions across groups using jitter points, subgroup coloring, summary statistics, outlier detection, log scaling, and high-quality SVG or PNG export.",
 
-  metaDescription:
-    "Free online boxplot generator for scientific data visualization. Create publication-ready boxplots from CSV or TSV data with grouping, jitter points, statistics, SVG and PNG export.",
+    metaDescription:
+      "Free online boxplot generator for scientific data visualization. Create publication-ready boxplots from CSV or TSV data with grouping, jitter points, statistics, SVG and PNG export.",
 
-  category: "Data Visualization Tools",
+    category: "Data Visualization Tools",
 
-  component: () => import("../tools/boxplot-generator/BoxplotGenerator"),
+    component: () => import("../tools/boxplot-generator/BoxplotGenerator"),
 
-  tags: [
-    "boxplot generator",
-    "box plot maker",
-    "scientific data visualization",
-    "publication ready plots",
-    "csv boxplot",
-    "tsv boxplot",
-    "grouped boxplot",
-    "jitter plot",
-    "data visualization tool",
-    "bioinformatics visualization"
-  ]
-}
+    tags: [
+      "boxplot generator",
+      "box plot maker",
+      "scientific data visualization",
+      "publication ready plots",
+      "csv boxplot",
+      "tsv boxplot",
+      "grouped boxplot",
+      "jitter plot",
+      "data visualization tool",
+      "bioinformatics visualization"
+    ]
+  }
 
 
 ]
